@@ -1,9 +1,7 @@
-<h1>Dernières histoires lues</h1>
-
 <div class="last_read_stories_container">
   <% if user_signed_in? %>
     <% if @read_stories.any? %>
-      <h2>Dernières histoires lues</h2>
+      <h1>Dernières histoires lues</h1>
       <% @read_stories.each_with_index do |story, index| %>
         <div class="last_read">
           <%= link_to story.title, story_path(story) %><br>
@@ -16,7 +14,7 @@
   <% end %>
 
   <!-- Affichage des dernières histoires mises à jour (pour tous les utilisateurs) -->
-  <h2>Dernières histoires mises à jour</h2>
+  <h1>Dernières histoires mises à jour</h1>
   <% @stories.each_with_index do |story, index| %>
     <div class="last_updated">
       <%= link_to story.title, story_path(story) %><br>
