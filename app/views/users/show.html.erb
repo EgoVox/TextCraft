@@ -1,0 +1,22 @@
+
+<h2>Histoire par <%= @user.username %></h2>
+
+<h1>Profil de <%= @user.username || @user.email %></h1>
+
+<p><strong>Nom :</strong> <%= @user.first_name %> <%= @user.last_name %></p>
+<p><strong>Ville :</strong> <%= @user.city %></p>
+<p><strong>Username:</strong> <%= @user.username %></p>
+<p><strong>Email :</strong> <%= @user.email %></p>
+<p><strong>Bio :</strong> <%= @user.bio %></p>
+
+<%= link_to 'Modifier mon profil', edit_user_registration_path, class: 'btn btn-primary' %>
+<ul>
+  <% @stories.each do |story| %>
+    <li>
+      <h3><%= link_to story.title, story_path(story) %></h3>
+      <p><%= story.description %></p>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'Retour aux histoires', stories_path, class: 'btn btn-secondary' %>

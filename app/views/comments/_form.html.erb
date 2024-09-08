@@ -1,0 +1,7 @@
+<%= form_with(model: [story, Comment.new], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :content, "Ajouter un commentaire" %>
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+  <%= form.submit 'Poster le Commentaire', class: 'btn btn-primary' %>
+<% end %>

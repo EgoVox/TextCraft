@@ -1,0 +1,8 @@
+<h1><%= @chapter.title %></h1>
+<p><%= @chapter.content %></p>
+
+<%= link_to 'Editer le chapitre', edit_story_chapter_path(@story, @chapter), class: 'btn btn-warning' if current_user == @story.user %>
+<%= button_to 'Supprimer le chapitre', story_chapter_path(@story, @chapter.position), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if current_user == @story.user %>
+
+<%= link_to 'Ajouter un chapitre', new_story_chapter_path(@story), class: 'btn btn-primary' if current_user == @story.user %>
+<%= link_to 'Retour à l\'histoire', story_path(@story), class: 'btn btn-secondary' %>

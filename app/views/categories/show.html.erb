@@ -1,0 +1,10 @@
+<h1>Histoires dans la catégorie <%= @category.name %></h1>
+
+<ul>
+  <% @stories.each do |story| %>
+    <li>
+      <%= link_to story.title, story_path(story) %>
+      <small>par <%= story.user.username %></small>
+    </li>
+  <% end %>
+</ul>

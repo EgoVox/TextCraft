@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wattpadlike</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+
+
+  </head>
+
+  <body>
+
+    <div class="container">
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+
+    <header>
+      <nav>
+        <%= link_to 'Accueil', root_path, class: 'btn btn-primary' %>
+
+      <!-- Menu déroulant pour les catégories -->
+        <li class="header-categories-dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" aria-expanded="false">
+            Catégories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+            <% Category.all.each do |category| %>
+              <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
+            <% end %>
+          </ul>
+        </li>
+
+        <% if user_signed_in? %>
+          <!-- Menu déroulant pour l'utilisateur connecté -->
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.username || current_user.email %> <!-- Affiche le nom ou l'email de l'utilisateur -->
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
+              <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+            </ul>
+          </div>
+        <% else %>
+          <!-- Si l'utilisateur n'est pas connecté, afficher les liens de connexion et inscription -->
+          <%= link_to 'Login', new_user_session_path, class: 'btn btn-success' %>
+          <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-info' %>
+        <% end %>
+      </nav>
+    </header>
+    <%= yield %>
+  </body>
+</html>

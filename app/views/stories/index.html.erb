@@ -1,0 +1,44 @@
+<h1>Dernières histoires lues</h1>
+
+<div class="last_read_stories_container">
+  <% if user_signed_in? %>
+    <% if @read_stories.any? %>
+      <h2>Dernières histoires lues</h2>
+      <% @read_stories.each_with_index do |story, index| %>
+        <div class="last_read">
+          <%= link_to story.title, story_path(story) %><br>
+          <small>par <%= story.user.username %></small>
+        </div>
+      <% end %>
+    <% else %>
+      <p>Vous n'avez lu aucune histoire récemment.</p>
+    <% end %>
+  <% end %>
+
+  <!-- Affichage des dernières histoires mises à jour (pour tous les utilisateurs) -->
+  <h2>Dernières histoires mises à jour</h2>
+  <% @stories.each_with_index do |story, index| %>
+    <div class="last_updated">
+      <%= link_to story.title, story_path(story) %><br>
+      <small>par <%= story.user.username %></small>
+    </div>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <div class="my_stories">
+    <h1>Mes histoires</h1>
+    <%= link_to 'Créer une nouvelle histoire', new_story_path, class: 'btn btn-primary' %>
+    <div class="story_container">
+    <ul>
+      <% @my_stories.each do |story| %>
+        <li>
+          <h2><%= link_to story.title, story_path(story) %></h2>
+          <p><%= story.description %></p>
+          <p><%= link_to 'Lire plus', story_path(story), class: 'btn btn-secondary' %></p>
+        </li>
+      <% end %>
+    </div>
+    </ul>
+  </div>
+<% end %>
