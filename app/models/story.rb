@@ -17,6 +17,11 @@ class Story < ApplicationRecord
     slug
   end
 
+  def last_read_chapter_for_user(user)
+    read = reads.where(user: user).order(created_at: :desc).first
+    read ? read.chapter : nil
+  end
+
   private
 
   def generate_slug

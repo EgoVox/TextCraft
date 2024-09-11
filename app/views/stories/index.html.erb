@@ -1,44 +1,73 @@
-<div class="last_read_stories_container">
-  <% if user_signed_in? %>
-    <% if @read_stories.any? %>
-      <h1>Dernières histoires lues</h1>
-      <% @read_stories.each_with_index do |story, index| %>
-        <div class="last_read">
-          <%= link_to story.title, story_path(story) %><br>
-          <small>par <%= story.user.username %></small>
+<div class="story-sections-container">
+  <!-- Dernières histoires lues -->
+  <div class="last-read-container section">
+    <% if user_signed_in? %>
+      <% if @read_stories.any? %>
+        <h1 class="section-title">Dernières histoires lues</h1>
+        <div class="stories-grid">
+          <% @read_stories.each do |story| %>
+            <div class="story-card">
+              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
+
+              <div class="story-info">
+                <%= link_to story.title, story_path(story), class: "story-title" %>
+                <small>par <%= story.user.username %></small>
+
+                <% last_chapter = story.last_read_chapter_for_user(current_user) %>
+                <% if last_chapter %>
+                  <div class="last-read-chapter">
+                    <p>Dernier chapitre lu :
+                      <%= link_to last_chapter.title, story_chapter_path(story, last_chapter), class: "chapter-link" %>
+                    </p>
+                  </div>
+                <% else %>
+                  <p class="no-chapter">Aucun chapitre lu récemment</p>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>Vous n'avez lu aucune histoire récemment.</p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <!-- Dernières histoires mises à jour -->
+  <div class="last-updated-container section">
+    <h1 class="section-title">Dernières histoires mises à jour</h1>
+    <div class="stories-grid">
+      <% @stories.each do |story| %>
+        <div class="story-card">
+          <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
+          <div class="story-info">
+            <%= link_to story.title, story_path(story), class: "story-title" %>
+            <small>par <%= story.user.username %></small>
+          </div>
         </div>
       <% end %>
-    <% else %>
-      <p>Vous n'avez lu aucune histoire récemment.</p>
-    <% end %>
-  <% end %>
+    </div>
+  </div>
 
-  <!-- Affichage des dernières histoires mises à jour (pour tous les utilisateurs) -->
-  <h1>Dernières histoires mises à jour</h1>
-  <% @stories.each_with_index do |story, index| %>
-    <div class="last_updated">
-      <%= link_to story.title, story_path(story) %><br>
-      <small>par <%= story.user.username %></small>
+  <!-- Mes histoires -->
+  <% if user_signed_in? %>
+    <div class="my-stories section">
+      <h1 class="section-title">Mes histoires</h1>
+      <div class="stories-grid">
+        <% @my_stories.each do |story| %>
+          <div class="story-card">
+            <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
+            <div class="story-info">
+              <h2><%= link_to story.title, story_path(story), class: "story-title" %></h2>
+              <p class="story-description"><%= story.description.truncate(100) %></p>
+              <div class="story-actions">
+                <%= link_to 'Lire', story_path(story), class: 'btn btn-read' %>
+                <%= link_to 'Modifier', edit_story_path(story), class: 'btn btn-edit' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
-
-
-
-<% if user_signed_in? %>
-  <div class="my_stories">
-    <h1>Mes histoires</h1>
-    <%= link_to 'Créer une nouvelle histoire', new_story_path, class: 'btn btn-primary' %>
-    <div class="story_container">
-    <ul>
-      <% @my_stories.each do |story| %>
-        <li>
-          <h2><%= link_to story.title, story_path(story) %></h2>
-          <p><%= story.description %></p>
-          <p><%= link_to 'Lire plus', story_path(story), class: 'btn btn-secondary' %></p>
-        </li>
-      <% end %>
-    </div>
-    </ul>
-  </div>
-<% end %>

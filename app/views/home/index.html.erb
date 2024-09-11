@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>Wattpadlike</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+    <%= javascript_importmap_tags %>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  </head>
+<body>
+    <!-- Main Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <%= image_tag 'TextCraft.webp', alt: 'TextCraft', class: 'hero-image' %>
+      <h1>Explorez des Histoires Uniques sur TextCraft</h1>
+      <p>Plongez dans un univers où l'imagination n'a pas de limites.</p>
+      <%= link_to "Commencer votre aventure", new_user_registration_path, class: 'cta-button' %>
+    </div>
+  </div>
+
+  <section class="popular-stories">
+    <h2>Histoires Populaires</h2>
+    <div class="story-list">
+      <!-- Liste des histoires populaires -->
+      <% @stories.each do |story| %>
+        <div class="story-item">
+          <h3><%= link_to story.title, story_path(story) %></h3>
+          <p><%= truncate(story.description, length: 100) %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</body>
+</html>

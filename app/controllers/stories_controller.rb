@@ -10,11 +10,13 @@ class StoriesController < ApplicationController
                           .order('reads.created_at DESC')
                           .limit(10)
 
+      @last_read_chapter = @read_stories.map { |story| story.last_read_chapter_for_user(current_user) }
+
       # Récupérer les histoires créées par l'utilisateur
       @my_stories = current_user.stories.order(created_at: :desc)
 
       # Afficher les 5 dernières histoires mises à jour (toutes les histoires)
-      @stories = Story.order(updated_at: :desc).limit(5)
+      @stories = Story.order(updated_at: :desc).limit(6)
     else
       # Si l'utilisateur n'est pas connecté : collection vide
       @read_stories = []
