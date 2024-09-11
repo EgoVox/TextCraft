@@ -1,0 +1,71 @@
+@import 'base/variables';
+
+.story-sections-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0;
+
+  .last-read-container,
+  .last-updated-container,
+  .my-stories {
+    flex: 0 1 30%;
+    max-width: 30%;
+    /* Ajoute une limite stricte de largeur */
+    padding: 10px;
+    background-color: $background-color;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: $main-text-color;
+      font-family: "Merriweather", serif;
+      font-weight: 900;
+    }
+
+    .story-card {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      transition: box-shadow 0.3s;
+
+      &:hover {
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+      }
+
+      small {
+        font-family: "Merriweather", serif;
+        font-weight: 300;
+      }
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
+
+    @media (max-width: 768px) {
+
+      .last-read-container,
+      .last-updated-container,
+      .my-stories {
+        flex: 0 1 100%;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+.story-list {
+  list-style-type: none;
+  padding-left: 0;
+
+  li {
+    margin-bottom: 20px;
+  }
+}

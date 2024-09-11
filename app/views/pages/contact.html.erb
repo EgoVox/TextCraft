@@ -1,0 +1,25 @@
+<div class="static-page">
+  <h1>Contactez-nous</h1>
+  <p>Si vous avez des questions, des suggestions ou des préoccupations, n'hésitez pas à nous contacter en remplissant le formulaire ci-dessous :</p>
+
+  <%= form_with url: '#', method: :post, class: 'contact-form' do |f| %>
+    <div class="form-group">
+      <%= f.label :name, "Nom" %>
+      <%= f.text_field :name, required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email, "Email" %>
+      <%= f.email_field :email, required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :message, "Message" %>
+      <%= f.text_area :message, required: true, rows: 5 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Envoyer", class: "cta-button" %>
+    </div>
+  <% end %>
+</div>

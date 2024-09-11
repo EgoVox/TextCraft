@@ -29,14 +29,14 @@ class ChaptersController < ApplicationController
 
     if analysis_result[:passed]
       if @chapter.save
-        flash[:notice] = "Chapitre créé avec succès. Qualité du texte : #{analysis_result[:score]}%. Forces et axes d'amélioration : #{analysis_result}"
+        flash[:notice] = "Chapitre créé avec succès. Qualité du texte : #{analysis_result[:score]}%. Forces et axes d'amélioration : #{analysis_result}".html_safe
         redirect_to story_chapter_path(@story, @chapter.position)
       else
         flash.now[:alert] = 'Erreur lors de la création du chapitre.'
         render :new
       end
     else
-      flash.now[:alert] = "Le texte a échoué à l'analyse avec un score de #{analysis_result[:score]}%. Axes d'amélioration : #{analysis_result}"
+      flash.now[:alert] = "Le texte a échoué à l'analyse avec un score de #{analysis_result[:score]}%. Axes d'amélioration : #{analysis_result}".html_safe
       render :new
     end
   end
@@ -52,11 +52,14 @@ class ChaptersController < ApplicationController
 
       if analysis_result[:passed]
         flash[:notice] = "Chapitre mis à jour avec succès. Qualité du texte : #{@score}%. #{@message}"
+        redirect_to story_chapter_path(@story, @chapter.position)
       else
         flash.now[:alert] = "Le texte a échoué à l'analyse avec un score de #{@score}%. #{@message}"
+        # On ne redirige pas si l'analyse échoue, on reste sur la page d'édition
+        render :edit
       end
-      redirect_to story_chapter_path(@story, @chapter.position)
     else
+      # Si la mise à jour échoue pour d'autres raisons (validations Rails, etc.)
       render :edit
     end
   end
@@ -91,7 +94,7 @@ def analyze_text(content)
   feedback = analysis_result[:feedback]
 
   # Afficher le score final et le feedback final
-  if score >= 70
+  if score >= 75
     return { score: score, passed: true, message: "Le texte est validé avec un score de #{score}%. Voici les raisons : #{feedback.join(', ')}" }
   else
     return { score: score, passed: false, message: "Le texte a échoué à l'analyse avec un score de #{score}%. Voici les raisons : #{feedback.join(', ')}" }

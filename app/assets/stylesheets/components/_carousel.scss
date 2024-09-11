@@ -1,0 +1,111 @@
+@import 'base/variables';
+
+/* Conteneur de la carousel */
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  padding: 20px 0;
+}
+
+/* Carousel avec défilement fluide */
+.carousel {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  gap: 20px;
+}
+
+/* Éléments de la carousel */
+.carousel-item {
+  flex: 0 0 auto;
+  min-width: 150px;
+  max-width: 300px;
+  margin: 0 10px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image de couverture */
+.story-cover {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Informations sur l'histoire */
+.story-info {
+  padding: 10px;
+}
+
+.story-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: $main-text-color;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  margin-bottom: 5px;
+  text-decoration: none;
+}
+
+.story-title:hover {
+  color: #007bff;
+}
+
+small {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  color: #777;
+}
+
+/* Boutons de navigation de la carousel */
+.carousel-container .carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-container .carousel-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Bouton gauche */
+.carousel-container .carousel-button.left {
+  left: 10px;
+}
+
+/* Bouton droit */
+.carousel-container .carousel-button.right {
+  right: 10px;
+}
+
+/* Media query pour rendre la carousel plus responsive */
+@media (max-width: 768px) {
+  .carousel-item {
+    min-width: 120px;
+    max-width: 100%;
+  }
+
+  .carousel-container .carousel-button {
+    padding: 8px;
+  }
+}

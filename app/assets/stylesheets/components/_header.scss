@@ -1,0 +1,137 @@
+@import 'components/nav';
+@import 'components/dropdown';
+@import 'components/auth';
+@import 'base/variables';
+
+/* Header principal */
+.main-header {
+  background-color: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Conteneur de navigation */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Liens de navigation */
+.nav-link {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  color: #333;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.nav-link:hover {
+  color: #ff6f61;
+}
+
+/* Menu déroulant pour les catégories */
+.header-categories-dropdown {
+  position: relative;
+}
+
+.header-categories-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  border-radius: 5px;
+}
+
+.header-categories-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+/* Menu utilisateur (connecté) */
+.user-menu {
+  position: relative;
+}
+
+.user-menu .dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.user-menu:hover .dropdown-menu {
+  display: block;
+}
+
+.user-menu .dropdown-item {
+  padding: 10px 20px;
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+.user-menu .dropdown-item:hover {
+  background-color: #ff6f61;
+  color: #fff;
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+}
+
+.mobile-menu-toggle span {
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-container {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-container.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-left,
+  .nav-right {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+}

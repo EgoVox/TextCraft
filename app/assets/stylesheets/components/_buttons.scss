@@ -1,0 +1,83 @@
+@import 'base/variables';
+/* Composant de base pour les boutons */
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease;
+}
+
+/* Bouton Lire */
+.btn-read {
+  width: 120px;
+  background-color: #28a745;
+  color: white;
+  border: 2px solid #28a745;
+
+  &:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #1e7e34;
+  }
+}
+
+/* Bouton Modifier */
+.btn-edit {
+  width: 120px;
+  background-color: #ffc107;
+  color: white;
+  border: 2px solid #ffc107;
+
+  &:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #d39e00;
+  }
+}
+
+/* Bouton Supprimer */
+.btn-delete {
+  width: 120px;
+  background-color: #dc3545;
+  color: white;
+  border: 2px solid #dc3545;
+
+  &:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #bd2130;
+  }
+}
+
+/* Bouton Créer une nouvelle histoire */
+.btn-create {
+  width: 120px;
+  background-color: #007bff;
+  color: white;
+  border: 2px solid #007bff;
+  display: inline-block;
+  font-size: 1.1rem;
+
+  &:hover {
+    background-color: #0069d9;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    background-color: #005cbf;
+  }
+}

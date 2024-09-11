@@ -1,0 +1,200 @@
+/* Conteneur pour les pages de connexion/inscription */
+/* Conteneur pour la page de connexion */
+.auth-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Titre du formulaire */
+.auth-header h2 {
+  font-size: 2rem;
+  font-family: 'Merriweather', serif;
+  color: #ff6f61;
+  margin-bottom: 30px;
+}
+
+/* Champs de formulaire */
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+  text-align: left;
+  /* Aligne les labels à gauche */
+}
+
+.input-field {
+  width: 90%;
+  padding: 12px 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.input-field:focus {
+  border-color: #ff6f61;
+  box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+  outline: none;
+}
+
+/* Checkbox "Se souvenir de moi" */
+.form-group.remember-me {
+  display: flex;
+  justify-content: center;
+  /* Centre horizontalement */
+  align-items: center;
+  /* Centre verticalement */
+  margin-top: 20px;
+}
+
+.form-group.remember-me input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.form-label-checkbox {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+/* Bouton de soumission */
+.cta-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6f61;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e65c50;
+}
+
+/* Liens sous le formulaire */
+.auth-links {
+  margin-top: 20px;
+}
+
+.auth-links p {
+  margin: 10px 0;
+}
+
+.auth-links a {
+  color: #ff6f61;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.btn-login,
+.btn-signup {
+  padding: 8px 15px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login {
+  background-color: #7C7C7C;
+}
+
+.btn-login:hover {
+  background-color: white;
+}
+
+.btn-signup {
+  background-color: #ff6f61;
+}
+
+.btn-signup:hover {
+  background-color: #e65c50;
+}
+
+/* Conteneur pour le menu utilisateur */
+.user-menu {
+  position: relative;
+}
+
+/* Bouton du menu utilisateur */
+.user-menu .dropdown-toggle {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.user-menu .dropdown-toggle i {
+  margin-right: 8px;
+}
+
+/* Menu déroulant */
+.user-menu .dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 10px 0;
+  width: 200px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.user-menu:hover .dropdown-menu {
+  display: block;
+}
+
+/* Liens dans le menu déroulant */
+.user-menu .dropdown-item {
+  padding: 10px 20px;
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.user-menu .dropdown-item:hover {
+  background-color: #ff6f61;
+  color: white;
+}
+
+/* Icône utilisateur */
+.user-menu i.fas.fa-user {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+/* Transition pour l'ouverture du menu */
+.user-menu .dropdown-menu {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.user-menu:hover .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}

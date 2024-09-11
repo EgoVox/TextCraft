@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+
+@import 'base/policy';
+@import 'base/variables';
+
+@import 'components/auth';
+@import 'components/buttons';
+@import 'components/carousel';
+@import 'components/dropdown';
+@import 'components/footer';
+@import 'components/header';
+@import 'components/nav';
+@import 'components/stories-section';
+@import 'components/story-form';
+
+@import 'pages/index';
+@import 'pages/static_pages';
+@import 'pages/home';
+@import 'pages/stories';

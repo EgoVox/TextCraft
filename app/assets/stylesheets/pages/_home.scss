@@ -1,0 +1,165 @@
+/* Section principale - Page d'accueil */
+.hero-section {
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
+  /* Couleurs douces et chaleureuses */
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-content {
+  color: #333;
+  text-align: center;
+  animation: floatAnimation 5s ease-in-out infinite;
+  /* Animation pour un effet de mouvement magique */
+}
+
+.hero-image {
+  max-width: 400px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  animation: shineAnimation 3s infinite alternate;
+  /* Animation douce pour l'image */
+}
+
+@keyframes shineAnimation {
+  from {
+    opacity: 0.8;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: 'Merriweather', serif;
+  color: #ff6f61;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #ff6f61;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #e65c50;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Section des histoires populaires */
+.popular-stories {
+  padding: 40px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.popular-stories h2 {
+  font-size: 2.5rem;
+  font-family: 'Merriweather', serif;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.story-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.story-item {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.story-item h3 {
+  font-size: 1.2rem;
+  color: #ff6f61;
+}
+
+.story-item p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+footer ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+footer ul li {
+  margin: 0 15px;
+}
+
+footer ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 10px 20px;
+  }
+
+  .hero-image {
+    width: 300px;
+  }
+}

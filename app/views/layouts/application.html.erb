@@ -6,56 +6,80 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   </head>
 
   <body>
-
-    <div class="container">
-      <% flash.each do |key, message| %>
-        <div class="alert alert-<%= key %>">
-          <%= message %>
-        </div>
-      <% end %>
-    </div>
-
-    <header>
-      <nav>
-        <%= link_to 'Accueil', root_path, class: 'btn btn-primary' %>
-
-      <!-- Menu déroulant pour les catégories -->
-        <li class="header-categories-dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" aria-expanded="false">
-            Catégories
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-            <% Category.all.each do |category| %>
-              <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
-            <% end %>
-          </ul>
-        </li>
-
-        <% if user_signed_in? %>
-          <!-- Menu déroulant pour l'utilisateur connecté -->
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.username || current_user.email %> <!-- Affiche le nom ou l'email de l'utilisateur -->
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-              <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
-              <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+    <header class="main-header">
+      <% if user_signed_in? %>
+      <nav class="nav-container">
+        <!-- Section gauche : Accueil et Catégories -->
+        <div class="nav-left">
+          <%= link_to 'Accueil', stories_path, class: 'nav-link logo-link' %>
+          <!-- Menu déroulant pour les catégories -->
+          <div class="header-categories-dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" aria-expanded="false">
+              Catégories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+              <% Category.all.each do |category| %>
+                <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
+              <% end %>
             </ul>
           </div>
-        <% else %>
-          <!-- Si l'utilisateur n'est pas connecté, afficher les liens de connexion et inscription -->
-          <%= link_to 'Login', new_user_session_path, class: 'btn btn-success' %>
-          <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-info' %>
-        <% end %>
+        </div>
+
+        <!-- Section droite : Menu utilisateur -->
+      <div class="nav-right">
+        <div class="dropdown user-menu">
+          <button class="nav-link dropdown-toggle" type="button" id="userDropdown" aria-expanded="false">
+            <i class="fas fa-user"></i> <%= current_user.username || current_user.email %>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
+            <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'dropdown-item' %></li>
+            <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+          </ul>
+        </div>
+      </div>
       </nav>
+      <% else %>
+        <nav class="nav-container">
+          <div class="nav-left">
+            <%= link_to 'TextCraft', unauthenticated_root_path, class: 'logo-link' %>
+          </div>
+          <div class="nav-right">
+            <%= link_to 'Se connecter', new_user_session_path, class: 'btn btn-login' %>
+            <%= link_to "S'inscrire", new_user_registration_path, class: 'signup-link' %>
+          </div>
+        </nav>
+      <% end %>
+
+      <!-- Bouton Hamburger pour le menu mobile -->
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </header>
+
     <%= yield %>
+
+  <footer class="main-footer">
+    <div class="footer-container">
+      <p>© 2024 TextCraft. Tous droits réservés.</p>
+      <nav class="footer-nav">
+        <ul>
+        <li><%= link_to 'Confidentialité', privacy_path %></li>
+        <li><%= link_to 'Conditions', terms_path %></li>
+        <li><%= link_to 'Contact', contact_path %></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
   </body>
 </html>
