@@ -1,50 +1,29 @@
-/* Dropdown pour les catégories */
 .header-categories-dropdown {
   position: relative;
   margin-left: 20px;
+
+  .dropdown-toggle {
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e65c50;
+    }
+  }
 
   .dropdown-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;
-    color: #333;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-    list-style: none;
-
-    li {
-      .dropdown-item {
-        padding: 10px 20px;
-        text-decoration: none;
-        color: #333;
-
-        &:hover {
-          color: #185519;
-          font-weight: 900;
-        }
-      }
-    }
-  }
-
-  &.show .dropdown-menu {
-    display: block;
-  }
-}
-
-/* Dropdown pour le menu utilisateur */
-.user-menu {
-  position: relative;
-  margin-right: 60px;
-
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
+    background-color: #fff;
     color: #333;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -59,14 +38,106 @@
         padding: 10px 20px;
         text-decoration: none;
         color: #333;
+        font-family: 'Merriweather', serif;
+        font-weight: 500;
+        display: block;
+        transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
           background-color: #f1f1f1;
+          color: #ff6f61;
+          font-weight: 700;
         }
       }
     }
   }
 
+  /* Enlever le comportement hover */
+  &:hover .dropdown-menu {
+    display: none;
+  }
+
+  /* Show the dropdown when the 'show' class is added */
+  &.show .dropdown-menu {
+    display: block;
+  }
+}
+
+/* Dropdown pour le menu utilisateur */
+.user-menu {
+  position: relative;
+  margin-right: 20px;
+
+  .dropdown-toggle {
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e65c50;
+    }
+
+    i {
+      margin-right: 8px;
+    }
+  }
+
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    list-style: none;
+    min-width: 150px;
+    white-space: nowrap;
+    z-index: 1000;
+
+    li {
+      .dropdown-item {
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #333;
+        font-family: 'Merriweather', serif;
+        font-weight: 500;
+        display: block;
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        &:hover {
+          background-color: #f1f1f1;
+          color: #ff6f61;
+          font-weight: 700;
+        }
+      }
+
+      .btn-logout {
+        background-color: transparent;
+        color: #333;
+        border: none;
+        width: 100%;
+        text-align: left;
+        padding: 10px 20px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #ff6f61;
+          color: white;
+        }
+      }
+    }
+  }
+
+  /* Show the dropdown when the 'show' class is added */
   &.show .dropdown-menu {
     display: block;
   }

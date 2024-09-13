@@ -8,6 +8,8 @@ gem 'dotenv-rails'
 gem 'languagetool', '~> 1.3'
 gem 'faraday'
 gem 'sassc-rails'
+gem "activestorage"
+gem "actiontext"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4"

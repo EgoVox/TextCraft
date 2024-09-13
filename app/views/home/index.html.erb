@@ -28,6 +28,11 @@
       <!-- Liste des histoires populaires -->
       <% @stories.each do |story| %>
         <div class="story-item">
+                      <% if story.cover_image_url.present? %>
+              <%= image_tag story.cover_image_url, class: "story-cover" %>
+            <% else %>
+              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
+            <% end %>
           <h3><%= link_to story.title, story_path(story) %></h3>
           <p><%= truncate(story.description, length: 100) %></p>
         </div>

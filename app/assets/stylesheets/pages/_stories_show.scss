@@ -1,0 +1,184 @@
+.story-show-container {
+  margin: 30px auto;
+  max-width: 900px;
+  padding: 20px;
+
+  .card {
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+
+    /* Alignement de l'image à gauche et du texte à droite */
+    .story-header {
+      display: flex;
+      align-items: center;
+
+      .story-cover-large {
+        width: 40%;
+        max-width: 300px;
+        margin-right: 20px;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .story-info {
+        flex: 1;
+        text-align: left;
+
+        .story-title {
+          font-size: 2.5rem;
+          font-family: "Merriweather", serif;
+          color: #FF6F61;
+          margin-bottom: 15px;
+        }
+
+        .story-description {
+          font-size: 1.2rem;
+          color: #666;
+          margin-bottom: 15px;
+        }
+      }
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
+  }
+
+  /* Style des chapitres */
+.chapters-section {
+  margin-top: 30px;
+
+  .section-title {
+    font-size: 1.8rem;
+    font-family: "Merriweather", serif;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+  }
+
+  .chapter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .chapter-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .chapter-header {
+      margin-bottom: 10px;
+    }
+
+    .chapter-title {
+      font-size: 1.3rem;
+      font-family: "Merriweather", serif;
+      color: #007bff;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .chapter-excerpt {
+      font-size: 1rem;
+      color: #555;
+    }
+  }
+
+  .add-chapter-btn {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+  }
+}
+
+  /* Style des commentaires */
+  .comments-section {
+    .comments-list {
+      list-style: none;
+      padding: 0;
+
+      .comment-card {
+        padding: 15px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 10px;
+
+        .comment-header {
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+
+    /* Likes */
+    .likes-section {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    /* Boutons */
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+
+    .btn-edit {
+      background-color: #ffc107;
+
+      &:hover {
+        background-color: #e0a800;
+      }
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+}

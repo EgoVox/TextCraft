@@ -1,45 +1,80 @@
-<h1><%= @story.title %></h1>
-<p><%= @story.description %></p>
+<div class="story-show-container">
+  <!-- Détails de l'histoire -->
+  <div class="story-details card">
+    <div class="story-header">
+      <% if @story.cover_image.attached? %>
+        <%= image_tag url_for(@story.cover_image), class: "story-cover-large" %>
+      <% end %>
 
-<%= link_to 'Editer l\'histoire', edit_story_path(@story), class: 'btn btn-warning' if current_user == @story.user %>
-<%= button_to 'Supprimer l\'histoire', @story, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if current_user == @story.user %>
+      <div class="story-info">
+        <h1 class="story-title"><%= @story.title %></h1>
+        <p class="story-description"><%= @story.description %></p>
+        <% if current_user == @story.user %>
+          <div class="story-actions">
+            <%= link_to '✏️ Editer', edit_story_path(@story), class: 'btn btn-edit' %>
+            <%= button_to '🗑️ Supprimer', @story, method: :delete, data: { confirm: 'Es-tu sûr ?' }, class: 'btn btn-danger' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
-<hr>
+  <!-- Liste des chapitres -->
+  <div class="chapters-section card">
+    <h2 class="section-title">Chapitres</h2>
+    <div class="chapter-grid">
+      <% @story.chapters.order(:position).each do |chapter| %>
+        <div class="chapter-card">
+          <div class="chapter-header">
+            <h3 class="chapter-title">
+              <%= link_to "Chapitre #{chapter.position}", story_chapter_path(@story, chapter.position) %>
+            </h3>
+          </div>
+          <p class="chapter-excerpt"><%= truncate(chapter.content.to_plain_text, length: 100) %></p>
+        </div>
+      <% end %>
+    </div>
+    <% if current_user == @story.user %>
+      <%= link_to '➕ Ajouter un chapitre', new_story_chapter_path(@story), class: 'btn btn-primary add-chapter-btn' %>
+    <% end %>
+  </div>
 
-<h2>Chapitres</h2>
-<ul>
-  <% @story.chapters.order(:position).each do |chapter| %>
-    <li>
-      <%= link_to "Chapitre #{chapter.position}", story_chapter_path(@story, chapter.position) %>
-      <p><%= truncate(chapter.content, length: 100) %></p>
-    </li>
+  <!-- Commentaires -->
+  <% unless current_user == @story.user %>
+    <div class="comments-section card">
+      <h2>Commentaires</h2>
+      <%= render 'comments/form', story: @story %>
+
+      <ul class="comments-list">
+        <% @story.comments.each do |comment| %>
+          <li class="comment-card">
+            <div class="comment-header">
+              <strong><%= comment.user.username %>:</strong>
+              <% if current_user == comment.user %>
+                <%= button_to '🗑️ Supprimer', story_comment_path(@story, comment), method: :delete, data: { confirm: 'Es-tu sûr ?', turbo: false }, class: 'btn btn-danger btn-sm' %>
+              <% end %>
+            </div>
+            <p class="comment-content"><%= comment.content %></p>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+  <!-- Likes -->
+  <div class="likes-section card">
+    <h2>❤️ Likes</h2>
+    <% if current_user %>
+      <% if @story.likes.exists?(user: current_user) %>
+        <%= button_to '❤️ Ne plus aimer', story_unlike_path(@story), method: :delete, data: { turbo: false }, class: 'btn btn-danger' %>
+      <% else %>
+        <%= button_to '❤️ Aimer', story_like_path(@story), method: :post, data: { turbo: false }, class: 'btn btn-primary' %>
+      <% end %>
+    <% end %>
+  </div>
   <% end %>
-</ul>
-<%= link_to 'Ajouter un chapitre', new_story_chapter_path(@story), class: 'btn btn-primary' if current_user == @story.user %>
 
-<hr>
 
-<h2>Commentairess</h2>
-<%= render 'comments/form', story: @story %>
-
-<ul>
-  <% @story.comments.each do |comment| %>
-    <li>
-      <strong><%= comment.user.username %>:</strong> <%= comment.content %>
-      <%= button_to 'Supprimer', story_comment_path(@story, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' if current_user == comment.user %>
-    </li>
-  <% end %>
-</ul>
-
-<hr>
-
-<h2>Likes</h2>
-<% if current_user %>
-  <% if @story.likes.exists?(user: current_user) %>
-    <%= button_to 'Ne plus aimer', story_unlike_path(@story), method: :delete, data: { turbo: false }, class: 'btn btn-danger' %>
-  <% else %>
-    <%= button_to 'Aimer', story_like_path(@story), method: :post, data: { turbo: false }, class: 'btn btn-primary' %>
-  <% end %>
-<% end %>
-
-<%= link_to 'Retour aux histoires', stories_path, class: 'btn btn-secondary' %>
+  <div class="back-link">
+    <%= link_to 'Retour aux histoires', stories_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
