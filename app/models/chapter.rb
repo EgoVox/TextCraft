@@ -1,4 +1,6 @@
 class Chapter < ApplicationRecord
+  has_rich_text :content
+
   belongs_to :story
   after_save :update_story_timestamp
 
@@ -10,6 +12,14 @@ class Chapter < ApplicationRecord
   # has_many :comments, dependent: :destroy
 
   validates :position, uniqueness: { scope: :story_id }
+
+  def previous_chapter
+    story.chapters.where("position < ?", self.position).order(position: :desc).first
+  end
+
+  def next_chapter
+    story.chapters.where("position > ?", self.position).order(position: :asc).first
+  end
 
   private
 

@@ -1,4 +1,6 @@
 class Story < ApplicationRecord
+  has_one_attached :cover_image
+
   belongs_to :user
   belongs_to :category
   has_many :chapters, dependent: :destroy
@@ -10,8 +12,12 @@ class Story < ApplicationRecord
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
+  validates :description, length: { maximum: 500 }
+
 
   before_validation :generate_slug, on: :create
+
+  validates :cover_image_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: 'doit être une URL valide' }, allow_blank: true
 
   def to_param
     slug

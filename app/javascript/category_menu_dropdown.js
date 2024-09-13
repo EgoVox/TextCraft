@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const categoriesToggle = document.getElementById("categoriesDropdown");
+  const categoriesDropdownButton = document.getElementById("categoriesDropdown");
   const categoriesMenu = document.querySelector(".header-categories-dropdown");
 
-  // Afficher / cacher le menu des catégories au clic
-  categoriesToggle.addEventListener("click", function (event) {
-    event.preventDefault();
+  // Toggle dropdown menu on click
+  categoriesDropdownButton.addEventListener("click", function () {
     categoriesMenu.classList.toggle("show");
   });
 
-  // Fermer le menu si on clique ailleurs sur la page
+  // Close the menu if clicking outside
   document.addEventListener("click", function (event) {
-    if (!categoriesMenu.contains(event.target) && event.target !== categoriesToggle) {
+    if (!categoriesMenu.contains(event.target) && event.target !== categoriesDropdownButton) {
       categoriesMenu.classList.remove("show");
     }
   });

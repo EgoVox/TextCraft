@@ -1,67 +1,70 @@
-<h2>Edit User</h2>
+<div class="edit-user-container">
+  <h2>Modifier mon profil</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'edit-user-form' }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div class="form-group">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+    <div class="form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :username %>
+      <%= f.text_field :username, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :gender %>
+      <%= f.select :gender, [['Masculin', 'masculin'], ['Féminin', 'feminin'], ['Autre', 'autre']], class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bio %>
+      <%= f.text_area :bio, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      <small>(Laissez vide pour ne pas changer le mot de passe)</small>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      <small>(Nous avons besoin de votre mot de passe actuel pour confirmer vos modifications)</small>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <div class="edit-user-footer">
+    <%= link_to "Retour", :back, class: "btn btn-secondary" %>
+    <div>
+      Pas satisfait ? <%= button_to "Supprimer mon compte", registration_path(resource_name), data: { confirm: "Êtes-vous sûr ?", turbo_confirm: "Êtes-vous sûr ?" }, method: :delete, class: 'btn btn-danger' %>
+    </div>
   </div>
-
-  <div class="form-group">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :username %>
-    <%= f.text_field :username, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :city %>
-    <%= f.text_field :city, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :gender %>
-    <%= f.select :gender, [['Masculin', 'masculin'], ['Feminin', 'feminin'], ['Autre', 'autre']], class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :bio %>
-    <%= f.text_area :bio, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %>
-    <%= f.email_field :email, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-    <small>(Ne rien mettre pour ne pas le changer)</small>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :current_password %>
-    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-    <small>(we need your current password to confirm your changes)</small>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update", class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<%= link_to "Back", :back, class: "btn btn-secondary" %>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

@@ -22,9 +22,9 @@
           <%= link_to 'Accueil', stories_path, class: 'nav-link logo-link' %>
           <!-- Menu déroulant pour les catégories -->
           <div class="header-categories-dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" aria-expanded="false">
+            <button class="nav-link dropdown-toggle" id="categoriesDropdown" type="button" aria-expanded="false">
               Catégories
-            </a>
+            </button>
             <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
               <% Category.all.each do |category| %>
                 <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
@@ -42,7 +42,7 @@
           <ul class="dropdown-menu" aria-labelledby="userDropdown">
             <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
             <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'dropdown-item' %></li>
-            <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item' %></li>
+            <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item btn-logout' %></li>
           </ul>
         </div>
       </div>

@@ -7,16 +7,20 @@ class StoriesController < ApplicationController
       @read_stories = Story.joins(:reads)
                           .where(reads: { user_id: current_user.id })
                           .where.not(user_id: current_user.id)  # Exclure les histoires créées par l'utilisateur
-                          .order('reads.created_at DESC')
+                          .group('stories.id')
+                          .order('MAX(reads.created_at) DESC')
                           .limit(10)
 
-      @last_read_chapter = @read_stories.map { |story| story.last_read_chapter_for_user(current_user) }
+      # Récupérer uniquement le dernier chapitre lu pour chaque histoire
+      @last_read_chapters = @read_stories.map do |story|
+        story.last_read_chapter_for_user(current_user)
+      end
 
       # Récupérer les histoires créées par l'utilisateur
       @my_stories = current_user.stories.order(created_at: :desc)
 
       # Afficher les 5 dernières histoires mises à jour (toutes les histoires)
-      @stories = Story.order(updated_at: :desc).limit(6)
+      @stories = Story.order(updated_at: :desc).limit(8)
     else
       # Si l'utilisateur n'est pas connecté : collection vide
       @read_stories = []
@@ -65,6 +69,6 @@ class StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:story).permit(:title, :description, :category_id)
+    params.require(:story).permit(:title, :description, :category_id, :cover_image_url)
   end
 end

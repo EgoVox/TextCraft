@@ -1,0 +1,95 @@
+.edit-user-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+
+  h2 {
+    font-family: "Merriweather", serif;
+    font-size: 2.5rem;
+    color: #ff6f61;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    label {
+      font-family: "Merriweather", serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:focus {
+        border-color: #ff6f61;
+        box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        outline: none;
+      }
+    }
+
+    small {
+      font-size: 0.9rem;
+      color: #666;
+    }
+  }
+
+  .actions {
+    text-align: center;
+    margin-top: 30px;
+
+    .btn-primary {
+      background-color: #ff6f61;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #e65c50;
+      }
+    }
+  }
+
+  .edit-user-footer {
+    margin-top: 40px;
+    text-align: center;
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #5a6268;
+      }
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin-top: 15px;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+}

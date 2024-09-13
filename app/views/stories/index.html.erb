@@ -1,73 +1,80 @@
-<div class="story-sections-container">
-  <!-- Dernières histoires lues -->
-  <div class="last-read-container section">
-    <% if user_signed_in? %>
-      <% if @read_stories.any? %>
-        <h1 class="section-title">Dernières histoires lues</h1>
-        <div class="stories-grid">
-          <% @read_stories.each do |story| %>
-            <div class="story-card">
-              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
-
-              <div class="story-info">
-                <%= link_to story.title, story_path(story), class: "story-title" %>
-                <small>par <%= story.user.username %></small>
-
-                <% last_chapter = story.last_read_chapter_for_user(current_user) %>
-                <% if last_chapter %>
-                  <div class="last-read-chapter">
-                    <p>Dernier chapitre lu :
-                      <%= link_to last_chapter.title, story_chapter_path(story, last_chapter), class: "chapter-link" %>
-                    </p>
-                  </div>
-                <% else %>
-                  <p class="no-chapter">Aucun chapitre lu récemment</p>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <p>Vous n'avez lu aucune histoire récemment.</p>
-      <% end %>
-    <% end %>
-  </div>
-
-  <!-- Dernières histoires mises à jour -->
-  <div class="last-updated-container section">
-    <h1 class="section-title">Dernières histoires mises à jour</h1>
-    <div class="stories-grid">
-      <% @stories.each do |story| %>
-        <div class="story-card">
-          <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
-          <div class="story-info">
-            <%= link_to story.title, story_path(story), class: "story-title" %>
-            <small>par <%= story.user.username %></small>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- Mes histoires -->
-  <% if user_signed_in? %>
-    <div class="my-stories section">
-      <h1 class="section-title">Mes histoires</h1>
+<div class="layout-container">
+  <!-- Colonne principale -->
+  <div class="main-column">
+    <!-- Dernières histoires mises à jour -->
+    <div class="last-updated section">
+      <h1 class="section-title">Dernières histoires mises à jour</h1>
       <div class="stories-grid">
-        <% @my_stories.each do |story| %>
-          <div class="story-card">
-            <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
-            <div class="story-info">
-              <h2><%= link_to story.title, story_path(story), class: "story-title" %></h2>
-              <p class="story-description"><%= story.description.truncate(100) %></p>
-              <div class="story-actions">
-                <%= link_to 'Lire', story_path(story), class: 'btn btn-read' %>
-                <%= link_to 'Modifier', edit_story_path(story), class: 'btn btn-edit' %>
+        <% @stories.each do |story| %>
+          <div class="card">
+            <% if story.cover_image_url.present? %>
+              <%= image_tag story.cover_image_url, class: "card__image" %>
+            <% else %>
+              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card__image") %>
+            <% end %>
+            <div class="card__overlay">
+              <div class="card__header">
+                <h3 class="card__title"><%= link_to story.title, story_path(story) %></h3>
+                <span class="card__tagline">par <%= story.user.username %></span>
+                <p class="card__description"><%= truncate(story.description, length: 100) %></p>
               </div>
+              <div class="card__arrow">↑</div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-  <% end %>
+  </div>
+
+  <!-- Colonne latérale -->
+  <div class="sidebar-column">
+    <!-- Dernières histoires lues -->
+    <% if user_signed_in? && @read_stories.any? %>
+      <div class="last-read section">
+        <h2 class="section-title">Dernières histoires lues</h2>
+        <div class="stories-list">
+          <% @read_stories.each do |story| %>
+            <div class="card list-item">
+              <div class="card__overlay">
+                <h3 class="card__title"><%= link_to story.title, story_path(story) %></h3>
+                <span class="card__tagline">par <%= story.user.username %></span>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <!-- Créer une histoire -->
+    <div class="create-story section">
+      <% if user_signed_in? %>
+        <%= link_to '➕ Créer une nouvelle histoire', new_story_path, class: 'btn btn-create' %>
+      <% end %>
+    </div>
+
+    <!-- Mes histoires -->
+    <% if user_signed_in? %>
+      <div class="my-stories section">
+        <h1 class="section-title">Mes histoires</h1>
+        <div class="stories-grid">
+          <% @my_stories.each do |story| %>
+            <div class="card">
+              <% if story.cover_image_url.present? %>
+                <%= image_tag story.cover_image_url, class: "card__image" %>
+              <% else %>
+                <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card__image") %>
+              <% end %>
+              <div class="card__overlay">
+                <div class="card__header">
+                  <h3 class="card__title"><%= link_to story.title, story_path(story) %></h3>
+                  <span class="card__tagline">par <%= story.user.username %></span>
+                </div>
+                <p class="card__description"><%= truncate(story.description, length: 100) %></p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

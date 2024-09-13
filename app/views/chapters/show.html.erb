@@ -1,8 +1,36 @@
-<h1><%= @chapter.title %></h1>
-<p><%= @chapter.content %></p>
+<div class="chapter-show-container">
+  <!-- Titre et contenu du chapitre -->
+  <div class="chapter-details card">
+    <h1 class="chapter-title"><%= @chapter.title %></h1>
+    <div class="chapter-content">
+      <div class="chapter-content">
+        <%= @chapter.content %>
+      </div>
+    </div>
 
-<%= link_to 'Editer le chapitre', edit_story_chapter_path(@story, @chapter), class: 'btn btn-warning' if current_user == @story.user %>
-<%= button_to 'Supprimer le chapitre', story_chapter_path(@story, @chapter.position), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' if current_user == @story.user %>
+    <!-- Boutons pour éditer et supprimer le chapitre (pour l'auteur) -->
+    <% if current_user == @story.user %>
+      <div class="chapter-actions">
+        <%= link_to '✏️ Editer', edit_story_chapter_path(@story, @chapter), class: 'btn btn-edit' %>
+        <%= button_to '🗑️ Supprimer le chapitre', story_chapter_path(@story, @chapter.position), method: :delete, data: { confirm: 'Es-tu sûr ?' }, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
 
-<%= link_to 'Ajouter un chapitre', new_story_chapter_path(@story), class: 'btn btn-primary' if current_user == @story.user %>
-<%= link_to 'Retour à l\'histoire', story_path(@story), class: 'btn btn-secondary' %>
+  <div class="chapter-navigation">
+    <!-- Lien vers le chapitre précédent s'il existe -->
+    <% if @chapter.previous_chapter.present? %>
+      <%= link_to '⬅️ Chapitre précédent', story_chapter_path(@story, @chapter.previous_chapter.position), class: 'btn btn-secondary' %>
+    <% end %>
+
+    <!-- Lien vers le chapitre suivant s'il existe -->
+    <% if @chapter.next_chapter.present? %>
+      <%= link_to 'Chapitre suivant ➡️', story_chapter_path(@story, @chapter.next_chapter.position), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <!-- Bouton pour retourner à l'histoire -->
+  <div class="back-to-story">
+    <%= link_to 'Retour à l\'histoire', story_path(@story), class: 'btn btn-secondary' %>
+  </div>
+</div>

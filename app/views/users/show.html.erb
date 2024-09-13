@@ -1,45 +1,59 @@
+<div class="user-profile-container">
+  <!-- Informations de l'utilisateur -->
+  <div class="user-details card">
+    <h1>Profil de <%= @user.username || @user.email %></h1>
+    <p><strong>Nom :</strong> <%= @user.first_name %> <%= @user.last_name %></p>
+    <p><strong>Ville :</strong> <%= @user.city || 'Non renseigné' %></p>
+    <p><strong>Username:</strong> <%= @user.username %></p>
+    <p><strong>Email :</strong> <%= @user.email %></p>
+    <p><strong>Bio :</strong> <%= @user.bio.present? ? @user.bio : 'Aucune biographie disponible.' %></p>
 
-<h2>Histoire par <%= @user.username %></h2>
-
-<h1>Profil de <%= @user.username || @user.email %></h1>
-
-<p><strong>Nom :</strong> <%= @user.first_name %> <%= @user.last_name %></p>
-<p><strong>Ville :</strong> <%= @user.city %></p>
-<p><strong>Username:</strong> <%= @user.username %></p>
-<p><strong>Email :</strong> <%= @user.email %></p>
-<p><strong>Bio :</strong> <%= @user.bio %></p>
-
-<%= link_to 'Modifier mon profil', edit_user_registration_path, class: 'btn btn-primary' %>
-
-  <div class="my-stories">
-    <h1>Mes histoires</h1>
-
-    <div class="stories-grid">
-      <% @stories.each do |story| %>
-        <div class="story-card">
-          <!-- Image de couverture ou image par défaut -->
-          <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
-
-          <!-- Informations sur l'histoire -->
-          <div class="story-info">
-            <h2><%= link_to story.title, story_path(story), class: "story-title" %></h2>
-            <p class="story-description"><%= story.description.truncate(100) %></p>
-
-            <div class="story-actions">
-              <%= link_to story_path(story), class: 'btn btn-read' do %>
-                Lire
-              <% end %>
-
-              <%= link_to edit_story_path(story), class: 'btn btn-edit' do %>
-                Modifier
-              <% end %>
-            <%= link_to 'Nouvelle histoire', new_story_path, class: 'btn btn-create' %>
-          </div>
-
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <%= link_to 'Modifier mon profil', edit_user_registration_path, class: 'btn btn-primary' %>
   </div>
 
-<%= link_to 'Retour aux histoires', stories_path, class: 'btn btn-secondary' %>
+  <!-- Section des histoires de l'utilisateur -->
+  <div class="my-stories section">
+    <h2>Les histoires au top par <%= @user.username %></h2>
+
+    <% if @stories.any? %>
+      <div class="stories-grid">
+        <% @stories.each do |story| %>
+          <div class="story-card">
+          <h2><%= link_to story.title, story_path(story), class: "story-title" %></h2>
+
+            <!-- Image de couverture ou image par défaut -->
+            <% if story.cover_image_url.present? %>
+              <%= image_tag story.cover_image_url, alt: "Couverture de #{story.title}", class: "story-cover" %>
+            <% else %>
+              <%= image_tag "default.jpg", alt: "Couverture de #{story.title}", class: "story-cover" %>
+            <% end %>
+
+            <!-- Informations sur l'histoire -->
+            <div class="story-info">
+              <p class="story-description"><%= story.description.truncate(100) %></p>
+
+              <div class="story-actions">
+                <%= link_to story_path(story), class: 'btn btn-read' do %>
+                  Lire
+                <% end %>
+                <%= link_to edit_story_path(story), class: 'btn btn-edit' do %>
+                  Modifier
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>Aucune histoire pour le moment.</p>
+    <% end %>
+
+    <!-- Bouton pour créer une nouvelle histoire -->
+    <%= link_to 'Nouvelle histoire', new_story_path, class: 'btn btn-create' %>
+  </div>
+
+  <!-- Lien de retour -->
+  <div class="back-link">
+    <%= link_to 'Retour aux histoires', stories_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

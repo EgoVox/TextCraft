@@ -1,0 +1,107 @@
+@import 'base/variables';
+
+.chapter-show-container {
+  padding: 40px 300px;
+  background-color: #f9f9f9;
+  text-align: center;
+
+  .chapter-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+
+    .chapter-title {
+      font-size: 2rem;
+      font-family: "Merriweather", serif;
+      color: $title-color;
+      margin-bottom: 20px;
+    }
+
+    .chapter-content {
+      text-align: left;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      text-align: justify;
+      color: #555;
+      white-space: pre-line;
+      padding: 20px 0;
+    }
+
+    .chapter-actions {
+      margin-top: 20px;
+
+      .btn {
+        margin-right: 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .btn-edit {
+        background-color: #ffc107;
+        color: white;
+
+        &:hover {
+          background-color: #e0a800;
+        }
+      }
+
+      .btn-danger {
+        background-color: #dc3545;
+        color: white;
+
+        &:hover {
+          background-color: #c82333;
+        }
+      }
+    }
+  }
+
+  .chapter-navigation {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+
+      &:hover {
+        background-color: #5a6268;
+      }
+    }
+
+    .btn-primary {
+      background-color: $title-color;
+      color: white;
+
+      &:hover {
+        background-color: $title-color;
+      }
+    }
+  }
+
+  .back-to-story {
+    margin-top: 20px;
+
+    .btn-secondary {
+      background-color: #6c757d;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: #5a6268;
+      }
+    }
+  }
+}

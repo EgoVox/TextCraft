@@ -5,3 +5,6 @@ import "./category_menu_dropdown";
 import "./index_carousel";
 import "./burger_menu";
 import "./user_menu_dropdown";
+
+import "trix"
+import "@rails/actiontext"
