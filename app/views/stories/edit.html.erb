@@ -1,4 +1,3 @@
-<h2>Modifier l'histoire</h2>
 <%= render 'form_story', story: @story, chapter: @chapter %>
 
 <%= button_to story_path(@story), method: :delete, data: { confirm: 'Es-tu sûr de vouloir supprimer cette histoire ?' }, class: 'btn btn-delete' do %>

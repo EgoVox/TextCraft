@@ -42,7 +42,7 @@
 }
 
 /* Adaptation des cards */
-.card {
+.card-index {
   position: relative;
   display: block;
   height: 100%;
@@ -52,18 +52,18 @@
   background-color: transparent;
 }
 
-.card__image {
+.card-index__image {
   width: 100%;
   height: 400px;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.card__image:hover {
+.card-index__image:hover {
   transform: scale(1.05);
 }
 
-.card__overlay {
+.card-index__overlay {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -72,14 +72,14 @@
   color: white;
   padding: 15px;
   transition: height 0.3s ease-in-out;
-  height: 40px;
+  height: 70px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.card__title {
+.card-index__title {
   font-size: 20px;
   margin: 0;
   color: #ff6f61 !important;
@@ -88,25 +88,25 @@
   text-decoration: none;
 }
 
-.card__title a{
+.card-index__title a{
   color: #ff6f61 !important;
   /* Remplacer par une couleur fixe */
   font-weight: bold;
   text-decoration: none;
 }
 
-.card__title:hover {
+.card-index__title:hover {
   color: #e65c50;
   /* Couleur au survol */
 }
 
-.card__tagline {
+.card-index__tagline {
   font-size: 16px;
   color: #ddd;
   font-weight: bold;
 }
 
-.card__description {
+.card-index__description {
   // font-size: 0.8rem;
   margin-top: 20px;
   display: none;
@@ -114,20 +114,20 @@
   font-size: 16px
 }
 
-.card:hover .card__overlay {
+.card-index:hover .card-index__overlay {
   height: 100%;
   padding-top: 20px;
 }
 
-.card:hover .card__description {
+.card-index:hover .card-index__description {
   display: block;
 }
 
 /* Flèche animée */
-.card__arrow {
+.card-index__arrow {
   position: absolute;
   bottom: 5px;
-  left: 50%;
+  left: 90%;
   transform: translateX(-50%);
   font-size: 1.5rem;
   color: white;
@@ -148,11 +148,11 @@
   }
 }
 
-.card:hover .card__arrow {
+.card-index:hover .card-index__arrow {
   transform: translate(-50%, -100%);
 }
 
-.card__header {
+.card-index__header {
   display: flex;
   flex-direction: column;
 }

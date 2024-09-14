@@ -1,7 +1,6 @@
 /* Section principale - Page d'accueil */
 .hero-section {
   background: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
-  /* Couleurs douces et chaleureuses */
   height: 80vh;
   display: flex;
   justify-content: center;
@@ -10,11 +9,29 @@
   position: relative;
 }
 
+.story-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 colonnes */
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 colonnes sur écrans moyens */
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    /* 1 colonne sur petits écrans */
+  }
+}
+
 .hero-content {
   color: #333;
   text-align: center;
   animation: floatAnimation 5s ease-in-out infinite;
-  /* Animation pour un effet de mouvement magique */
 }
 
 .hero-image {
@@ -22,7 +39,6 @@
   margin-bottom: 20px;
   border-radius: 4px;
   animation: shineAnimation 3s infinite alternate;
-  /* Animation douce pour l'image */
 }
 
 @keyframes shineAnimation {
@@ -93,73 +109,126 @@ p {
 }
 
 .story-list {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 histoires par ligne */
   gap: 20px;
-  flex-wrap: wrap;
+  max-width: 1200px;
+  /* Limite la largeur de l'ensemble des cartes */
+  margin: 0 auto;
+  /* Centre les cartes */
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 histoires par ligne sur écrans moyens */
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    /* 1 histoire par ligne sur petits écrans */
+  }
 }
 
-.story-item {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 200px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.category-name {
+  font-size: 1.5rem;
+  color: #ff6f61;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-.story-item:hover {
+.card-home {
+  position: relative;
+  display: block;
+  max-width: 350px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.card-home__image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card-home__image:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
 }
 
-.story-item h3 {
-  font-size: 1.2rem;
+.card-home__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 15px;
+  transition: height 0.3s ease-in-out;
+  height: 90px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-home__title {
+  font-size: 1.7rem !important;
+  margin: 0;
   color: #ff6f61;
 }
 
-.story-item p {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-}
-
-footer ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-footer ul li {
-  margin: 0 15px;
-}
-
-footer ul li a {
-  color: white;
+.card-home__title a {
+  color: #ff6f61;
   text-decoration: none;
 }
 
-@media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2rem;
+.card-home__tagline {
+  font-size: 1.2rem !important;
+  color: #ddd;
+}
+
+.card-home__description {
+  font-size: 1rem !important;
+  margin-top: 10px;
+  display: none;
+  color: white;
+}
+
+.card-home:hover .card-home__overlay {
+  height: 100%;
+  padding-top: 20px;
+}
+
+.card-home:hover .card-home__description {
+  display: block;
+}
+
+.card-home__arrow {
+  position: absolute;
+  bottom: 5px;
+  left: 10%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: white;
+  transition: transform 0.3s ease;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translate(-50%, 0);
   }
 
-  .hero-section p {
-    font-size: 1rem;
+  50% {
+    transform: translate(-50%, 10px);
   }
+}
 
-  .cta-button {
-    padding: 10px 20px;
-  }
-
-  .hero-image {
-    width: 300px;
-  }
+.card-home:hover .card-home__arrow {
+  transform: translate(-50%, -100%);
 }

@@ -30,7 +30,7 @@
 
             <!-- Informations sur l'histoire -->
             <div class="story-info">
-              <p class="story-description"><%= story.description.truncate(100) %></p>
+              <p class="story-description"><%= story.description %></p>
 
               <div class="story-actions">
                 <%= link_to story_path(story), class: 'btn btn-read' do %>

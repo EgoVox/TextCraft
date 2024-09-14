@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
-    <title>Wattpadlike</title>
+    <title>TextCraft</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,35 +9,46 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-
   </head>
-<body>
-    <!-- Main Section -->
-  <div class="hero-section">
-    <div class="hero-content">
-      <%= image_tag 'TextCraft.webp', alt: 'TextCraft', class: 'hero-image' %>
-      <h1>Explorez des Histoires Uniques sur TextCraft</h1>
-      <p>Plongez dans un univers où l'imagination n'a pas de limites.</p>
-      <%= link_to "Commencer votre aventure", new_user_registration_path, class: 'cta-button' %>
-    </div>
-  </div>
 
-  <section class="popular-stories">
-    <h2>Histoires Populaires</h2>
-    <div class="story-list">
-      <!-- Liste des histoires populaires -->
-      <% @stories.each do |story| %>
-        <div class="story-item">
-                      <% if story.cover_image_url.present? %>
-              <%= image_tag story.cover_image_url, class: "story-cover" %>
-            <% else %>
-              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "story-cover") %>
-            <% end %>
-          <h3><%= link_to story.title, story_path(story) %></h3>
-          <p><%= truncate(story.description, length: 100) %></p>
-        </div>
-      <% end %>
+  <body>
+    <!-- Main Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <%= image_tag 'TextCraft.webp', alt: 'TextCraft', class: 'hero-image' %>
+        <h1>Explorez des Histoires Uniques sur TextCraft</h1>
+        <p>Plongez dans un univers où l'imagination n'a pas de limites.</p>
+        <%= link_to "Commencer votre aventure", new_user_registration_path, class: 'cta-button' %>
+      </div>
     </div>
-  </section>
-</body>
+
+    <section class="popular-stories">
+      <h2>Histoires Populaires par Catégorie</h2>
+      <div class="story-list">
+        <% @categories.each do |category_data| %>
+          <% story = category_data[:popular_story] %>
+          <div class="story-item card-home">
+            <h3 class="category-name"><%= category_data[:category].name %></h3> <!-- Nom de la catégorie -->
+
+            <!-- Image de couverture ou image par défaut -->
+            <% if story.cover_image_url.present? %>
+              <%= image_tag story.cover_image_url, class: "card-home__image" %>
+            <% else %>
+              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card-home__image") %>
+            <% end %>
+
+            <!-- Overlay contenant le titre et la description -->
+            <div class="card-home__overlay">
+              <div class="card-home__header">
+                <h3 class="card-home__title"><%= link_to story.title, story_path(story), class: 'card-home__title_link' %></h3>
+                <span class="card-home__tagline">par <%= story.user.username %></span>
+              </div>
+              <p class="card-home__description"><%= truncate(story.description, length: 250) %></p>
+              <div class="card-home__arrow">⇧</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </body>
 </html>

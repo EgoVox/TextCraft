@@ -6,19 +6,19 @@
       <h1 class="section-title">Dernières histoires mises à jour</h1>
       <div class="stories-grid">
         <% @stories.each do |story| %>
-          <div class="card">
+          <div class="card-index">
             <% if story.cover_image_url.present? %>
-              <%= image_tag story.cover_image_url, class: "card__image" %>
+              <%= image_tag story.cover_image_url, class: "card-index__image" %>
             <% else %>
               <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card__image") %>
             <% end %>
-            <div class="card__overlay">
-              <div class="card__header">
-                <h3 class="card__title"><%= link_to story.title, story_path(story) %></h3>
-                <span class="card__tagline">par <%= story.user.username %></span>
-                <p class="card__description"><%= truncate(story.description, length: 100) %></p>
+            <div class="card-index__overlay">
+              <div class="card-index__header">
+                <h3 class="card-index__title"><%= link_to story.title, story_path(story) %></h3>
+                <span class="card-index__tagline">par <%= story.user.username %></span>
+                <p class="card-index__description"><%= story.description %></p>
               </div>
-              <div class="card__arrow">↑</div>
+              <div class="card-index__arrow">↑</div>
             </div>
           </div>
         <% end %>
@@ -34,10 +34,10 @@
         <h2 class="section-title">Dernières histoires lues</h2>
         <div class="stories-list">
           <% @read_stories.each do |story| %>
-            <div class="card list-item">
-              <div class="card__overlay">
-                <h3 class="card__title"><%= link_to story.title, story_path(story) %></h3>
-                <span class="card__tagline">par <%= story.user.username %></span>
+            <div class="card-index list-item">
+              <div class="card-index__overlay">
+                <h3 class="card-index__title"><%= link_to story.title, story_path(story) %></h3>
+                <span class="card-index__tagline">par <%= story.user.username %></span>
               </div>
             </div>
           <% end %>
@@ -58,18 +58,18 @@
         <h1 class="section-title">Mes histoires</h1>
         <div class="stories-grid">
           <% @my_stories.each do |story| %>
-            <div class="card">
+            <div class="card-index">
               <% if story.cover_image_url.present? %>
-                <%= image_tag story.cover_image_url, class: "card__image" %>
+                <%= image_tag story.cover_image_url, class: "card-index__image" %>
               <% else %>
-                <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card__image") %>
+                <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card-index__image") %>
               <% end %>
-              <div class="card__overlay">
-                <div class="card__header">
-                  <h3 class="card__title"><%= link_to story.title, story_path(story) %></h3>
-                  <span class="card__tagline">par <%= story.user.username %></span>
+              <div class="card-index__overlay">
+                <div class="card-index__header">
+                  <h3 class="card-index__title"><%= link_to story.title, story_path(story) %></h3>
+                  <span class="card-index__tagline">par <%= story.user.username %></span>
                 </div>
-                <p class="card__description"><%= truncate(story.description, length: 100) %></p>
+                <p class="card-index__description"><%= story.description %></p>
               </div>
             </div>
           <% end %>

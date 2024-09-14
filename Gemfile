@@ -10,6 +10,8 @@ gem 'faraday'
 gem 'sassc-rails'
 gem "activestorage"
 gem "actiontext"
+gem 'toastr-rails'
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4"
