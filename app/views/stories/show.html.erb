@@ -1,6 +1,6 @@
 <div class="story-show-container">
   <!-- Détails de l'histoire -->
-  <div class="story-details card">
+  <div class="story-details card-story-show">
     <div class="story-header">
       <% if @story.cover_image.attached? %>
         <%= image_tag url_for(@story.cover_image), class: "story-cover-large" %>
@@ -72,7 +72,6 @@
     <% end %>
   </div>
   <% end %>
-
 
   <div class="back-link">
     <%= link_to 'Retour aux histoires', stories_path, class: 'btn btn-secondary' %>

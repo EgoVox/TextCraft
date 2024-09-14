@@ -3,15 +3,20 @@
 
   <div class="stories-grid">
     <% @stories.each do |story| %>
-      <div class="story-card">
+      <div class="story-card card-category">
         <% if story.cover_image_url.present? %>
-          <%= image_tag story.cover_image_url, class: "story-cover" %>
+          <%= image_tag story.cover_image_url, class: "card-category__image" %>
         <% else %>
-          <%= image_tag "default.jpg", alt: "Couverture de #{story.title}", class: "story-cover" %>
+          <%= image_tag "default.jpg", alt: "Couverture de #{story.title}", class: "card-category__image" %>
         <% end %>
-        <div class="story-info">
-          <%= link_to story.title, story_path(story), class: "story-title" %>
-          <small>par <%= story.user.username %></small>
+        <div class="card-category__overlay">
+          <div class="card-category__header">
+            <h3 class="card-category__title"><%= link_to story.title, story_path(story) %></h3>
+            <span class="card-category__tagline">par <%= story.user.username %></span>
+          </div>
+          <p class="card-category__description"><%= story.description %></p>
+          <div class="card-category__left-arrow">⇧</div>
+          <div class="card-category__right-arrow">⇧</div>
         </div>
       </div>
     <% end %>

@@ -1,0 +1,97 @@
+/* Style de la modal */
+.modal-overlay {
+  position: fixed;
+  top: 5;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Couleur de fond sombre */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  /* Superposition au-dessus des autres éléments */
+}
+
+.modal-container {
+  background-color: #fff;
+  /* Couleur de fond principale */
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  font-family: 'Merriweather', serif;
+  /* Font utilisée sur le site */
+}
+
+/* Bouton de fermeture */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  /* Couleur du bouton de fermeture */
+}
+
+.modal-header {
+  font-size: 24px;
+  color: #444;
+  /* Couleur du texte */
+  margin-bottom: 15px;
+}
+
+.modal-body {
+  font-size: 16px;
+  color: #666;
+  /* Couleur du texte principal */
+  line-height: 1.6;
+}
+
+/* Style des suggestions */
+.modal-body ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.modal-body ul li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-body ul li:last-child {
+  border-bottom: none;
+}
+
+/* Ajouter un effet au bouton de fermeture */
+.modal-close:hover {
+  color: #f00;
+  /* Rouge lors du survol */
+}
+
+/* Bouton action dans la modal */
+.modal-footer {
+  text-align: right;
+}
+
+.modal-footer button {
+  background-color: #4CAF50;
+  /* Couleur du bouton (vert) */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-footer button:hover {
+  background-color: #45a049;
+  /* Vert plus foncé au survol */
+}

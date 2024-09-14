@@ -3,14 +3,13 @@
   max-width: 900px;
   padding: 20px;
 
-  .card {
+  .card-story-show {
     background-color: #fdfdfd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 30px;
 
-    /* Alignement de l'image à gauche et du texte à droite */
     .story-header {
       display: flex;
       align-items: center;
@@ -47,73 +46,85 @@
     }
   }
 
-  /* Style des chapitres */
-.chapters-section {
-  margin-top: 30px;
-
-  .section-title {
-    font-size: 1.8rem;
-    font-family: "Merriweather", serif;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-  }
-
-  .chapter-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
+    .story-details {
+      max-width: none;
+      /* ou vérifie si une autre règle limite la taille */
+      width: 100%;
+      /* assure que la div prend toute la largeur disponible */
+      margin: 0 auto;
+      /* centrer la div si nécessaire */
     }
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
+  .chapters-section {
+      max-width: none;
+        /* ou vérifie si une autre règle limite la taille */
+        width: 100%;
+        /* assure que la div prend toute la largeur disponible */
+        margin: 30px auto;
+        /* centrer la div si nécessaire */
 
-  .chapter-card {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .chapter-header {
-      margin-bottom: 10px;
-    }
-
-    .chapter-title {
-      font-size: 1.3rem;
+    .section-title {
+      font-size: 1.8rem;
       font-family: "Merriweather", serif;
-      color: #007bff;
-      text-decoration: none;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
+    }
 
-      &:hover {
-        text-decoration: underline;
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
       }
     }
 
-    .chapter-excerpt {
-      font-size: 1rem;
-      color: #555;
+    .chapter-card {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .chapter-header {
+        margin-bottom: 10px;
+      }
+
+      .chapter-title {
+        font-size: 1.3rem;
+        font-family: "Merriweather", serif;
+        color: #007bff;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .chapter-excerpt {
+        font-size: 1rem;
+        color: #555;
+      }
+    }
+
+    .add-chapter-btn {
+      margin-top: 20px;
+      display: block;
+      text-align: center;
     }
   }
 
-  .add-chapter-btn {
-    margin-top: 20px;
-    display: block;
-    text-align: center;
-  }
-}
-
-  /* Style des commentaires */
   .comments-section {
     .comments-list {
       list-style: none;
@@ -132,53 +143,50 @@
         }
       }
     }
+  }
 
+  .likes-section {
+    text-align: center;
+    padding: 20px 0;
+  }
 
-    /* Likes */
-    .likes-section {
-      text-align: center;
-      padding: 20px 0;
+  .btn {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+
+    &:hover {
+      background-color: #0056b3;
     }
+  }
 
-    /* Boutons */
-    .btn {
-      display: inline-block;
-      padding: 10px 15px;
-      border-radius: 5px;
-      color: white;
-      text-align: center;
-      font-weight: bold;
-      cursor: pointer;
-      margin-right: 10px;
+  .btn-danger {
+    background-color: #dc3545;
+
+    &:hover {
+      background-color: #c82333;
     }
+  }
 
-    .btn-primary {
-      background-color: #007bff;
+  .btn-edit {
+    background-color: #ffc107;
 
-      &:hover {
-        background-color: #0056b3;
-      }
+    &:hover {
+      background-color: #e0a800;
     }
+  }
 
-    .btn-danger {
-      background-color: #dc3545;
-
-      &:hover {
-        background-color: #c82333;
-      }
-    }
-
-    .btn-edit {
-      background-color: #ffc107;
-
-      &:hover {
-        background-color: #e0a800;
-      }
-    }
-
-    .back-link {
-      text-align: center;
-      margin-top: 20px;
-    }
+  .back-link {
+    text-align: center;
+    margin-top: 20px;
   }
 }

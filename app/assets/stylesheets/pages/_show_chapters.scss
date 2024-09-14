@@ -6,6 +6,9 @@
   text-align: center;
 
   .chapter-details {
+    max-width: none;
+    width: 100%;
+    margin: 0 auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
@@ -22,7 +25,7 @@
     .chapter-content {
       text-align: left;
       font-size: 1.1rem;
-      line-height: 1.8;
+      line-height: 1;
       text-align: justify;
       color: #555;
       white-space: pre-line;

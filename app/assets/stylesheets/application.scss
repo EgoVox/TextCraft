@@ -14,9 +14,11 @@
  *= require_self
  */
 
+
 @import 'base/policy';
 @import 'base/variables';
 
+@import 'components/modal';
 @import 'components/auth';
 @import 'components/buttons';
 @import 'components/carousel';
