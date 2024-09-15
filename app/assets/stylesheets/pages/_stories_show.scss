@@ -1,3 +1,5 @@
+@import "/base/variables";
+
 .story-show-container {
   margin: 30px auto;
   max-width: 900px;
@@ -29,7 +31,7 @@
         .story-title {
           font-size: 2.5rem;
           font-family: "Merriweather", serif;
-          color: #FF6F61;
+          color: $title-color;
           margin-bottom: 15px;
         }
 
@@ -55,6 +57,17 @@
       /* centrer la div si nécessaire */
     }
 
+  .story-show-img {
+    margin: 0 auto;
+    display: block;
+    width: 300px;
+    height: 450px;
+    max-width: 500px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
   .chapters-section {
       max-width: none;
         /* ou vérifie si une autre règle limite la taille */
@@ -64,6 +77,7 @@
         /* centrer la div si nécessaire */
 
     .section-title {
+      padding-top: 10px;
       font-size: 1.8rem;
       font-family: "Merriweather", serif;
       margin-bottom: 20px;
@@ -104,12 +118,18 @@
       .chapter-title {
         font-size: 1.3rem;
         font-family: "Merriweather", serif;
-        color: #007bff;
+        color: $title-color;
         text-decoration: none;
 
         &:hover {
           text-decoration: underline;
         }
+      }
+
+      .chapter-title a{
+        color: $title-color;
+        text-decoration: none;
+        font-weight: bold;
       }
 
       .chapter-excerpt {
@@ -162,10 +182,10 @@
   }
 
   .btn-primary {
-    background-color: #007bff;
+    background-color: $title-color;
 
     &:hover {
-      background-color: #0056b3;
+      background-color: $title-color;;
     }
   }
 

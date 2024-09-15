@@ -19,6 +19,14 @@
     </div>
   </div>
 
+  <div>
+    <% if @story.cover_image_url.present? %>
+      <%= image_tag @story.cover_image_url, class: "story-show-img" %>
+    <% else %>
+      <%= image_tag("default.jpg", alt: "Couverture de #{@story.title}", class: "story-show-img") %>
+    <% end %>
+  </div>
+
   <!-- Liste des chapitres -->
   <div class="chapters-section card">
     <h2 class="section-title">Chapitres</h2>
