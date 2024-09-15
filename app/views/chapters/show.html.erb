@@ -13,6 +13,7 @@
       <div class="chapter-actions">
         <%= link_to '✏️ Editer', edit_story_chapter_path(@story, @chapter), class: 'btn btn-edit' %>
         <%= button_to '🗑️ Supprimer le chapitre', story_chapter_path(@story, @chapter.position), method: :delete, data: { confirm: 'Es-tu sûr ?' }, class: 'btn btn-danger' %>
+        <%= link_to '➕ Ajouter un chapitre', new_story_chapter_path(@story), class: 'btn btn-primary add-chapter-btn' %>
       </div>
     <% end %>
   </div>
