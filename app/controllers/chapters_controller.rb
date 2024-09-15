@@ -165,7 +165,7 @@ end
   end
 
   def contains_vulgarity?(content)
-    vulgar_words = ["pute", "putes", "merde", "connard", "salope", "enculé", "fils de pute"]
+    vulgar_words = ["pute", "putes", "connard", "connards", "salope", "enculé", "fils de pute", "salopes", "enculée", "enculées", "enculés"]
 
     plain_text_content = if content.respond_to?(:body)
                           content.body.to_plain_text
