@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'pages/terms'
   get 'pages/contact'
   # Routes pour la gestion des utilisateurs avec Devise
-  devise_for :users
+
+  devise_for :users, controllers: {
+  registrations: 'users/registrations'
+}
 
   # Redirection après connexion (utilisateurs authentifiés)
   authenticated :user do
