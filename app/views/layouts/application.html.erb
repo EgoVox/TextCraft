@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Wattpadlike</title>
+    <title>TextCraft</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
@@ -19,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
   </head>
 
-  <body>
+  <body data-turbo="false">
     <header class="main-header">
       <% if user_signed_in? %>
       <nav class="nav-container">
@@ -76,7 +74,7 @@
 
       <!-- Modale Bootstrap pour les flash messages -->
 
-<% if @chapter && @chapter.feedback.present? %>
+<% if @chapter && @chapter.feedback.present? && params[:show_modal] == "true" %>
   <div class="modal-overlay">
     <div class="modal-container">
       <button class="modal-close" onclick="closeModal()">×</button>

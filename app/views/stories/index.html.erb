@@ -34,8 +34,8 @@
         <h2 class="section-title">Dernières histoires lues</h2>
         <div class="stories-list">
           <% @read_stories.each do |story| %>
-            <div class="card-index list-item">
-              <div class="card-index__overlay">
+             <div class="card-index list-item">
+              <div>
                 <h3 class="card-index__title"><%= link_to story.title, story_path(story) %></h3>
                 <span class="card-index__tagline">par <%= story.user.username %></span>
               </div>

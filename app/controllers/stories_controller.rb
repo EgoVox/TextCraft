@@ -19,13 +19,13 @@ class StoriesController < ApplicationController
       # Récupérer les histoires créées par l'utilisateur
       @my_stories = current_user.stories.order(created_at: :desc)
 
-      # Afficher les 5 dernières histoires mises à jour (toutes les histoires)
-      @stories = Story.order(updated_at: :desc).limit(8)
-    else
-      # Si l'utilisateur n'est pas connecté : collection vide
-      @read_stories = []
-      # Afficher les 5 dernières histoires mises à jour pour les utilisateurs non connectés
-      @stories = Story.order(updated_at: :desc).limit(5)
+      # Afficher les 8 dernières histoires mises à jour (toutes les histoires)
+      @stories = Story.joins(:chapters).distinct.order(updated_at: :desc).limit(8)
+    # else
+    #   # Si l'utilisateur n'est pas connecté : collection vide
+    #   @read_stories = []
+    #   # Afficher les 5 dernières histoires mises à jour pour les utilisateurs non connectés
+    #   @stories = Story.order(updated_at: :desc).limit(5)
     end
   end
 
