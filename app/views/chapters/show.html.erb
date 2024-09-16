@@ -30,6 +30,32 @@
     <% end %>
   </div>
 
+    <!-- Section des commentaires -->
+<h2>Commentaires</h2>
+
+<!-- Formulaire pour ajouter un commentaire -->
+<%= form_with(model: [ @chapter, Comment.new ], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :content, "Ajouter un commentaire" %><br>
+    <%= form.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= form.submit "Poster le Commentaire" %>
+  </div>
+<% end %>
+
+<!-- Afficher les commentaires -->
+<h2>Commentaires :</h2>
+<% @chapter.comments.each do |comment| %>
+  <p><%= comment.content %> - <%= comment.user.username %></p>
+  <div class="comment">
+    <p><strong><%= comment.user.username %> :</strong> <%= comment.content %></p>
+    <% if comment.user == current_user %>
+      <%= link_to 'Supprimer', chapter_comment_path(@chapter, comment), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce commentaire ?' }, class: 'btn btn-danger' %>
+    <% end %>
+  </div>
+<% end %>
+
   <!-- Bouton pour retourner à l'histoire -->
   <div class="back-to-story">
     <%= link_to 'Retour à l\'histoire', story_path(@story), class: 'btn btn-secondary' %>

@@ -33,7 +33,7 @@ class ChaptersController < ApplicationController
       if @chapter.save
         flash[:notice] = "Chapitre créé avec succès."
         respond_to do |format|
-          format.html { redirect_to story_chapter_path(@story, @chapter.position) }
+          format.html { redirect_to story_chapter_path(@story, @chapter.position, show_modal: true) }
           format.turbo_stream { render_flash }
         end
       else
@@ -64,7 +64,7 @@ def update
     if analysis_result[:passed]
       flash[:notice] = "Chapitre mis à jour avec succès. Qualité du texte : #{@score}%. #{@message}"
       respond_to do |format|
-        format.html { redirect_to story_chapter_path(@story, @chapter.position) }
+        format.html { redirect_to story_chapter_path(@story, @chapter.position, show_modal: true) }
         format.turbo_stream { render_flash }
       end
     else
@@ -89,6 +89,28 @@ def destroy
 end
 
   private
+
+  def set_story
+    @story = Story.find_by!(slug: params[:story_id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Histoire introuvable."
+    redirect_to stories_path
+  end
+
+  def set_chapter_by_position
+    @chapter = @story.chapters.find_by!(position: params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Chapitre introuvable pour la position donnée."
+    redirect_to story_path(@story)
+  end
+
+  def set_chapter_by_id
+    @chapter = @story.chapters.find(params[:id])
+  end
+
+  def chapter_params
+    params.require(:chapter).permit(:title, :content)
+  end
 
   def check_spelling(content)
     response = call_language_tool_api(content)
@@ -145,23 +167,6 @@ end
         #{additional_feedback}
       FEEDBACK
     end
-  end
-
-
-  def set_story
-    @story = Story.find_by!(slug: params[:story_id])
-  end
-
-  def set_chapter_by_position
-    @chapter = @story.chapters.find_by!(position: params[:id])
-  end
-
-  def set_chapter_by_id
-    @chapter = @story.chapters.find(params[:id])
-  end
-
-  def chapter_params
-    params.require(:chapter).permit(:title, :content)
   end
 
   def contains_vulgarity?(content)

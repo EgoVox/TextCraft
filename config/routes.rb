@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   get 'pages/privacy'
   get 'pages/terms'
   get 'pages/contact'
-  # Routes pour la gestion des utilisateurs avec Devise
 
+  # Routes pour la gestion des utilisateurs avec Devise
   devise_for :users, controllers: {
-  registrations: 'users/registrations'
-}
+    registrations: 'users/registrations'
+  }
 
   # Redirection après connexion (utilisateurs authentifiés)
   authenticated :user do
@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   # Routes pour les stories et les chapitres
   resources :stories do
     # Routes imbriquées pour les chapitres
-    resources :chapters, except: [:index]  # Pas besoin d'indexer les chapitres séparément
+    resources :chapters, except: [:index]
+      # Routes imbriquées pour les commentaires (sur les chapitres)
+      resources :comments, only: [:create, :destroy]
 
     # Routes imbriquées pour les commentaires (sur les stories)
     resources :comments, only: [:create, :destroy]
@@ -29,6 +31,10 @@ Rails.application.routes.draw do
     # Route pour liker une histoire
     post 'like', to: 'likes#create'
     delete 'unlike', to: 'likes#destroy'
+  end
+
+  resources :chapters do
+    resources :comments, only: [:create, :destroy]
   end
 
   # Routes pour les catégories

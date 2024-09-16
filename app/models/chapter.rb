@@ -9,7 +9,7 @@ class Chapter < ApplicationRecord
 
   has_many :reads, dependent: :destroy
   has_many :users_who_read, through: :reads, source: :user
-  # has_many :comments, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
 
   validates :position, uniqueness: { scope: :story_id }
 
