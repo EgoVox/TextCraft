@@ -1,29 +1,44 @@
+@import 'base/variables';
+
 .edit-user-container {
   max-width: 700px;
   margin: 0 auto;
-  padding: 40px 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: $section-padding;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
   text-align: left;
 
+  .dark-mode & {
+    background-color: $dark-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
+
   h2 {
-    font-family: "Merriweather", serif;
+    font-family: $font-family-serif;
     font-size: 2.5rem;
-    color: #ff6f61;
+    color: $primary-color;
     margin-bottom: 30px;
     text-align: center;
+
+    .dark-mode & {
+      color: $dark-primary-color;
+    }
   }
 
   .form-group {
     margin-bottom: 20px;
 
     label {
-      font-family: "Merriweather", serif;
+      font-family: $font-family-serif;
       font-size: 1.1rem;
       font-weight: bold;
       margin-bottom: 10px;
       display: block;
+
+      .dark-mode & {
+        color: $dark-text-color;
+      }
     }
 
     .form-control {
@@ -35,15 +50,30 @@
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
       &:focus {
-        border-color: #ff6f61;
+        border-color: $primary-color;
         box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
         outline: none;
+
+        .dark-mode & {
+          border-color: $dark-primary-color;
+          box-shadow: 0 0 5px rgba(255, 111, 97, 0.3);
+        }
+      }
+
+      .dark-mode & {
+        background-color: $dark-card-background-color;
+        color: $dark-text-color;
+        border-color: $dark-secondary-color;
       }
     }
 
     small {
-      font-size: 0.9rem;
-      color: #666;
+      font-size: $small-text-font-size;
+      color: $text-muted-color;
+
+      .dark-mode & {
+        color: $dark-text-muted-color;
+      }
     }
   }
 
@@ -52,14 +82,22 @@
     margin-top: 30px;
 
     .btn-primary {
-      background-color: #ff6f61;
-      color: white;
-      padding: 10px 20px;
+      background-color: $primary-color;
+      color: $white-color;
+      padding: $button-padding;
       border-radius: 5px;
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #e65c50;
+        background-color: $primary-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-primary-color;
+
+        &:hover {
+          background-color: $dark-primary-hover-color;
+        }
       }
     }
   }
@@ -69,26 +107,42 @@
     text-align: center;
 
     .btn-secondary {
-      background-color: #6c757d;
-      color: white;
-      padding: 10px 20px;
+      background-color: $secondary-color;
+      color: $white-color;
+      padding: $button-padding;
       border-radius: 5px;
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #5a6268;
+        background-color: $secondary-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-secondary-color;
+
+        &:hover {
+          background-color: $dark-secondary-hover-color;
+        }
       }
     }
 
     .btn-danger {
-      background-color: #dc3545;
-      color: white;
-      padding: 10px 20px;
+      background-color: $danger-color;
+      color: $white-color;
+      padding: $button-padding;
       border-radius: 5px;
       margin-top: 15px;
 
       &:hover {
-        background-color: #c82333;
+        background-color: $danger-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-danger-color;
+
+        &:hover {
+          background-color: $dark-danger-hover-color;
+        }
       }
     }
   }

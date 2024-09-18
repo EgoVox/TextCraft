@@ -24,15 +24,24 @@
   max-width: 300px;
   margin: 0 10px;
   text-align: center;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: $card-background-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-light;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 .carousel-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: $box-shadow-hover;
+
+  .dark-mode & {
+    box-shadow: $dark-box-shadow-hover;
+  }
 }
 
 /* Image de couverture */
@@ -40,33 +49,49 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-light;
+
+  .dark-mode & {
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 /* Informations sur l'histoire */
 .story-info {
-  padding: 10px;
+  padding: $card-padding;
 }
 
 .story-title {
   font-weight: bold;
   font-size: 1.1rem;
-  color: $main-text-color;
-  font-family: "Merriweather", serif;
+  color: $text-color;
+  font-family: $font-family-serif;
   font-weight: 700;
   margin-bottom: 5px;
   text-decoration: none;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .story-title:hover {
-  color: #007bff;
+  color: $secondary-color;
+
+  .dark-mode & {
+    color: $dark-secondary-color;
+  }
 }
 
 small {
-  font-family: "Merriweather", serif;
+  font-family: $font-family-serif;
   font-weight: 300;
-  color: #777;
+  color: $text-muted-color;
+
+  .dark-mode & {
+    color: $dark-text-muted-color;
+  }
 }
 
 /* Boutons de navigation de la carousel */
@@ -75,17 +100,26 @@ small {
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  color: $white-color;
   border: none;
   padding: 10px;
   cursor: pointer;
   border-radius: 50%;
   z-index: 1;
   transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: $dark-white-color;
+  }
 }
 
 .carousel-container .carousel-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
+
+  .dark-mode & {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
 }
 
 /* Bouton gauche */

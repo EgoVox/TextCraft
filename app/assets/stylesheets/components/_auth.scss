@@ -1,20 +1,31 @@
+@import 'base/variables';
+
 /* Conteneur pour la page de connexion */
 .auth-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 40px 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: $background-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
   text-align: center;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 /* Titre du formulaire */
 .auth-header h2 {
   font-size: 2rem;
-  font-family: 'Merriweather', serif;
-  color: #ff6f61;
+  font-family: $font-family-serif;
+  color: $primary-color;
   margin-bottom: 30px;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 /* Champs de formulaire */
@@ -28,17 +39,28 @@
 .input-field {
   width: 90%;
   padding: 12px 15px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  background-color: #fff;
+  background-color: $card-background-color;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+    border-color: $dark-secondary-color;
+    color: $dark-text-color;
+  }
 }
 
 .input-field:focus {
-  border-color: #ff6f61;
+  border-color: $primary-color;
   box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
   outline: none;
+
+  .dark-mode & {
+    border-color: $dark-primary-color;
+    box-shadow: 0 0 5px rgba(255, 111, 97, 0.3);
+  }
 }
 
 /* Checkbox "Se souvenir de moi" */
@@ -57,24 +79,37 @@
 
 .form-label-checkbox {
   font-size: 0.9rem;
-  color: #333;
+  color: $text-color;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 /* Bouton de soumission */
 .cta-button {
   width: 100%;
   padding: 12px;
-  background-color: #ff6f61;
-  color: white;
+  background-color: $primary-color;
+  color: $white-color;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: $border-radius;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+  }
 }
 
 .cta-button:hover {
-  background-color: #e65c50;
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
 }
 
 /* Liens sous le formulaire */
@@ -87,37 +122,58 @@
 }
 
 .auth-links a {
-  color: #ff6f61;
+  color: $primary-color;
   text-decoration: none;
   font-weight: bold;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 .auth-links a:hover {
   text-decoration: underline;
 }
 
+/* Boutons */
 .btn-login,
 .btn-signup {
   padding: 8px 15px;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 5px;
-  color: white;
+  border-radius: $border-radius;
+  color: $white-color;
   transition: background-color 0.3s ease;
 }
 
 .btn-login {
-  background-color: #7C7C7C;
+  background-color: $secondary-color;
+
+  .dark-mode & {
+    background-color: $dark-secondary-color;
+  }
 }
 
 .btn-login:hover {
-  background-color: white;
+  background-color: $white-color;
+
+  .dark-mode & {
+    background-color: $dark-secondary-hover-color;
+  }
 }
 
 .btn-signup {
-  background-color: #ff6f61;
+  background-color: $primary-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+  }
 }
 
 .btn-signup:hover {
-  background-color: #e65c50;
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
 }

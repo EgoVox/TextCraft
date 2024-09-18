@@ -1,11 +1,18 @@
+@import 'base/variables';
+
 /* Style général des formulaires */
 .story-form {
   max-width: 600px;
   margin: 0 auto;
-  padding: 40px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: $section-padding;
+  background-color: $background-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 /* Champs de formulaire */
@@ -15,10 +22,14 @@
 
 .form-label {
   display: block;
-  font-family: 'Merriweather', serif;
+  font-family: $font-family-serif;
   font-weight: 700;
   margin-bottom: 10px;
-  font-size: 1.1rem;
+  font-size: $text-font-size;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .input-field {
@@ -26,8 +37,14 @@
   padding: 10px 15px;
   border-radius: 5px;
   border: 1px solid #ddd;
-  font-size: 1rem;
+  font-size: $text-font-size;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+    color: $dark-text-color;
+    border-color: $dark-secondary-color;
+  }
 }
 
 .input-field-desc {
@@ -36,14 +53,25 @@
   padding: 10px 15px;
   border-radius: 5px;
   border: 1px solid #ddd;
-  font-size: 1rem;
+  font-size: $text-font-size;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+    color: $dark-text-color;
+    border-color: $dark-secondary-color;
+  }
 }
 
 .input-field:focus {
-  border-color: #ff6f61;
+  border-color: $primary-color;
   box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
   outline: none;
+
+  .dark-mode & {
+    border-color: $dark-primary-color;
+    box-shadow: 0 0 5px rgba(255, 111, 97, 0.3);
+  }
 }
 
 .story-cover-edit {
@@ -51,30 +79,49 @@
   height: auto;
   margin-bottom: 20px;
 }
+
 /* Bouton CTA (call-to-action) */
 .cta-button {
   width: 100%;
   padding: 12px;
-  background-color: #ff6f61;
-  color: white;
+  background-color: $primary-color;
+  color: $white-color;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: $border-radius;
   cursor: pointer;
   text-align: center;
   transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+  }
 }
 
 .cta-button:hover {
-  background-color: #e65c50;
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
 }
 
 /* Bouton secondaire */
 .btn-secondary {
-  background-color: #7C7C7C;
+  background-color: $secondary-color;
   text-align: center;
+
+  .dark-mode & {
+    background-color: $dark-secondary-color;
+    color: $dark-white-color;
+  }
 }
 
 .btn-secondary:hover {
-  background-color: #666666;
+  background-color: $secondary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-secondary-hover-color;
+  }
 }

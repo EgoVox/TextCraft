@@ -56,6 +56,11 @@
       <small>(Nous avons besoin de votre mot de passe actuel pour confirmer vos modifications)</small>
     </div>
 
+  <div class="form-group">
+    <%= f.label :dark_mode, "Activer le mode sombre" %>
+    <%= f.check_box :dark_mode, id: "user_dark_mode" %>
+  </div>
+
     <div class="actions">
       <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
     </div>

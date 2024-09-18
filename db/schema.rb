@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_114747) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_18_143713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,6 +68,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_114747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "feedback"
+    t.integer "analysis_score"
+    t.text "analysis_feedback"
     t.index ["story_id"], name: "index_chapters_on_story_id"
   end
 
@@ -172,6 +174,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_114747) do
     t.string "first_name"
     t.string "last_name"
     t.string "username"
+    t.boolean "dark_mode"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,35 +1,55 @@
 @import 'base/variables';
 
 .chapter-show-container {
-  padding: 40px 300px;
-  background-color: #f9f9f9;
+  padding: $section-padding;
+  background-color: $background-color;
+  padding-left: 300px;
+  padding-right: 300px;
   text-align: center;
 
+  .dark-mode & {
+    background-color: $dark-background-color;
+  }
+
   .chapter-details {
+    display: block;
     max-width: none;
     width: 100%;
     margin: 0 auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: $card-background-color;
+    padding: $card-padding;
+    border-radius: $card-border-radius;
+    box-shadow: $box-shadow-light;
     margin-bottom: 20px;
 
+    .dark-mode & {
+      background-color: $dark-card-background-color;
+      box-shadow: $dark-box-shadow-light;
+    }
+
     .chapter-title {
-      font-size: 2rem;
-      font-family: "Merriweather", serif;
-      color: $title-color;
-      margin-bottom: 20px;
+      font-size: $title-font-size;
+      font-family: $font-family-serif;
+      color: $primary-color;
+      margin-bottom: $title-margin-bottom;
+
+      .dark-mode & {
+        color: $dark-primary-color;
+      }
     }
 
     .chapter-content {
       text-align: left;
-      font-size: 1.1rem;
+      font-size: $text-font-size;
       line-height: 1;
       text-align: justify;
-      color: #555;
+      color: $text-muted-color;
       white-space: pre-line;
       padding: 20px 0;
+
+      .dark-mode & {
+        color: $dark-text-muted-color;
+      }
     }
 
     .chapter-actions {
@@ -37,26 +57,42 @@
 
       .btn {
         margin-right: 10px;
-        padding: 10px 20px;
-        border-radius: 5px;
+        padding: $button-padding;
+        border-radius: $border-radius;
         margin-bottom: 10px;
       }
 
       .btn-edit {
         background-color: #ffc107;
-        color: white;
+        color: $white-color;
 
         &:hover {
           background-color: #e0a800;
         }
+
+        .dark-mode & {
+          background-color: $dark-primary-color;
+
+          &:hover {
+            background-color: $dark-primary-hover-color;
+          }
+        }
       }
 
       .btn-danger {
-        background-color: #dc3545;
-        color: white;
+        background-color: $danger-color;
+        color: $white-color;
 
         &:hover {
-          background-color: #c82333;
+          background-color: $danger-hover-color;
+        }
+
+        .dark-mode & {
+          background-color: $dark-danger-color;
+
+          &:hover {
+            background-color: $dark-danger-hover-color;
+          }
         }
       }
     }
@@ -69,26 +105,42 @@
     gap: 20px;
 
     .btn {
-      padding: 10px 20px;
-      border-radius: 5px;
+      padding: $button-padding;
+      border-radius: $border-radius;
       font-size: 1rem;
     }
 
     .btn-secondary {
-      background-color: #6c757d;
-      color: white;
+      background-color: $secondary-color;
+      color: $white-color;
 
       &:hover {
-        background-color: #5a6268;
+        background-color: $secondary-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-secondary-color;
+
+        &:hover {
+          background-color: $dark-secondary-hover-color;
+        }
       }
     }
 
     .btn-primary {
-      background-color: $title-color;
-      color: white;
+      background-color: $primary-color;
+      color: $white-color;
 
       &:hover {
-        background-color: $title-color;
+        background-color: $primary-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-primary-color;
+
+        &:hover {
+          background-color: $dark-primary-hover-color;
+        }
       }
     }
   }
@@ -97,13 +149,21 @@
     margin-top: 20px;
 
     .btn-secondary {
-      background-color: #6c757d;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
+      background-color: $secondary-color;
+      color: $white-color;
+      padding: $button-padding;
+      border-radius: $border-radius;
 
       &:hover {
-        background-color: #5a6268;
+        background-color: $secondary-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-secondary-color;
+
+        &:hover {
+          background-color: $dark-secondary-hover-color;
+        }
       }
     }
   }

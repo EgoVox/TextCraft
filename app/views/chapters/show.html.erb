@@ -30,6 +30,15 @@
     <% end %>
   </div>
 
+  <% if user_signed_in? && current_user == @story.user %>
+    <div class="chapter-feedback">
+      <h3>Rapport d'analyse du chapitre</h3>
+      <div class="feedback-content">
+        <%= raw @chapter.analysis_feedback %>
+      </div>
+    </div>
+  <% end %>
+
     <!-- Section des commentaires -->
 <h2>Commentaires</h2>
 

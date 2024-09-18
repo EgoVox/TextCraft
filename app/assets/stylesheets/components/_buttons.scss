@@ -1,12 +1,13 @@
 @import 'base/variables';
+
 /* Composant de base pour les boutons */
 .btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: $button-padding;
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
-  border-radius: 5px;
+  border-radius: $border-radius;
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s ease;
@@ -15,17 +16,30 @@
 /* Bouton Lire */
 .btn-read {
   width: 120px;
-  background-color: #28a745;
-  color: white;
-  border: 2px solid #28a745;
+  background-color: $success-color;
+  color: $white-color;
+  border: 2px solid $success-color;
 
   &:hover {
-    background-color: #218838;
+    background-color: $success-hover-color;
     transform: scale(1.05);
   }
 
   &:active {
-    background-color: #1e7e34;
+    background-color: darken($success-color, 10%);
+  }
+
+  .dark-mode & {
+    background-color: $dark-success-color;
+    border-color: $dark-success-color;
+
+    &:hover {
+      background-color: $dark-success-hover-color;
+    }
+
+    &:active {
+      background-color: darken($dark-success-color, 10%);
+    }
   }
 }
 
@@ -33,7 +47,8 @@
 .btn-edit {
   width: 120px;
   background-color: #ffc107;
-  color: white;
+  /* Spécifique */
+  color: $white-color;
   border: 2px solid #ffc107;
 
   &:hover {
@@ -42,42 +57,81 @@
   }
 
   &:active {
-    background-color: #d39e00;
+    background-color: darken(#ffc107, 10%);
+  }
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    border-color: $dark-primary-color;
+
+    &:hover {
+      background-color: $dark-primary-hover-color;
+    }
+
+    &:active {
+      background-color: darken($dark-primary-color, 10%);
+    }
   }
 }
 
 /* Bouton Supprimer */
 .btn-delete {
   width: 120px;
-  background-color: #dc3545;
-  color: white;
-  border: 2px solid #dc3545;
+  background-color: $danger-color;
+  color: $white-color;
+  border: 2px solid $danger-color;
 
   &:hover {
-    background-color: #c82333;
+    background-color: $danger-hover-color;
     transform: scale(1.05);
   }
 
   &:active {
-    background-color: #bd2130;
+    background-color: darken($danger-color, 10%);
+  }
+
+  .dark-mode & {
+    background-color: $dark-danger-color;
+    border-color: $dark-danger-color;
+
+    &:hover {
+      background-color: $dark-danger-hover-color;
+    }
+
+    &:active {
+      background-color: darken($dark-danger-color, 10%);
+    }
   }
 }
 
 /* Bouton Créer une nouvelle histoire */
 .btn-create {
   width: 120px;
-  background-color: #007bff;
-  color: white;
-  border: 2px solid #007bff;
+  background-color: $secondary-color;
+  color: $white-color;
+  border: 2px solid $secondary-color;
   display: inline-block;
   font-size: 1.1rem;
 
   &:hover {
-    background-color: #0069d9;
+    background-color: $secondary-hover-color;
     transform: scale(1.05);
   }
 
   &:active {
-    background-color: #005cbf;
+    background-color: darken($secondary-color, 10%);
+  }
+
+  .dark-mode & {
+    background-color: $dark-secondary-color;
+    border-color: $dark-secondary-color;
+
+    &:hover {
+      background-color: $dark-secondary-hover-color;
+    }
+
+    &:active {
+      background-color: darken($dark-secondary-color, 10%);
+    }
   }
 }

@@ -1,15 +1,12 @@
 @import 'base/variables';
 
 /* Conteneur de navigation */
-/* Conteneur de navigation */
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  /* Pour ajouter un peu d'espace sur les côtés */
   width: 100%;
-  /* Assure que le conteneur prend toute la largeur */
 }
 
 /* Section gauche : Accueil et Catégories */
@@ -17,67 +14,73 @@
   display: flex;
   align-items: center;
   flex-grow: 1;
-  /* Pour occuper l'espace disponible à gauche */
 }
 
 .nav-left .logo-link {
   font-size: 1.8rem;
-  font-family: 'Merriweather', serif;
-  color: #ff6f61;
+  font-family: $font-family-serif;
+  color: $primary-color;
   text-decoration: none;
   font-weight: bold;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
+/* Section droite */
 .nav-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-grow: 1;
-  /* Pour occuper l'espace disponible à droite */
 }
 
 /* Liens de navigation */
 .nav-link {
-  color: $main-text-color;
+  color: $text-color;
   padding: 20px;
   text-decoration: none;
   font-size: 1rem;
-  font-family: 'Merriweather', serif;
+  font-family: $font-family-serif;
   font-weight: 900;
 
   &:hover {
-    background-color: white;
-    border-radius: 5px;
+    background-color: $white-color;
+    border-radius: $border-radius;
+
+    .dark-mode & {
+      background-color: $dark-card-background-color;
+    }
   }
-}
 
-.nav-right{
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.nav-right .nav-link {
-  color: #333;
-  text-decoration: none;
-  font-size: 1rem;
-  margin-right: 15px;
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .signup-link,
 .btn-login {
   padding: 10px 15px;
   margin: 20px;
-  background-color: #ff6f61;
-  color: white;
-  border-radius: 5px;
+  background-color: $primary-color;
+  color: $white-color;
+  border-radius: $border-radius;
   text-decoration: none;
   transition: background-color 0.3s ease;
-}
 
-.signup-link:hover,
-.btn-login:hover {
-  background-color: #e65c50;
+  &:hover {
+    background-color: $primary-hover-color;
+
+    .dark-mode & {
+      background-color: $dark-primary-hover-color;
+    }
+  }
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+  }
 }
 
 /* Bouton Hamburger pour le menu mobile */
@@ -92,8 +95,12 @@
 
 .mobile-menu-toggle span {
   height: 3px;
-  background-color: #333;
+  background-color: $text-color;
   border-radius: 2px;
+
+  .dark-mode & {
+    background-color: $dark-text-color;
+  }
 }
 
 /* Menu mobile */
@@ -102,10 +109,14 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: white;
+  background-color: $white-color;
   width: 100%;
   z-index: 999;
   padding: 15px 0;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+  }
 
   ul {
     list-style: none;
@@ -118,11 +129,19 @@
       .nav-link {
         display: block;
         padding: 10px 15px;
-        color: white;
+        color: $white-color;
         text-decoration: none;
 
         &:hover {
-          background-color:white;
+          background-color: $white-color;
+
+          .dark-mode & {
+            background-color: $dark-card-background-color;
+          }
+        }
+
+        .dark-mode & {
+          color: $dark-text-color;
         }
       }
     }

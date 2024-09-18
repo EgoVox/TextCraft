@@ -1,30 +1,33 @@
+@import 'base/variables';
+
 /* Style de la modal */
 .modal-overlay {
   position: fixed;
-  top: 5;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Couleur de fond sombre */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
-  /* Superposition au-dessus des autres éléments */
 }
 
 .modal-container {
-  background-color: #fff;
-  /* Couleur de fond principale */
+  background-color: $card-background-color;
   width: 90%;
   max-width: 1200px;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
   position: relative;
-  font-family: 'Merriweather', serif;
-  /* Font utilisée sur le site */
+  font-family: $font-family-serif;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 /* Bouton de fermeture */
@@ -37,22 +40,31 @@
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  color: #333;
-  /* Couleur du bouton de fermeture */
+  color: $text-color;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .modal-header {
   font-size: 24px;
-  color: #444;
-  /* Couleur du texte */
+  color: $text-color;
   margin-bottom: 15px;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .modal-body {
   font-size: 16px;
-  color: #666;
-  /* Couleur du texte principal */
+  color: $text-muted-color;
   line-height: 1.6;
+
+  .dark-mode & {
+    color: $dark-text-muted-color;
+  }
 }
 
 /* Style des suggestions */
@@ -64,6 +76,10 @@
 .modal-body ul li {
   padding: 10px 0;
   border-bottom: 1px solid #eee;
+
+  .dark-mode & {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
 }
 
 .modal-body ul li:last-child {
@@ -73,7 +89,6 @@
 /* Ajouter un effet au bouton de fermeture */
 .modal-close:hover {
   color: #f00;
-  /* Rouge lors du survol */
 }
 
 /* Bouton action dans la modal */
@@ -82,16 +97,22 @@
 }
 
 .modal-footer button {
-  background-color: #4CAF50;
-  /* Couleur du bouton (vert) */
-  color: white;
+  background-color: $success-color;
+  color: $white-color;
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: $border-radius;
   cursor: pointer;
+
+  .dark-mode & {
+    background-color: $dark-success-color;
+  }
 }
 
 .modal-footer button:hover {
-  background-color: #45a049;
-  /* Vert plus foncé au survol */
+  background-color: $success-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-success-hover-color;
+  }
 }

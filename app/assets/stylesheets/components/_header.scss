@@ -5,12 +5,17 @@
 
 /* Header principal */
 .main-header {
-  background-color: #fff;
+  background-color: $card-background-color;
   padding: 15px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow-light;
   position: sticky;
   top: 0;
   z-index: 1000;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 /* Conteneur de navigation */
@@ -22,13 +27,21 @@
 
 /* Liens de navigation */
 .nav-link {
-  font-family: 'Merriweather', serif;
+  font-family: $font-family-serif;
   font-weight: 700;
-  color: #333;
+  color: $text-color;
   text-decoration: none;
   margin-right: 20px;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .nav-link:hover {
-  color: #ff6f61;
+  color: $primary-color;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }

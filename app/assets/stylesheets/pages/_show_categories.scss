@@ -1,35 +1,39 @@
 @import 'base/variables';
 
 .category-show-container {
-  padding: 40px 20px;
-  background-color: #f9f9f9;
+  padding: $section-padding;
+  background-color: $background-color;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+  }
 
   .stories-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* Affiche 3 cartes par ligne */
     gap: 20px;
 
     @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
-      /* Affiche 2 cartes par ligne pour les écrans de moins de 1024px */
     }
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
-      /* Affiche 1 carte par ligne pour les petits écrans */
     }
   }
 
-  /* Adaptation des cards pour la catégorie */
   .card-category {
     position: relative;
     display: block;
     height: 100%;
-    border-radius: 8px;
+    border-radius: $card-border-radius;
     overflow: hidden;
     text-decoration: none;
     background-color: transparent;
+
+    .dark-mode & {
+      background-color: $dark-card-background-color;
+    }
   }
 
   .card-category__image {
@@ -49,7 +53,7 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.6);
-    color: white;
+    color: $white-color;
     padding: 15px;
     transition: height 0.3s ease-in-out;
     height: 80px;
@@ -57,38 +61,63 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .dark-mode & {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: $dark-white-color;
+    }
   }
 
   .card-category__title {
     font-size: 20px;
     margin: 0;
-    color: #ff6f61 !important;
+    color: $primary-color !important;
     font-weight: bold;
     text-decoration: none;
+
+    .dark-mode & {
+      color: $dark-primary-color !important;
+    }
   }
 
   .card-category__title a {
-    color: #ff6f61 !important;
+    color: $primary-color !important;
     font-weight: bold;
     font-size: 2rem;
     text-decoration: none;
+
+    .dark-mode & {
+      color: $dark-primary-color !important;
+    }
   }
 
   .card-category__title:hover {
-    color: #e65c50;
+    color: $primary-hover-color;
+
+    .dark-mode & {
+      color: $dark-primary-hover-color;
+    }
   }
 
   .card-category__tagline {
     font-size: 1.5rem;
     color: #ddd;
     font-weight: bold;
+
+    .dark-mode & {
+      color: $dark-tagline-color;
+    }
   }
 
   .card-category__description {
     font-size: 1.3rem;
     margin-top: 20px;
     display: none;
-    color: white;
+    color: $white-color;
+
+    .dark-mode & {
+      color: $dark-white-color;
+    }
   }
 
   .card-category:hover .card-category__overlay {
@@ -100,26 +129,28 @@
     display: block;
   }
 
-  .card-category__left-arrow {
-    position: absolute;
-    bottom: 5px;
-    left: 10%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
-    color: white;
-    transition: transform 0.3s ease;
-    animation: bounce 2s infinite;
-  }
-
+  .card-category__left-arrow,
   .card-category__right-arrow {
     position: absolute;
     bottom: 5px;
-    left: 90%;
-    transform: translateX(-50%);
     font-size: 1.5rem;
-    color: white;
+    color: $white-color;
     transition: transform 0.3s ease;
     animation: bounce 2s infinite;
+
+    .dark-mode & {
+      color: $dark-white-color;
+    }
+  }
+
+  .card-category__left-arrow {
+    left: 10%;
+    transform: translateX(-50%);
+  }
+
+  .card-category__right-arrow {
+    left: 90%;
+    transform: translateX(-50%);
   }
 
   .card-category:hover .card-category__arrow {
@@ -132,18 +163,28 @@
   }
 
   .create-story .btn-create {
-    background-color: #ff6f61;
-    color: white;
-    border: 2px solid #ff6f61;
+    background-color: $primary-color;
+    color: $white-color;
+    border: 2px solid $primary-color;
     padding: 12px 25px;
     font-size: 1.2rem;
-    border-radius: 8px;
+    border-radius: $card-border-radius;
     text-decoration: none;
     transition: background-color 0.3s ease;
+
+    .dark-mode & {
+      background-color: $dark-primary-color;
+      border-color: $dark-primary-color;
+      color: $dark-white-color;
+    }
   }
 
   .create-story .btn-create:hover {
-    background-color: #e65c50;
+    background-color: $primary-hover-color;
+
+    .dark-mode & {
+      background-color: $dark-primary-hover-color;
+    }
   }
 
   @media (max-width: 1024px) {
