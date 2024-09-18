@@ -22,16 +22,25 @@ class ChaptersController < ApplicationController
   def create
     @chapter = @story.chapters.build(chapter_params)
 
-    # Analyse du chapitre
-    analysis_result = analyze_text(@chapter.content)
-    puts "Résultat de l'analyse : #{analysis_result}"
+    # Réinitialiser les informations d'analyse avant une nouvelle analyse
+    @chapter.analysis_score = nil
+    @chapter.analysis_feedback = nil
 
-    @chapter.feedback = feedback_message(analysis_result)
+    # Effectuer l'analyse
+    analysis_result = analyze_text(@chapter.content)
+
+    # Mettre à jour le feedback et le score dans la base de données (même si le chapitre n'est pas sauvegardé)
+    @chapter.analysis_feedback = feedback_message(analysis_result)
+    @chapter.analysis_score = analysis_result[:final_score]
+
+    # Stocker le feedback dans la session pour afficher dans la modal
+    session[:feedback] = @chapter.analysis_feedback
+    session[:analysis_score] = @chapter.analysis_score
 
     if analysis_result[:passed]
-      # Si le texte est validé, sauvegarder le chapitre
+      # Si le texte est validé, sauvegarder le chapitre avec l'analyse
       if @chapter.save
-        flash[:notice] = "Chapitre créé avec succès."
+        flash[:notice] = "Chapitre créé avec succès. Qualité du texte : #{@chapter.analysis_score}%."
         respond_to do |format|
           format.html { redirect_to story_chapter_path(@story, @chapter.position, show_modal: true) }
           format.turbo_stream { render_flash }
@@ -39,54 +48,74 @@ class ChaptersController < ApplicationController
       else
         flash.now[:alert] = 'Erreur lors de la création du chapitre.'
         respond_to do |format|
-          format.html { render :new }
+          format.html { render :new, locals: { show_modal: true } }
           format.turbo_stream { render_flash }
         end
       end
     else
-      # Si le texte est rejeté, ne pas sauvegarder
-      puts "Texte rejeté avec un score final de #{analysis_result[:final_score]}"
-      flash.now[:alert] = feedback_message(analysis_result)
+      # Si le texte échoue à l'analyse, afficher la modal avec le feedback
+      flash.now[:alert] = "Le texte a échoué à l'analyse avec un score de #{@chapter.analysis_score}%. #{@chapter.analysis_feedback}"
       respond_to do |format|
-        format.html { render :new }
+        format.html { render :new, locals: { show_modal: true } }
         format.turbo_stream { render_flash }
       end
     end
   end
 
 
-def update
-  if @chapter.update(chapter_params)
+  def update
+    @chapter = @story.chapters.build(chapter_params)
+
+    # Réinitialiser les informations d'analyse avant une nouvelle analyse
+    @chapter.analysis_score = nil
+    @chapter.analysis_feedback = nil
+
+    # Effectuer l'analyse
     analysis_result = analyze_text(@chapter.content)
-    @score = analysis_result[:score]
-    @message = analysis_result[:message]
+
+    # Mettre à jour le feedback et le score dans la base de données (même si le chapitre n'est pas sauvegardé)
+    @chapter.analysis_feedback = feedback_message(analysis_result)
+    @chapter.analysis_score = analysis_result[:final_score]
+
+    # Stocker le feedback dans la session pour afficher dans la modal
+    session[:feedback] = @chapter.analysis_feedback
+    session[:analysis_score] = @chapter.analysis_score
 
     if analysis_result[:passed]
-      flash[:notice] = "Chapitre mis à jour avec succès. Qualité du texte : #{@score}%. #{@message}"
-      respond_to do |format|
-        format.html { redirect_to story_chapter_path(@story, @chapter.position, show_modal: true) }
-        format.turbo_stream { render_flash }
+      # Si le texte est validé, sauvegarder le chapitre avec l'analyse
+      if @chapter.save
+        flash[:notice] = "Chapitre créé avec succès. Qualité du texte : #{@chapter.analysis_score}%."
+        respond_to do |format|
+          format.html { redirect_to story_chapter_path(@story, @chapter.position, show_modal: true) }
+          format.turbo_stream { render_flash }
+        end
+      else
+        flash.now[:alert] = 'Erreur lors de la création du chapitre.'
+        respond_to do |format|
+          format.html { render :new, locals: { show_modal: true } }
+          format.turbo_stream { render_flash }
+        end
       end
     else
-      flash.now[:alert] = "Le texte a échoué à l'analyse avec un score de #{@score}%. #{@message}"
+      # Si le texte échoue à l'analyse, afficher la modal avec le feedback
+      flash.now[:alert] = "Le texte a échoué à l'analyse avec un score de #{@chapter.analysis_score}%. #{@chapter.analysis_feedback}"
       respond_to do |format|
-        format.html { render :edit }
+        format.html { render :new, locals: { show_modal: true } }
         format.turbo_stream { render_flash }
       end
     end
-  else
-    render :edit
   end
-end
 
-def destroy
-  @chapter.destroy
-  flash[:notice] = 'Chapitre supprimé avec succès.'
-  respond_to do |format|
-    format.html { redirect_to story_path(@story) }
-    format.turbo_stream { render_flash }
+
+
+  def destroy
+    @chapter.destroy
+    flash[:notice] = 'Chapitre supprimé avec succès.'
+    respond_to do |format|
+      format.html { redirect_to story_path(@story) }
+      format.turbo_stream { render_flash }
+    end
   end
-end
 
   private
 
@@ -362,9 +391,9 @@ end
     client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
 
     prompt = if score < 70
-                "Le texte suivant a obtenu un score de #{score}/100. Le texte n'est pas adapté pour la publication dans sa forme actuelle. Donne 3 critiques claires et directes sur les principales faiblesses du texte. Voici le texte : #{content}"
+                "Le texte suivant a obtenu un score de #{score}/100. Le texte n'est pas adapté pour la publication dans sa forme actuelle. Donne 3 critiques claires et directes sur les principales faiblesses du texte en prenant en compte que ce n'est qu'un seul chapitre d'une histoire plus vaste. Voici le texte : #{content}"
               else
-                "Le texte suivant a obtenu un score de #{score}/100. Bien qu'il soit de bonne qualité et publiable, il peut encore être amélioré. Identifie 2 aspects forts du texte et donne une critique précise sur ce qui doit être changé pour en faire un récit exceptionnel. Voici le texte : #{content}"
+                "Le texte suivant a obtenu un score de #{score}/100. Bien qu'il soit de bonne qualité et publiable, il peut encore être amélioré. Identifie 3 aspects forts du texte et donne une critique précise sur ce qui doit être changé pour en faire un récit exceptionnel en prenant en compte que ce n'est qu'un seul chapitre d'une histoire plus vaste. Voici le texte : #{content}"
               end
 
     begin

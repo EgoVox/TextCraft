@@ -1,3 +1,5 @@
+@import 'base/variables';
+
 /* Section principale - Page d'accueil */
 .hero-section {
   background: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
@@ -7,38 +9,47 @@
   align-items: center;
   text-align: center;
   position: relative;
+
+  .dark-mode & {
+    background: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
+  }
 }
 
 .story-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 colonnes */
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 colonnes sur écrans moyens */
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    /* 1 colonne sur petits écrans */
   }
 }
 
 .hero-content {
-  color: #333;
+  color: $text-color;
   text-align: center;
   animation: floatAnimation 5s ease-in-out infinite;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .hero-image {
   max-width: 400px;
   margin-bottom: 20px;
-  border-radius: 4px;
+  border-radius: $border-radius;
   animation: shineAnimation 3s infinite alternate;
+
+  .dark-mode & {
+    opacity: 0.9;
+  }
 }
 
 @keyframes shineAnimation {
@@ -67,73 +78,99 @@
 
 h1 {
   font-size: 3rem;
-  font-family: 'Merriweather', serif;
-  color: #ff6f61;
+  font-family: $font-family-serif;
+  color: $primary-color;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+  .dark-mode & {
+    color: $dark-primary-color;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.1);
+  }
 }
 
 p {
   font-size: 1.2rem;
-  color: #666;
+  color: $text-muted-color;
+
+  .dark-mode & {
+    color: $dark-text-muted-color;
+  }
 }
 
 .cta-button {
   display: inline-block;
   padding: 15px 30px;
-  background-color: #ff6f61;
-  color: white;
+  background-color: $primary-color;
+  color: $white-color;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-light;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 .cta-button:hover {
-  background-color: #e65c50;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  background-color: $primary-hover-color;
+  box-shadow: $box-shadow-hover;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+    box-shadow: $dark-box-shadow-hover;
+  }
 }
 
 /* Section des histoires populaires */
 .popular-stories {
-  padding: 40px;
-  background-color: #f9f9f9;
+  padding: $section-padding;
+  background-color: $background-color;
   text-align: center;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+  }
 }
 
 .popular-stories h2 {
   font-size: 2.5rem;
-  font-family: 'Merriweather', serif;
-  color: #333;
+  font-family: $font-family-serif;
+  color: $text-color;
   margin-bottom: 30px;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .story-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 3 histoires par ligne */
   gap: 20px;
   max-width: 1200px;
-  /* Limite la largeur de l'ensemble des cartes */
   margin: 0 auto;
-  /* Centre les cartes */
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 histoires par ligne sur écrans moyens */
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    /* 1 histoire par ligne sur petits écrans */
   }
 }
 
 .category-name {
   font-size: 1.5rem;
-  color: #ff6f61;
+  color: $primary-color;
   text-align: center;
   margin-bottom: 10px;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 .card-home {
@@ -141,10 +178,14 @@ p {
   display: block;
   max-width: 350px;
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: $card-border-radius;
   overflow: hidden;
   text-decoration: none;
   background-color: transparent;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+  }
 }
 
 .card-home__image {
@@ -164,7 +205,7 @@ p {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: $white-color;
   padding: 15px;
   transition: height 0.3s ease-in-out;
   height: 90px;
@@ -172,29 +213,50 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  .dark-mode & {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $dark-white-color;
+  }
 }
 
 .card-home__title {
   font-size: 1.7rem !important;
   margin: 0;
-  color: #ff6f61;
+  color: $primary-color;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 .card-home__title a {
-  color: #ff6f61;
+  color: $primary-color;
   text-decoration: none;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 .card-home__tagline {
   font-size: 1.2rem !important;
   color: #ddd;
+
+  .dark-mode & {
+    color: $dark-tagline-color;
+  }
 }
 
 .card-home__description {
   font-size: 1rem !important;
   margin-top: 10px;
   display: none;
-  color: white;
+  color: $white-color;
+
+  .dark-mode & {
+    color: $dark-white-color;
+  }
 }
 
 .card-home:hover .card-home__overlay {
@@ -212,9 +274,13 @@ p {
   left: 10%;
   transform: translateX(-50%);
   font-size: 1.5rem;
-  color: white;
+  color: $white-color;
   transition: transform 0.3s ease;
   animation: bounce 2s infinite;
+
+  .dark-mode & {
+    color: $dark-white-color;
+  }
 }
 
 @keyframes bounce {

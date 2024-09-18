@@ -1,9 +1,16 @@
+@import 'base/variables';
+
 /* Footer */
 .main-footer {
-  background-color: #ffecd2;
+  background-color: $background-color;
   padding: 20px;
   text-align: center;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+    box-shadow: 0 -4px 6px rgba(255, 255, 255, 0.1);
+  }
 }
 
 .footer-container {
@@ -14,8 +21,12 @@
 }
 
 .main-footer p {
-  font-size: 0.9rem;
-  color: #666;
+  font-size: $small-text-font-size;
+  color: $text-muted-color;
+
+  .dark-mode & {
+    color: $dark-text-muted-color;
+  }
 }
 
 .footer-nav ul {
@@ -31,10 +42,14 @@
 }
 
 .footer-nav ul li a {
-  color: #ff6f61;
+  color: $primary-color;
   text-decoration: none;
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: $small-text-font-size;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 .footer-nav ul li a:hover {

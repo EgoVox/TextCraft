@@ -21,18 +21,27 @@
 }
 
 .section {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: $background-color;
+  padding: $card-padding;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-light;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 .section-title {
-  font-size: 1.8rem;
-  font-family: "Merriweather", serif;
-  margin-bottom: 15px;
+  font-size: $subtitle-font-size;
+  font-family: $font-family-serif;
+  margin-bottom: $title-margin-bottom;
   text-align: left;
-  color: white;
+  color: $white-color;
+
+  .dark-mode & {
+    color: $dark-white-color;
+  }
 }
 
 .stories-grid {
@@ -46,10 +55,14 @@
   position: relative;
   display: block;
   height: 100%;
-  border-radius: 8px;
+  border-radius: $card-border-radius;
   overflow: hidden;
   text-decoration: none;
   background-color: transparent;
+
+  .dark-mode & {
+    background-color: $dark-card-background-color;
+  }
 }
 
 .card-index__image {
@@ -69,49 +82,81 @@
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: $white-color;
   padding: 15px;
   transition: height 0.3s ease-in-out;
-  height: 70px;
+  height: 90px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  .dark-mode & {
+    color: $dark-white-color;
+  }
 }
 
 .card-index__title {
   font-size: 20px;
   margin: 0;
-  color: #ff6f61 !important;
-  /* Remplacer par une couleur fixe */
+  color: $primary-color !important;
   font-weight: bold;
   text-decoration: none;
+
+  .dark-mode & {
+    color: $dark-primary-color !important;
+  }
 }
 
-.card-index__title a{
-  color: #ff6f61 !important;
-  /* Remplacer par une couleur fixe */
+.card-index__title a {
+  color: $primary-color !important;
   font-weight: bold;
   text-decoration: none;
+
+  .dark-mode & {
+    color: $dark-primary-color !important;
+  }
+}
+
+.card-index__title_main a {
+    font-size: 20px;
+  color: $primary-color;
+  /* Couleur par défaut, à remplacer par la couleur opposée via JS */
+  font-weight: bold;
+  text-decoration: none;
+
+  .dark-mode & {
+    color: $dark-primary-color !important;
+  }
 }
 
 .card-index__title:hover {
-  color: #e65c50;
-  /* Couleur au survol */
+  color: $primary-hover-color;
+
+  .dark-mode & {
+    color: $dark-primary-hover-color;
+  }
 }
 
 .card-index__tagline {
   font-size: 16px;
-  color: #ddd;
+  color: $tagline-color;
   font-weight: bold;
+
+  .dark-mode & {
+    color: $dark-tagline-color;
+  }
 }
 
 .card-index__description {
-  // font-size: 0.8rem;
   margin-top: 20px;
   display: none;
-  color: white;
-  font-size: 16px
+  color: $white-color;
+  font-size: 16px;
+
+  .dark-mode & {
+    color: $dark-white-color;
+  }
 }
 
 .card-index:hover .card-index__overlay {
@@ -130,9 +175,13 @@
   left: 90%;
   transform: translateX(-50%);
   font-size: 1.5rem;
-  color: white;
+  color: $white-color;
   transition: transform 0.3s ease;
   animation: bounce 2s infinite;
+
+  .dark-mode & {
+    color: $dark-white-color;
+  }
 }
 
 /* Animation de la flèche */
@@ -158,18 +207,28 @@
 }
 
 .create-story .btn-create {
-  background-color: #ff6f61;
-  color: white;
-  border: 2px solid #ff6f61;
+  background-color: $primary-color;
+  color: $white-color;
+  border: 2px solid $primary-color;
   padding: 12px 25px;
   font-size: 1.2rem;
-  border-radius: 8px;
+  border-radius: $card-border-radius;
   text-decoration: none;
   transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+    border-color: $dark-primary-color;
+  }
 }
 
 .create-story .btn-create:hover {
-  background-color: #e65c50;
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
 }
 
 @media (max-width: 1024px) {

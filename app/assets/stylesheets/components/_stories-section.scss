@@ -14,34 +14,56 @@
     /* Ajoute une limite stricte de largeur */
     padding: 10px;
     background-color: $background-color;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
     margin-bottom: 20px;
+
+    .dark-mode & {
+      background-color: $dark-background-color;
+      box-shadow: $dark-box-shadow-light;
+    }
 
     h1 {
       text-align: center;
       font-size: 1.5rem;
       margin-bottom: 10px;
-      color: $main-text-color;
-      font-family: "Merriweather", serif;
+      color: $text-color;
+      font-family: $font-family-serif;
       font-weight: 900;
+
+      .dark-mode & {
+        color: $dark-text-color;
+      }
     }
 
     .story-card {
       margin-bottom: 15px;
       padding: 10px;
       border: 1px solid #ddd;
-      border-radius: 5px;
-      background-color: #fff;
+      border-radius: $card-border-radius;
+      background-color: $card-background-color;
       transition: box-shadow 0.3s;
 
+      .dark-mode & {
+        background-color: $dark-card-background-color;
+        border-color: $dark-secondary-color;
+      }
+
       &:hover {
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        box-shadow: $box-shadow-hover;
+
+        .dark-mode & {
+          box-shadow: $dark-box-shadow-hover;
+        }
       }
 
       small {
-        font-family: "Merriweather", serif;
+        font-family: $font-family-serif;
         font-weight: 300;
+
+        .dark-mode & {
+          color: $dark-text-muted-color;
+        }
       }
     }
 

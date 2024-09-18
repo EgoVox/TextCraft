@@ -1,4 +1,103 @@
-//colors
-$background-color: #F9F9F9;
-$main-text-color: #1c1c1c;
-$title-color: #ff6f61;
+:root {
+  --primary-color: #ff6f61; // Valeur par défaut pour la couleur principale
+}
+
+// Couleurs principales (valeurs par défaut)
+$primary-color: var(--primary-color); // Utilisation de la variable CSS
+$primary-hover-color: var(--primary-hover-color);
+$secondary-color: #6c757d; // Couleur secondaire (gris)
+$secondary-hover-color: #5a6268; // Couleur au survol des boutons secondaires
+$danger-color: #dc3545; // Couleur des actions dangereuses (rouge)
+$danger-hover-color: #c82333; // Couleur au survol des actions dangereuses
+$success-color: #28a745; // Couleur des actions réussies (vert)
+$success-hover-color: #218838; // Couleur au survol des actions réussies
+$tagline-color: #666;
+
+// Couleurs de fond
+$background-color: #f9f9f9; // Fond général du site
+$card-background-color: #ffffff; // Fond des cartes (histoires, chapitres)
+
+// Couleurs de texte
+$text-color: #333; // Couleur principale du texte
+$text-muted-color: #666; // Texte plus discret
+$white-color: #fff; // Blanc pur
+
+// Ombres et bordures
+$box-shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+$box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+$border-radius: 10px;
+
+// Boutons principaux
+$btn-background: $primary-color;
+$btn-hover-background: $primary-hover-color;
+$btn-text-color: $white-color;
+
+// Boutons secondaires
+$btn-secondary-background: $secondary-color;
+$btn-secondary-hover-background: $secondary-hover-color;
+$btn-secondary-text-color: $white-color;
+
+// Familles de polices
+$font-family-serif: 'Merriweather', serif; // Pour les titres
+$font-family-sans-serif: 'Arial', sans-serif; // Pour le texte courant
+
+// Taille des polices
+$title-font-size: 2rem; // Taille des titres
+$subtitle-font-size: 1.8rem; // Taille des sous-titres
+$text-font-size: 1.1rem; // Taille du texte courant
+$small-text-font-size: 0.9rem; // Texte plus petit
+
+// Marges et padding
+$section-padding: 40px 20px; // Padding pour les sections principales
+$card-padding: 20px; // Padding pour les cartes d'histoires et chapitres
+$button-padding: 10px 20px; // Padding pour les boutons
+
+// Marges pour les titres et éléments
+$title-margin-bottom: 20px;
+$subtitle-margin-top: 30px;
+
+// Ombres
+$box-shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1); // Ombre légère pour les cartes
+$box-shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15); // Ombre au survol
+
+// Bordures
+$border-radius: 10px; // Rayon de bordure par défaut
+$card-border-radius: 8px; // Rayon de bordure pour les cartes
+
+
+
+// dark_mode.scss
+// Couleurs principales
+$dark-primary-color: #ff6f61; // Même couleur principale pour la cohérence
+$dark-primary-hover-color: #e65c50; // Même couleur de survol
+$dark-secondary-color: #adb5bd; // Gris plus clair pour le contraste
+$dark-secondary-hover-color: #8f9aa3; // Gris clair pour le survol
+$dark-danger-color: #ff4d4d; // Rouge vif
+$dark-danger-hover-color: #e60000; // Rouge foncé pour le survol
+$dark-success-color: #3fbf3f; // Vert vif pour le contraste
+$dark-success-hover-color: #31a531; // Vert foncé pour le survol
+$dark-tagline-color: #ddd;
+
+// Couleurs de fond
+$dark-background-color: #1e1e1e; // Fond sombre
+$dark-card-background-color: #2c2c2c; // Fond légèrement plus clair pour les cartes
+
+// Couleurs de texte
+$dark-text-color: #f1f1f1; // Texte principal clair
+$dark-text-muted-color: #b3b3b3; // Texte discret gris clair
+$dark-white-color: #fff; // Blanc pur
+
+// Ombres et bordures
+$dark-box-shadow-light: 0 4px 6px rgba(255, 255, 255, 0.1);
+$dark-box-shadow-hover: 0 6px 12px rgba(255, 255, 255, 0.15);
+$dark-border-radius: 10px;
+
+// Boutons principaux
+$dark-btn-background: $dark-primary-color;
+$dark-btn-hover-background: $dark-primary-hover-color;
+$dark-btn-text-color: $dark-white-color;
+
+// Boutons secondaires
+$dark-btn-secondary-background: $dark-secondary-color;
+$dark-btn-secondary-hover-background: $dark-secondary-hover-color;
+$dark-btn-secondary-text-color: $dark-white-color;

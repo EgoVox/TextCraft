@@ -1,31 +1,50 @@
+@import 'base/variables';
+
 /* Pages statiques */
 .static-page {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: $section-padding;
+  background-color: $background-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-light;
+
+  .dark-mode & {
+    background-color: $dark-background-color;
+    box-shadow: $dark-box-shadow-light;
+  }
 }
 
 .static-page h1 {
-  font-family: 'Merriweather', serif;
+  font-family: $font-family-serif;
   font-size: 2.5rem;
-  color: #ff6f61;
-  margin-bottom: 20px;
+  color: $primary-color;
+  margin-bottom: $title-margin-bottom;
+
+  .dark-mode & {
+    color: $dark-primary-color;
+  }
 }
 
 .static-page h2 {
-  font-family: 'Merriweather', serif;
-  font-size: 1.8rem;
-  color: #333;
-  margin-top: 30px;
+  font-family: $font-family-serif;
+  font-size: $subtitle-font-size;
+  color: $text-color;
+  margin-top: $subtitle-margin-top;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .static-page p {
-  font-size: 1.1rem;
-  color: #666;
+  font-size: $text-font-size;
+  color: $text-muted-color;
   line-height: 1.6;
+
+  .dark-mode & {
+    color: $dark-text-muted-color;
+  }
 }
 
 .contact-form .form-group {
@@ -35,26 +54,45 @@
 .contact-form .form-group label {
   display: block;
   font-weight: bold;
-  color: #333;
+  color: $text-color;
+
+  .dark-mode & {
+    color: $dark-text-color;
+  }
 }
 
 .contact-form .form-group input,
 .contact-form .form-group textarea {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   border: 1px solid #ccc;
+
+  .dark-mode & {
+    border-color: $dark-secondary-color;
+    background-color: $dark-card-background-color;
+    color: $dark-text-color;
+  }
 }
 
 .contact-form .cta-button {
-  background-color: #ff6f61;
-  color: white;
-  padding: 10px 20px;
+  background-color: $primary-color;
+  color: $white-color;
+  padding: $button-padding;
   border: none;
-  border-radius: 5px;
+  border-radius: $border-radius;
   cursor: pointer;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+  }
 }
 
 .contact-form .cta-button:hover {
-  background-color: #e65c50;
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
 }

@@ -9,6 +9,7 @@ gem 'languagetool', '~> 1.3'
 gem 'faraday'
 gem 'sassc-rails'
 gem "activestorage"
+# gem "trix"
 gem "actiontext"
 gem 'toastr-rails'
 # gem 'commontator'

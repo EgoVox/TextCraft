@@ -1,20 +1,33 @@
+@import 'base/variables';
+
 .header-categories-dropdown {
   position: relative;
   margin-left: 20px;
 
   .dropdown-toggle {
-    background-color: #ff6f61;
-    color: white;
+    background-color: $primary-color;
+    color: $white-color;
     padding: 10px 20px;
     border-radius: 5px;
-    font-family: 'Merriweather', serif;
+    font-family: $font-family-serif;
     font-weight: 700;
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #e65c50;
+      background-color: $primary-hover-color;
+      color: $white-color;
+    }
+
+    .dark-mode & {
+      background-color: $dark-primary-color;
+      color: $dark-white-color;
+
+      &:hover {
+        background-color: $dark-primary-hover-color;
+        color: $white-color;
+      }
     }
   }
 
@@ -23,41 +36,55 @@
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #fff;
-    color: #333;
+    background-color: $card-background-color;
+    color: $text-color;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow-light;
     padding: 10px 0;
     list-style: none;
     min-width: 150px;
     white-space: nowrap;
     z-index: 1000;
 
+    .dark-mode & {
+      background-color: $dark-card-background-color;
+      color: $dark-text-color;
+      box-shadow: $dark-box-shadow-light;
+    }
+
     li {
       .dropdown-item {
         padding: 10px 20px;
         text-decoration: none;
-        color: #333;
-        font-family: 'Merriweather', serif;
+        color: $text-color;
+        font-family: $font-family-serif;
         font-weight: 500;
         display: block;
         transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
-          background-color: #f1f1f1;
-          color: #ff6f61;
+          background-color: $background-color;
+          color: $white-color;
           font-weight: 700;
+
+          .dark-mode & {
+            background-color: $dark-background-color;
+            color: $dark-primary-color;
+          }
+        }
+
+        .dark-mode & {
+          color: $dark-text-color;
         }
       }
     }
   }
 
-  /* Enlever le comportement hover */
   &:hover .dropdown-menu {
     display: none;
+    color: $white-color;
   }
 
-  /* Show the dropdown when the 'show' class is added */
   &.show .dropdown-menu {
     display: block;
   }
@@ -69,18 +96,29 @@
   margin-right: 20px;
 
   .dropdown-toggle {
-    background-color: #ff6f61;
-    color: white;
+    background-color: $primary-color;
+    color: $white-color;
     padding: 10px 20px;
     border-radius: 5px;
-    font-family: 'Merriweather', serif;
+    font-family: $font-family-serif;
     font-weight: 700;
     cursor: pointer;
     border: none;
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #e65c50;
+      background-color: $primary-hover-color;
+      color: $white-color;
+    }
+
+    .dark-mode & {
+      background-color: $dark-primary-color;
+      color: $dark-white-color;
+
+      &:hover {
+        background-color: $dark-primary-hover-color;
+        color: $white-color;
+      }
     }
 
     i {
@@ -93,36 +131,51 @@
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: #fff;
-    color: #333;
+    background-color: $card-background-color;
+    color: $text-color;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow-light;
     padding: 10px 0;
     list-style: none;
     min-width: 150px;
     white-space: nowrap;
     z-index: 1000;
 
+    .dark-mode & {
+      background-color: $dark-card-background-color;
+      color: $dark-text-color;
+      box-shadow: $dark-box-shadow-light;
+    }
+
     li {
       .dropdown-item {
         padding: 10px 20px;
         text-decoration: none;
-        color: #333;
-        font-family: 'Merriweather', serif;
+        color: $text-color;
+        font-family: $font-family-serif;
         font-weight: 500;
         display: block;
         transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
-          background-color: #f1f1f1;
-          color: #ff6f61;
+          background-color: $background-color;
+          color: $white-color;
           font-weight: 700;
+
+          .dark-mode & {
+            background-color: $dark-background-color;
+            color: $dark-primary-color;
+          }
+        }
+
+        .dark-mode & {
+          color: $dark-text-color;
         }
       }
 
       .btn-logout {
         background-color: transparent;
-        color: #333;
+        color: $text-color;
         border: none;
         width: 100%;
         text-align: left;
@@ -130,14 +183,22 @@
         cursor: pointer;
 
         &:hover {
-          background-color: #ff6f61;
-          color: white;
+          background-color: $primary-color;
+          color: $white-color;
+
+          .dark-mode & {
+            background-color: $dark-primary-color;
+            color: $dark-white-color;
+          }
+        }
+
+        .dark-mode & {
+          color: $dark-text-color;
         }
       }
     }
   }
 
-  /* Show the dropdown when the 'show' class is added */
   &.show .dropdown-menu {
     display: block;
   }

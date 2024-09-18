@@ -5,10 +5,13 @@
 
 
 
-import "category_menu_dropdown";
-import "index_carousel";
-import "burger_menu";
-import "user_menu_dropdown";
+import "./category_menu_dropdown";
+import "./index_carousel";
+import "./burger_menu";
+import "./user_menu_dropdown";
+import "./switch_mode";
+import "./color_picker";
+import "./color_utils";
 
 import "trix"
 import "@rails/actiontext"
