@@ -1,4 +1,4 @@
-import { getOppositeColor } from './color_utils';
+import { getOppositeColor } from 'color_utils';
 
 // Fonction pour générer une couleur plus sombre
 function darkenColor(color, amount) {
