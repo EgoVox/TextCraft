@@ -30,6 +30,11 @@
   /* Permettre le défilement vertical */
   padding: $section-padding;
   /* Padding pour le contenu du menu */
+
+  @media (min-width: 768px) {
+    display: none !important;
+    /* Assurer que le menu est bien caché sur les grands écrans */
+  }
 }
 
 /* Afficher le menu lorsqu'il a la classe active */
@@ -44,29 +49,28 @@
   /* Supprimer les puces de liste */
   padding: 0;
   /* Supprimer le padding par défaut */
-  margin-left: 2rem;
+  margin: 0;
   /* Supprimer les marges par défaut */
 }
 
 /* Élément de la liste du menu mobile */
 #mobileMenu li {
-  margin-bottom: 2px;
+  margin-bottom: 10px;
   /* Espacement entre les éléments */
 }
 
 /* Liens du menu mobile */
 .menu-link {
-  box-sizing: content-box;
   display: block;
   /* Bloc pour chaque lien */
   text-align: left;
   /* Alignement à gauche */
-  width: 20rem !important;
-  /* Prendre toute la largeur */
+  width: 90%;
+  max-width: 300px;
   padding: 16px 24px;
   /* Padding interne */
-  font-size: $text-font-size;
-  /* Taille de la police */
+  font-size: 1.2rem;
+  /* Ajustement de la taille de la police */
   font-family: $font-family-sans-serif;
   /* Police définie */
   color: $text-color;
@@ -81,6 +85,13 @@
   /* Transitions */
   text-decoration: none;
   /* Pas de soulignement */
+
+  &:hover,
+  &:focus {
+    color: $primary-color;
+    background-color: $card-background-color;
+    border-color: $primary-color;
+  }
 }
 
 /* Suppression du hover sur mobile */
@@ -136,6 +147,11 @@
   /* Curseur en forme de main */
   z-index: 1000;
   /* Au-dessus des autres éléments */
+
+  @media (min-width: 768px) {
+    display: none;
+    /* Masquer le bouton burger sur les écrans moyens et grands */
+  }
 }
 
 /* Style des barres du bouton burger */
@@ -191,6 +207,11 @@
   /* Fond au toucher */
   border-color: $secondary-hover-color;
   /* Bordure au toucher */
+    display: flex;
+      align-items: center;
+      justify-content: space-between;
+      /* Pour que le texte et le bouton soient correctement espacés */
+      padding: 12px 20px;
 }
 
 .menu-link.btn-danger {
@@ -250,4 +271,46 @@
   /* Fond au toucher */
   border-color: $dark-danger-hover-color;
   /* Bordure au toucher */
+}
+
+/* Media Queries pour les ajustements */
+@media (max-width: 767px) {
+
+  /* Styles pour les petits écrans */
+  #mobileMenu {
+    padding: 1rem;
+    /* Réduire le padding sur les petits écrans */
+  }
+
+  .menu-link {
+    font-size: 1rem;
+    /* Réduire la taille de la police */
+    padding: 12px 20px;
+    /* Réduire le padding interne */
+    width: calc(100% - 4rem);
+    /* Ajuster la largeur pour les petits écrans */
+  }
+
+  .menu-link.btn-primary,
+  .menu-link.btn-secondary,
+  .menu-link.btn-danger {
+    width: 100%;
+    /* Prendre toute la largeur */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Styles pour les écrans moyens */
+  .menu-link {
+    font-size: 1.1rem;
+    /* Taille de la police ajustée */
+    padding: 14px 22px;
+    /* Padding ajusté */
+  }
+
+  #mobileMenu {
+    padding: 2rem;
+    /* Padding plus important */
+  }
 }

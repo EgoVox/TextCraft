@@ -100,10 +100,13 @@
               <% end %>
             </ul>
           </div>
-            <div class="color-picker-container">
-              <label for="primaryColorPicker">Couleur principale :</label>
-              <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="#ff6f61">
-            </div>
+          <div class="color-picker-container">
+            <label for="color-picker-button">Couleur principale</label>
+            <!-- Bouton cliquable pour afficher la couleur sélectionnée -->
+            <button id="color-picker-button" style="width: 30px; height: 30px; border: none; cursor: pointer;"></button>
+            <!-- Color picker caché, déclenché par le bouton -->
+            <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="#ff6f61" style="display:none;">
+          </div>
         </div>
 
         <!-- Section droite : Menu utilisateur -->
@@ -149,8 +152,16 @@
           <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'menu-link btn btn-secondary' %></li>
           <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'menu-link btn btn-danger' %></li>
           <li>
-            <button id="color-picker-button" class="menu-link btn btn-secondary">Couleur principale</button>
-            <input type="color" id="primary-color-picker" value="#ff6f61" style="display:none;">
+            <!-- Label caché pour l'accessibilité -->
+            <label for="primaryColorPicker" class="visually-hidden">Choisir la couleur principale</label>
+
+            <!-- Bouton personnalisé pour ouvrir le color picker -->
+            <button id="color-picker-button" class="menu-link btn btn-secondary" onclick="document.getElementById('primaryColorPicker').click();">
+              Couleur principale
+            </button>
+
+            <!-- Input color caché -->
+            <input type="color" id="primaryColorPicker" value="#ff6f61" style="display:none;">
           </li>
         <% else %>
           <li><%= link_to 'TextCraft', unauthenticated_root_path, class: 'menu-link btn btn-primary' %></li>
