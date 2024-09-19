@@ -7,16 +7,23 @@ function darkenColor(color, amount) {
   let g = ((colorValue >> 8) & 0x00FF) - amount;
   let b = (colorValue & 0x0000FF) - amount;
 
-  r = Math.max(r, 0);
-  g = Math.max(g, 0);
-  b = Math.max(b, 0);
+  // Limiter les valeurs de couleur pour rester dans le range valide
+  r = Math.max(Math.min(r, 255), 0);
+  g = Math.max(Math.min(g, 255), 0);
+  b = Math.max(Math.min(b, 255), 0);
 
   return `#${(r << 16 | g << 8 | b).toString(16).padStart(6, '0')}`;
 }
 
 // Fonction pour injecter les styles immédiatement dans le <head>
 function injectStyles(primaryColor, oppositeColor, darkColor) {
-  const style = document.createElement('style');
+  let style = document.querySelector('#dynamic-styles');
+  if (!style) {
+    style = document.createElement('style');
+    style.id = 'dynamic-styles';
+    document.head.appendChild(style);
+  }
+
   style.innerHTML = `
     :root {
       --primary-color: ${primaryColor};
@@ -29,7 +36,6 @@ function injectStyles(primaryColor, oppositeColor, darkColor) {
       color: ${oppositeColor};
     }
   `;
-  document.head.appendChild(style);
 }
 
 // Fonction pour appliquer la couleur principale et la couleur opposée
@@ -43,11 +49,17 @@ function applyPrimaryColor(color) {
   // Sauvegarder les couleurs dans le localStorage
   localStorage.setItem('primaryColor', color);
   localStorage.setItem('oppositeColor', oppositeColor);
+
+  // Mettre à jour l'aperçu du bouton
+  const colorPickerButton = document.getElementById('color-picker-button');
+  if (colorPickerButton) {
+    colorPickerButton.style.backgroundColor = color;
+  }
 }
 
 // Charger la couleur sauvegardée au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
-  const savedColor = localStorage.getItem('primaryColor');
+  const savedColor = localStorage.getItem('primaryColor') || '#ff6f61';
   const savedOppositeColor = localStorage.getItem('oppositeColor');
 
   // Appliquer les couleurs sauvegardées immédiatement si elles existent
@@ -58,14 +70,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Sélecteur pour l'input de couleur
   const colorPicker = document.getElementById('primaryColorPicker');
+  const colorPickerButton = document.getElementById('color-picker-button');
 
-  // Écoute des changements de l'input color picker
+  // Initialiser la valeur du color picker
   if (colorPicker) {
-    colorPicker.value = savedColor || '#ff6f61'; // Valeur par défaut si aucune couleur n'est sauvegardée
+    // Assigner la couleur sauvegardée ou la valeur par défaut
+    colorPicker.value = savedColor;
 
     colorPicker.addEventListener('input', function(event) {
       const newColor = event.target.value;
       applyPrimaryColor(newColor);
+    });
+  }
+
+  // Afficher le color picker lors du clic sur le bouton
+  if (colorPickerButton) {
+    colorPickerButton.style.backgroundColor = savedColor; // Définir la couleur initiale du bouton
+    colorPickerButton.addEventListener('click', function() {
+      if (colorPicker) {
+        // Ouvrir le color picker natif
+        colorPicker.click();
+      }
     });
   }
 });

@@ -1,0 +1,64 @@
+/* Ajuster le conteneur pour le label et le bouton de couleur */
+.color-picker-container {
+  display: flex;
+  /* Utilise le flexbox */
+  align-items: center;
+  /* Centre verticalement les éléments */
+  gap: 10px;
+  /* Espace entre le label et le bouton */
+  flex-wrap: nowrap;
+  /* Empêche les éléments de se briser sur plusieurs lignes */
+}
+
+/* Ajuster le label */
+.color-picker-container label {
+  white-space: nowrap;
+  /* Empêche le label de se briser sur plusieurs lignes */
+  margin-right: 10rem;
+  /* Espace à droite du label */
+}
+
+/* Ajuster le bouton en mode mobile */
+#color-picker-button {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: var(--primary-color, #ff6f61);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+/* Ajustement spécifique pour les petits écrans */
+@media (max-width: 480px) {
+  .color-picker-container {
+    flex-direction: row;
+    /* Alignement horizontal même en mobile */
+    justify-content: flex-start;
+    /* Aligne les éléments à gauche */
+    gap: 5px;
+    /* Réduit l'espace entre le label et le bouton */
+  }
+
+  .color-picker-container label {
+    font-size: 0.875rem;
+    /* Taille du texte plus petite */
+  }
+
+  #color-picker-button {
+    width: 24px;
+    /* Réduire la taille du bouton en mobile */
+    height: 24px;
+    /* Réduire la taille du bouton en mobile */
+  }
+}
