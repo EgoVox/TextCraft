@@ -3,13 +3,19 @@
 /* Footer */
 .main-footer {
   background-color: $background-color;
-  padding: 20px;
+  padding: 1.25rem;
+  /* Utilisation de rem pour le padding */
   text-align: center;
   box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 
   .dark-mode & {
     background-color: $dark-background-color;
     box-shadow: 0 -4px 6px rgba(255, 255, 255, 0.1);
+  }
+
+  @media (min-width: 768px) {
+    padding: 20px;
+    /* Restaure le padding par défaut sur écrans moyens */
   }
 }
 
@@ -18,23 +24,46 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  /* Ajout d'espacement entre les éléments */
 }
 
 .main-footer p {
-  font-size: $small-text-font-size;
+  font-size: 0.875rem;
+  /* Utilisation de rem pour la taille de police */
   color: $text-muted-color;
+  margin: 0.5rem 0;
+  /* Ajout d'une marge autour du texte */
 
   .dark-mode & {
     color: $dark-text-muted-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: $small-text-font-size;
+    /* Taille par défaut sur écrans moyens */
+    margin: 0;
+    /* Restaure la marge par défaut */
   }
 }
 
 .footer-nav ul {
   list-style: none;
   padding: 0;
-  margin: 10px 0 0 0;
+  margin: 0.625rem 0 0 0;
+  /* Utilisation de rem pour la marge supérieure */
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  /* Ajoute flex-wrap pour gérer les petits écrans */
+  gap: 1rem;
+  /* Utilisation de rem pour l'espacement entre les éléments */
+
+  @media (min-width: 768px) {
+    gap: 20px;
+    /* Espacement par défaut sur écrans moyens */
+    margin: 10px 0 0 0;
+    /* Restaure la marge par défaut */
+  }
 }
 
 .footer-nav ul li {
@@ -45,13 +74,45 @@
   color: $primary-color;
   text-decoration: none;
   font-weight: bold;
-  font-size: $small-text-font-size;
+  font-size: 0.875rem;
+  /* Utilisation de rem pour la taille de police */
+  transition: color 0.3s ease;
 
   .dark-mode & {
     color: $dark-primary-color;
   }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    font-size: $small-text-font-size;
+    /* Taille par défaut sur écrans moyens */
+  }
 }
 
-.footer-nav ul li a:hover {
-  text-decoration: underline;
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .main-footer {
+    padding: 1rem;
+    /* Réduction du padding sur très petits écrans */
+  }
+
+  .footer-container {
+    gap: 0.75rem;
+    /* Réduction de l'espacement entre les éléments */
+  }
+
+  .footer-nav ul {
+    gap: 0.5rem;
+    /* Réduction de l'espacement entre les liens */
+    margin: 0.5rem 0;
+    /* Réduction de la marge supérieure */
+  }
+
+  .footer-nav ul li a {
+    font-size: 0.75rem;
+    /* Réduction de la taille de police des liens */
+  }
 }

@@ -1,16 +1,20 @@
 @import "/base/variables";
 
 .story-show-container {
-  margin: 30px auto;
-  max-width: 900px;
-  padding: 20px;
+  margin: 2rem auto;
+  /* Utilisation de rem pour plus de flexibilité */
+  max-width: 100%;
+  padding: 1.25rem;
+  /* Ajustement des marges pour les petits écrans */
 
+  /* Carte principale de l'histoire */
   .card-story-show {
     background-color: $card-background-color;
     border-radius: $border-radius;
     box-shadow: $box-shadow-light;
     padding: $card-padding;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
+    /* Unités relatives */
 
     .dark-mode & {
       background-color: $dark-card-background-color;
@@ -19,17 +23,29 @@
 
     .story-header {
       display: flex;
+      flex-wrap: wrap;
+      /* Permet à la couverture et aux informations de se superposer en petit écran */
       align-items: center;
 
       .story-cover-large {
-        width: 40%;
+        width: 100%;
+        /* Prenez toute la largeur sur les petits écrans */
         max-width: 300px;
-        margin-right: 20px;
+        margin: 0 auto 1.25rem;
+        /* Centré avec une marge inférieure */
         border-radius: $card-border-radius;
         box-shadow: $box-shadow-hover;
 
         .dark-mode & {
           box-shadow: $dark-box-shadow-hover;
+        }
+
+        @media (min-width: 768px) {
+          width: 40%;
+          /* Réduit à 40% sur les écrans moyens */
+          margin-right: 1.25rem;
+          margin-bottom: 0;
+          /* Supprime la marge inférieure */
         }
       }
 
@@ -38,10 +54,11 @@
         text-align: left;
 
         .story-title {
-          font-size: 2.5rem;
+          font-size: 2rem;
+          /* Utilise rem pour l'adaptabilité */
           font-family: $font-family-serif;
           color: $primary-color;
-          margin-bottom: 15px;
+          margin-bottom: 1rem;
 
           .dark-mode & {
             color: $dark-primary-color;
@@ -49,9 +66,10 @@
         }
 
         .story-description {
-          font-size: 1.2rem;
+          font-size: 1rem;
+          /* Ajusté pour les petits écrans */
           color: $text-muted-color;
-          margin-bottom: 15px;
+          margin-bottom: 1rem;
 
           .dark-mode & {
             color: $dark-text-muted-color;
@@ -61,7 +79,8 @@
     }
 
     .btn {
-      margin-top: 10px;
+      margin-top: 0.625rem;
+      /* Ajusté en rem */
     }
   }
 
@@ -74,10 +93,14 @@
   .story-show-img {
     margin: 0 auto;
     display: block;
-    width: 300px;
-    height: 450px;
-    max-width: 500px;
-    margin-top: 20px;
+    width: 100%;
+    /* Prenez toute la largeur sur les petits écrans */
+    max-width: 300px;
+    /* Limite de largeur pour la flexibilité */
+    height: auto;
+    /* Maintient le ratio de l'image */
+    margin-top: 1.25rem;
+    /* Espace supérieur */
     border-radius: $card-border-radius;
     box-shadow: $box-shadow-hover;
 
@@ -89,13 +112,15 @@
   .chapters-section {
     max-width: none;
     width: 100%;
-    margin: 30px auto;
+    margin: 2rem auto;
 
     .section-title {
-      padding-top: 10px;
-      font-size: 1.8rem;
+      padding-top: 0.625rem;
+      font-size: 1.5rem;
+      /* Réduit la taille de police sur petits écrans */
       font-family: $font-family-serif;
-      margin-bottom: $title-margin-bottom;
+      margin-bottom: 1rem;
+      /* Utilise des unités relatives */
       text-align: center;
       color: $text-color;
 
@@ -106,21 +131,20 @@
 
     .chapter-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-
-      @media (max-width: 1024px) {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      /* Utilise auto-fit pour mieux adapter les cartes */
+      gap: 1.25rem;
 
       @media (max-width: 768px) {
         grid-template-columns: 1fr;
+        /* Une seule colonne sur petits écrans */
       }
     }
 
     .chapter-card {
       background-color: $background-color;
-      padding: 15px;
+      padding: 1rem;
+      /* Utilisation de rem */
       border-radius: $border-radius;
       box-shadow: $box-shadow-light;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -140,11 +164,12 @@
       }
 
       .chapter-header {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
       }
 
       .chapter-title {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
+        /* Ajusté pour les petits écrans */
         font-family: $font-family-serif;
         color: $primary-color;
         text-decoration: none;
@@ -169,7 +194,8 @@
       }
 
       .chapter-excerpt {
-        font-size: $text-font-size;
+        font-size: 0.875rem;
+        /* Ajusté pour les petits écrans */
         color: #555;
 
         .dark-mode & {
@@ -179,7 +205,7 @@
     }
 
     .add-chapter-btn {
-      margin-top: 20px;
+      margin-top: 1.25rem;
       display: block;
       text-align: center;
     }
@@ -191,11 +217,12 @@
       padding: 0;
 
       .comment-card {
-        padding: 15px;
+        padding: 1rem;
+        /* Utilisation de rem */
         background-color: $background-color;
         border: 1px solid #ddd;
         border-radius: $card-border-radius;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
 
         .dark-mode & {
           background-color: $dark-card-background-color;
@@ -204,7 +231,7 @@
 
         .comment-header {
           font-weight: bold;
-          margin-bottom: 10px;
+          margin-bottom: 0.625rem;
         }
       }
     }
@@ -212,18 +239,20 @@
 
   .likes-section {
     text-align: center;
-    padding: 20px 0;
+    padding: 1.25rem 0;
+    /* Utilisation de rem */
   }
 
   .btn {
     display: inline-block;
-    padding: $button-padding;
+    padding: 0.625rem 1.25rem;
+    /* Ajustement des paddings */
     border-radius: $border-radius;
     color: $white-color;
     text-align: center;
     font-weight: bold;
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 0.625rem;
 
     .dark-mode & {
       color: $dark-white-color;
@@ -280,6 +309,31 @@
 
   .back-link {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 1.25rem;
+  }
+}
+
+/* Media Queries supplémentaires pour les très petits écrans */
+@media (max-width: 480px) {
+  .story-show-container {
+    padding: 1rem;
+    /* Réduit le padding */
+  }
+
+  .story-header .story-info .story-title {
+    font-size: 1.5rem;
+    /* Taille de police réduite */
+  }
+
+  .chapter-grid {
+    gap: 1rem;
+    /* Réduit l'espace entre les chapitres */
+  }
+
+  .btn {
+    margin-right: 0.5rem;
+    /* Réduit la marge */
+    padding: 0.5rem 1rem;
+    /* Réduit le padding des boutons */
   }
 }

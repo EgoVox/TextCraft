@@ -2,27 +2,72 @@
 
 .layout-container {
   display: flex;
-  gap: 30px;
-  padding: 20px;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  /* Réduction de l'espacement */
+  padding: 1rem;
+  /* Réduction du padding global */
+  align-items: flex-start;
+  /* Alignement en haut */
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding: 1rem;
+  }
+}
+
+.main-column,
+.sidebar-column {
+  gap: 1.25rem;
+  /* Réduction de l'espacement entre les sections */
+}
+
+.section {
+  padding: 1rem;
+  /* Réduction du padding pour les sections */
+  margin-bottom: 1rem;
+  /* Ajout d'une marge inférieure uniforme */
+}
+
+.stories-grid {
+  gap: 1rem;
+  /* Réduction de l'espacement entre les éléments de la grille */
 }
 
 .main-column {
   flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 2.5rem;
+  /* Utilisation de rem pour l'espacement */
+
+  @media (max-width: 768px) {
+    flex: 1;
+    /* Prend toute la largeur sur les petits écrans */
+    gap: 1.5rem;
+    /* Réduction de l'espacement pour les petits écrans */
+  }
 }
 
 .sidebar-column {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1.875rem;
+  /* Utilisation de rem pour l'espacement */
+
+  @media (max-width: 768px) {
+    flex: 1;
+    /* Prend toute la largeur sur les petits écrans */
+    gap: 1.5rem;
+    /* Réduction de l'espacement pour les petits écrans */
+  }
 }
 
 .section {
   background-color: $background-color;
-  padding: $card-padding;
+  padding: 1.5rem;
+  /* Utilisation de rem pour le padding */
   border-radius: $card-border-radius;
   box-shadow: $box-shadow-light;
 
@@ -30,24 +75,45 @@
     background-color: $dark-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    /* Réduction du padding pour les petits écrans */
+  }
 }
 
 .section-title {
-  font-size: $subtitle-font-size;
+  font-size: 1.5rem;
+  /* Utilisation de rem pour la taille de police */
   font-family: $font-family-serif;
-  margin-bottom: $title-margin-bottom;
+  margin-bottom: 1rem;
+  /* Utilisation de rem pour la marge inférieure */
   text-align: left;
   color: $white-color;
 
   .dark-mode & {
     color: $dark-white-color;
   }
+
+  @media (max-width: 768px) {
+    font-size: $subtitle-font-size;
+    /* Taille par défaut sur petits écrans */
+    margin-bottom: $title-margin-bottom;
+    /* Restaure la marge par défaut */
+  }
 }
 
 .stories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  /* Grille flexible pour petits écrans */
+  gap: 1.25rem;
+  /* Utilisation de rem pour l'espacement */
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* Taille par défaut sur écrans moyens */
+  }
 }
 
 /* Adaptation des cards */
@@ -67,9 +133,15 @@
 
 .card-index__image {
   width: 100%;
-  height: 400px;
+  height: 250px;
+  /* Réduction de la hauteur pour petits écrans */
   object-fit: cover;
   transition: transform 0.3s ease;
+
+  @media (min-width: 768px) {
+    height: 400px;
+    /* Hauteur par défaut sur écrans moyens */
+  }
 }
 
 .card-index__image:hover {
@@ -83,9 +155,11 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.6);
   color: $white-color;
-  padding: 15px;
+  padding: 1rem;
+  /* Utilisation de rem pour le padding */
   transition: height 0.3s ease-in-out;
-  height: 90px;
+  height: 5rem;
+  /* Utilisation de rem pour la hauteur */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -97,7 +171,8 @@
 }
 
 .card-index__title {
-  font-size: 20px;
+  font-size: 1.25rem;
+  /* Ajustement pour petits écrans */
   margin: 0;
   color: $primary-color !important;
   font-weight: bold;
@@ -105,6 +180,11 @@
 
   .dark-mode & {
     color: $dark-primary-color !important;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -119,14 +199,19 @@
 }
 
 .card-index__title_main a {
-    font-size: 20px;
+  font-size: 1.5rem;
+  /* Taille ajustée pour petits écrans */
   color: $primary-color;
-  /* Couleur par défaut, à remplacer par la couleur opposée via JS */
   font-weight: bold;
   text-decoration: none;
 
   .dark-mode & {
     color: $dark-primary-color !important;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.75rem;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -139,29 +224,43 @@
 }
 
 .card-index__tagline {
-  font-size: 16px;
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
   color: $tagline-color;
   font-weight: bold;
 
   .dark-mode & {
     color: $dark-tagline-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+    /* Taille par défaut sur écrans moyens */
+  }
 }
 
 .card-index__description {
-  margin-top: 20px;
+  margin-top: 1.25rem;
+  /* Utilisation de rem pour la marge supérieure */
   display: none;
   color: $white-color;
-  font-size: 16px;
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
 
   .dark-mode & {
     color: $dark-white-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.25rem;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
 .card-index:hover .card-index__overlay {
   height: 100%;
-  padding-top: 20px;
+  padding-top: 1.25rem;
+  /* Utilisation de rem pour le padding */
 }
 
 .card-index:hover .card-index__description {
@@ -171,16 +270,23 @@
 /* Flèche animée */
 .card-index__arrow {
   position: absolute;
-  bottom: 5px;
+  bottom: 0.3125rem;
+  /* Utilisation de rem pour la position */
   left: 90%;
   transform: translateX(-50%);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+  /* Taille ajustée pour petits écrans */
   color: $white-color;
   transition: transform 0.3s ease;
   animation: bounce 2s infinite;
 
   .dark-mode & {
     color: $dark-white-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -210,8 +316,10 @@
   background-color: $primary-color;
   color: $white-color;
   border: 2px solid $primary-color;
-  padding: 12px 25px;
-  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  /* Utilisation de rem pour le padding */
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
   border-radius: $card-border-radius;
   text-decoration: none;
   transition: background-color 0.3s ease;
@@ -220,6 +328,11 @@
     background-color: $dark-primary-color;
     color: $dark-white-color;
     border-color: $dark-primary-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -231,8 +344,45 @@
   }
 }
 
-@media (max-width: 1024px) {
+/* Media Queries supplémentaires pour les très petits écrans */
+@media (max-width: 480px) {
   .layout-container {
-    flex-direction: column;
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+    gap: 1rem;
+    /* Réduction de l'espacement sur petits écrans */
+  }
+
+  .main-column,
+  .sidebar-column {
+    gap: 1rem;
+    /* Réduction de l'espacement des colonnes */
+  }
+
+  .section {
+    padding: 1rem;
+    /* Réduction du padding des sections */
+  }
+
+  .card-index__image {
+    height: 200px;
+    /* Réduction de la hauteur de l'image */
+  }
+
+  .card-index__title_main a {
+    font-size: 1.25rem;
+    /* Réduction de la taille du titre */
+  }
+
+  .card-index__description {
+    font-size: 0.875rem;
+    /* Réduction de la taille de la description */
+  }
+
+  .create-story .btn-create {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding du bouton */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police du bouton */
   }
 }

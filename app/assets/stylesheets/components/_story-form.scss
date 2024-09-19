@@ -2,9 +2,12 @@
 
 /* Style général des formulaires */
 .story-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: $section-padding;
+  max-width: 100%;
+  /* Prend toute la largeur sur petits écrans */
+  margin: 1.5rem auto;
+  /* Utilisation de rem pour les marges */
+  padding: 1.5rem;
+  /* Utilisation de rem pour le padding */
   background-color: $background-color;
   border-radius: $border-radius;
   box-shadow: $box-shadow-light;
@@ -13,31 +16,51 @@
     background-color: $dark-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (min-width: 768px) {
+    max-width: 600px;
+    /* Limite la largeur sur les écrans moyens */
+    padding: $section-padding;
+    /* Restaure le padding par défaut */
+  }
 }
 
 /* Champs de formulaire */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  /* Utilisation de rem pour la marge inférieure */
 }
 
 .form-label {
   display: block;
   font-family: $font-family-serif;
   font-weight: 700;
-  margin-bottom: 10px;
-  font-size: $text-font-size;
+  margin-bottom: 0.625rem;
+  /* Utilisation de rem pour la marge inférieure */
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
 
   .dark-mode & {
     color: $dark-text-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: $text-font-size;
+    /* Taille par défaut sur écrans moyens */
+    margin-bottom: 10px;
+    /* Restaure la marge par défaut */
   }
 }
 
 .input-field {
-  width: 94%;
-  padding: 10px 15px;
+  width: 100%;
+  /* Utilise toute la largeur disponible */
+  padding: 0.75rem 1rem;
+  /* Utilisation de rem pour le padding */
   border-radius: 5px;
   border: 1px solid #ddd;
-  font-size: $text-font-size;
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   .dark-mode & {
@@ -45,21 +68,37 @@
     color: $dark-text-color;
     border-color: $dark-secondary-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: $text-font-size;
+    /* Taille par défaut sur écrans moyens */
+  }
 }
 
 .input-field-desc {
-  width: 94%;
-  height: 150px;
-  padding: 10px 15px;
+  width: 100%;
+  /* Utilise toute la largeur disponible */
+  height: 120px;
+  /* Hauteur ajustée pour petits écrans */
+  padding: 0.75rem 1rem;
+  /* Utilisation de rem pour le padding */
   border-radius: 5px;
   border: 1px solid #ddd;
-  font-size: $text-font-size;
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   .dark-mode & {
     background-color: $dark-card-background-color;
     color: $dark-text-color;
     border-color: $dark-secondary-color;
+  }
+
+  @media (min-width: 768px) {
+    height: 150px;
+    /* Hauteur par défaut sur écrans moyens */
+    font-size: $text-font-size;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -77,13 +116,15 @@
 .story-cover-edit {
   width: 100%;
   height: auto;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  /* Utilisation de rem pour la marge inférieure */
 }
 
 /* Bouton CTA (call-to-action) */
 .cta-button {
   width: 100%;
-  padding: 12px;
+  padding: 0.75rem;
+  /* Utilisation de rem pour le padding */
   background-color: $primary-color;
   color: $white-color;
   font-weight: bold;
@@ -96,6 +137,11 @@
   .dark-mode & {
     background-color: $dark-primary-color;
     color: $dark-white-color;
+  }
+
+  @media (min-width: 768px) {
+    padding: 12px;
+    /* Restaure le padding par défaut sur écrans moyens */
   }
 }
 
@@ -111,10 +157,19 @@
 .btn-secondary {
   background-color: $secondary-color;
   text-align: center;
+  padding: 0.75rem 1rem;
+  /* Utilisation de rem pour le padding */
+  border-radius: $border-radius;
+  transition: background-color 0.3s ease;
 
   .dark-mode & {
     background-color: $dark-secondary-color;
     color: $dark-white-color;
+  }
+
+  @media (min-width: 768px) {
+    padding: $button-padding;
+    /* Restaure le padding par défaut sur écrans moyens */
   }
 }
 
@@ -123,5 +178,39 @@
 
   .dark-mode & {
     background-color: $dark-secondary-hover-color;
+  }
+}
+
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .story-form {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .form-label {
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
+    margin-bottom: 0.5rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .input-field,
+  .input-field-desc {
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
+  }
+
+  .cta-button,
+  .btn-secondary {
+    padding: 0.5rem;
+    /* Réduction du padding des boutons */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police des boutons */
   }
 }

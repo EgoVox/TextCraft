@@ -6,7 +6,8 @@
 /* Header principal */
 .main-header {
   background-color: $card-background-color;
-  padding: 15px 20px;
+  padding: 1rem 1.25rem;
+  /* Utilisation de rem pour le padding */
   box-shadow: $box-shadow-light;
   position: sticky;
   top: 0;
@@ -16,6 +17,11 @@
     background-color: $dark-card-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (min-width: 768px) {
+    padding: 15px 20px;
+    /* Restaure le padding par défaut sur écrans moyens */
+  }
 }
 
 /* Conteneur de navigation */
@@ -23,6 +29,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  /* Ajout de flex-wrap pour gérer les petits écrans */
+  gap: 1rem;
+  /* Ajout d'un espacement entre les éléments */
 }
 
 /* Liens de navigation */
@@ -31,17 +41,50 @@
   font-weight: 700;
   color: $text-color;
   text-decoration: none;
-  margin-right: 20px;
+  margin-right: 1.25rem;
+  /* Utilisation de rem pour la marge droite */
+  font-size: 0.875rem;
+  /* Taille ajustée pour petits écrans */
+  transition: color 0.3s ease;
 
   .dark-mode & {
     color: $dark-text-color;
   }
+
+  &:hover {
+    color: $primary-color;
+
+    .dark-mode & {
+      color: $dark-primary-color;
+    }
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+    /* Taille par défaut sur écrans moyens */
+    margin-right: 20px;
+    /* Restaure la marge par défaut sur écrans moyens */
+  }
 }
 
-.nav-link:hover {
-  color: $primary-color;
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .main-header {
+    padding: 0.75rem 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
 
-  .dark-mode & {
-    color: $dark-primary-color;
+  .nav-container {
+    flex-direction: column;
+    /* Organisation en colonne pour les petits écrans */
+    gap: 0.5rem;
+    /* Réduction de l'espacement entre les éléments */
+  }
+
+  .nav-link {
+    font-size: 0.75rem;
+    /* Réduction de la taille des liens */
+    margin-right: 0.5rem;
+    /* Réduction de la marge droite */
   }
 }

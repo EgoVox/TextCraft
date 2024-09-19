@@ -101,7 +101,7 @@
             </ul>
           </div>
             <div class="color-picker-container">
-              <label for="primaryColorPicker">Choisissez votre couleur principale :</label>
+              <label for="primaryColorPicker">Couleur principale :</label>
               <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="#ff6f61">
             </div>
         </div>
@@ -131,13 +131,36 @@
         </nav>
       <% end %>
 
-      <!-- Bouton Hamburger pour le menu mobile -->
+      <!-- Bouton Hamburger pour le menu mobile aligné à gauche -->
       <div class="mobile-menu-toggle" id="mobileMenuToggle">
         <span></span>
         <span></span>
         <span></span>
       </div>
+
+      <!-- Menu mobile caché par défaut et placé à gauche -->
+      <nav id="mobileMenu" class="mobile-menu">
+      <ul>
+        <% if user_signed_in? %>
+          <li><%= link_to 'Accueil', authenticated_root_path, class: 'menu-link btn btn-primary' %></li>
+          <li><%= link_to 'Histoires', stories_path, class: 'menu-link btn btn-primary' %></li>
+          <li><%= link_to 'Catégories', categories_path, class: 'menu-link btn btn-primary' %></li>
+          <li><%= link_to 'Mon Profil', user_path(current_user), class: 'menu-link btn btn-secondary' %></li>
+          <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'menu-link btn btn-secondary' %></li>
+          <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'menu-link btn btn-danger' %></li>
+          <li>
+            <button id="color-picker-button" class="menu-link btn btn-secondary">Couleur principale</button>
+            <input type="color" id="primary-color-picker" value="#ff6f61" style="display:none;">
+          </li>
+        <% else %>
+          <li><%= link_to 'TextCraft', unauthenticated_root_path, class: 'menu-link btn btn-primary' %></li>
+          <li><%= link_to 'Se connecter', new_user_session_path, class: 'menu-link btn btn-success' %></li>
+          <li><%= link_to "S'inscrire", new_user_registration_path, class: 'menu-link btn btn-success' %></li>
+        <% end %>
+      </ul>
+      </nav>
     </header>
+
     <div id="flash-messages"></div>
 
     <!-- Modale pour afficher le feedback d'analyse -->

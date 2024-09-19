@@ -2,9 +2,10 @@
 
 .chapter-edit-container {
   width: 100%;
-  /* Assure que le conteneur prend toute la largeur possible */
-  margin: 0 auto;
-  padding: $section-padding;
+  margin: 1.5rem auto;
+  /* Utilisation de rem pour la marge */
+  padding: 1.5rem;
+  /* Utilisation de rem pour le padding */
   background-color: $background-color;
   border-radius: $border-radius;
   box-shadow: $box-shadow-light;
@@ -15,11 +16,13 @@
   }
 
   .chapter-form {
-    max-width: 1000px;
+    max-width: 100%;
+    /* Prend toute la largeur sur petits écrans */
     width: 100%;
-    /* Assure que le formulaire occupe toute la largeur disponible */
-    margin: 0 auto;
-    padding: $card-padding;
+    margin: 1rem auto;
+    /* Utilisation de rem pour la marge */
+    padding: 1.5rem;
+    /* Utilisation de rem pour le padding */
     background-color: $card-background-color;
     border-radius: $border-radius;
     box-shadow: $box-shadow-light;
@@ -28,37 +31,61 @@
       background-color: $dark-card-background-color;
       box-shadow: $dark-box-shadow-light;
     }
+
+    @media (min-width: 768px) {
+      max-width: 1000px;
+      /* Limite la largeur sur les écrans moyens */
+      padding: $card-padding;
+      /* Restaure le padding par défaut */
+    }
   }
 
   .section-title {
-    font-size: $title-font-size;
+    font-size: 1.8rem;
+    /* Ajustement pour petits écrans */
     font-family: $font-family-serif;
     color: $text-color;
-    margin-bottom: $title-margin-bottom;
+    margin-bottom: 1.5rem;
+    /* Utilisation de rem pour la marge inférieure */
     text-align: center;
 
     .dark-mode & {
       color: $dark-text-color;
     }
+
+    @media (min-width: 768px) {
+      font-size: $title-font-size;
+      /* Taille par défaut sur écrans moyens */
+      margin-bottom: $title-margin-bottom;
+      /* Restaure la marge par défaut */
+    }
   }
 
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
+    /* Utilisation de rem pour la marge inférieure */
 
     .form-label {
       font-weight: bold;
       color: $text-color;
-      margin-bottom: 10px;
+      margin-bottom: 0.625rem;
+      /* Utilisation de rem pour la marge inférieure */
       display: block;
 
       .dark-mode & {
         color: $dark-text-color;
       }
+
+      @media (min-width: 768px) {
+        margin-bottom: 10px;
+        /* Restaure la marge par défaut sur écrans moyens */
+      }
     }
 
     .input-field {
       width: 100%;
-      padding: 10px;
+      padding: 0.75rem;
+      /* Utilisation de rem pour le padding */
       border-radius: 5px;
       border: 1px solid #ddd;
       font-size: 1rem;
@@ -85,11 +112,16 @@
 
   .form-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    flex-direction: column;
+    /* Colonne pour les petits écrans */
+    gap: 1rem;
+    /* Espacement entre les boutons */
+    margin-top: 1.25rem;
+    /* Utilisation de rem pour la marge supérieure */
 
     .btn {
-      padding: $button-padding;
+      padding: 0.75rem 1.5rem;
+      /* Utilisation de rem pour le padding */
       font-size: 1rem;
       border-radius: 5px;
 
@@ -127,6 +159,54 @@
           }
         }
       }
+
+      @media (min-width: 768px) {
+        padding: $button-padding;
+        /* Restaure le padding par défaut sur écrans moyens */
+        flex-direction: row;
+        /* Restaure la direction des boutons en ligne */
+        gap: 1.5rem;
+        /* Espacement plus grand sur écrans moyens */
+        justify-content: space-between;
+        /* Espace entre les boutons */
+      }
     }
+  }
+}
+
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .chapter-edit-container {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  .chapter-form {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    /* Réduction supplémentaire de la taille du titre */
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .form-actions {
+    gap: 0.5rem;
+    /* Réduction de l'espacement des boutons */
+  }
+
+  .form-actions .btn {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding des boutons */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police des boutons */
   }
 }

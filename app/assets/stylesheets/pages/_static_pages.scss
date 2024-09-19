@@ -2,9 +2,12 @@
 
 /* Pages statiques */
 .static-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: $section-padding;
+  max-width: 100%;
+  /* Prend toute la largeur sur petits écrans */
+  margin: 1.5rem auto;
+  /* Utilisation de rem pour des marges flexibles */
+  padding: 1.5rem;
+  /* Ajustement du padding pour les petits écrans */
   background-color: $background-color;
   border-radius: $card-border-radius;
   box-shadow: $box-shadow-light;
@@ -13,48 +16,81 @@
     background-color: $dark-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (min-width: 768px) {
+    max-width: 800px;
+    /* Limite la largeur sur les écrans moyens */
+    padding: $section-padding;
+    /* Restaure le padding par défaut */
+  }
 }
 
 .static-page h1 {
   font-family: $font-family-serif;
-  font-size: 2.5rem;
+  font-size: 2rem;
+  /* Taille réduite pour s'adapter à tous les écrans */
   color: $primary-color;
-  margin-bottom: $title-margin-bottom;
+  margin-bottom: 1.5rem;
+  /* Utilisation de rem pour des marges flexibles */
 
   .dark-mode & {
     color: $dark-primary-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 2.5rem;
+    /* Taille par défaut sur les écrans moyens */
   }
 }
 
 .static-page h2 {
   font-family: $font-family-serif;
-  font-size: $subtitle-font-size;
+  font-size: 1.5rem;
+  /* Taille réduite pour les petits écrans */
   color: $text-color;
-  margin-top: $subtitle-margin-top;
+  margin-top: 1rem;
+  /* Ajustement des marges pour petits écrans */
 
   .dark-mode & {
     color: $dark-text-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: $subtitle-font-size;
+    /* Taille par défaut sur les écrans moyens */
+    margin-top: $subtitle-margin-top;
+    /* Restaure la marge par défaut */
+  }
 }
 
 .static-page p {
-  font-size: $text-font-size;
+  font-size: 1rem;
+  /* Taille de police plus petite pour les petits écrans */
   color: $text-muted-color;
   line-height: 1.6;
 
   .dark-mode & {
     color: $dark-text-muted-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: $text-font-size;
+    /* Taille par défaut sur les écrans moyens */
+  }
 }
 
+/* Formulaire de contact */
 .contact-form .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  /* Ajustement des marges */
 }
 
 .contact-form .form-group label {
   display: block;
   font-weight: bold;
   color: $text-color;
+  margin-bottom: 0.5rem;
+  /* Ajout d'un espace en dessous du label */
 
   .dark-mode & {
     color: $dark-text-color;
@@ -64,35 +100,83 @@
 .contact-form .form-group input,
 .contact-form .form-group textarea {
   width: 100%;
-  padding: 10px;
+  padding: 0.625rem;
+  /* Ajustement du padding pour l'adaptabilité */
   border-radius: $border-radius;
   border: 1px solid #ccc;
+  box-sizing: border-box;
+  /* Inclut le padding et la bordure dans la largeur */
 
   .dark-mode & {
     border-color: $dark-secondary-color;
     background-color: $dark-card-background-color;
     color: $dark-text-color;
   }
+
+  @media (min-width: 768px) {
+    padding: 0.75rem;
+    /* Restaure le padding par défaut sur écrans moyens */
+  }
 }
 
 .contact-form .cta-button {
   background-color: $primary-color;
   color: $white-color;
-  padding: $button-padding;
+  padding: 0.75rem 1.5rem;
+  /* Utilisation de rem pour un bouton responsive */
   border: none;
   border-radius: $border-radius;
   cursor: pointer;
+  width: 100%;
+  /* Prend toute la largeur sur petits écrans */
 
   .dark-mode & {
     background-color: $dark-primary-color;
     color: $dark-white-color;
   }
+
+  &:hover {
+    background-color: $primary-hover-color;
+
+    .dark-mode & {
+      background-color: $dark-primary-hover-color;
+    }
+  }
+
+  @media (min-width: 768px) {
+    width: auto;
+    /* Restaure la taille par défaut sur écrans moyens */
+  }
 }
 
-.contact-form .cta-button:hover {
-  background-color: $primary-hover-color;
+/* Media Queries pour petits écrans */
+@media (max-width: 480px) {
+  .static-page {
+    padding: 1rem;
+    /* Réduit le padding sur petits écrans */
+  }
 
-  .dark-mode & {
-    background-color: $dark-primary-hover-color;
+  .static-page h1 {
+    font-size: 1.8rem;
+    /* Réduction supplémentaire de la taille du titre */
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .static-page h2 {
+    font-size: 1.25rem;
+    /* Taille de sous-titre réduite */
+    margin-top: 0.75rem;
+    /* Ajustement de la marge supérieure */
+  }
+
+  .static-page p {
+    font-size: 0.875rem;
+    /* Réduction de la taille de police des paragraphes */
+  }
+
+  .contact-form .cta-button {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding du bouton */
   }
 }

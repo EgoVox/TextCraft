@@ -12,13 +12,18 @@
   align-items: center;
   justify-content: center;
   z-index: 999;
+  padding: 1rem;
+  /* Ajout de padding pour éviter le chevauchement */
 }
 
 .modal-container {
   background-color: $card-background-color;
-  width: 90%;
-  max-width: 1200px;
-  padding: 20px;
+  width: 100%;
+  /* Prend toute la largeur sur petits écrans */
+  max-width: 90%;
+  /* Limite la largeur sur petits écrans */
+  padding: 1.5rem;
+  /* Utilisation de rem pour le padding */
   border-radius: $border-radius;
   box-shadow: $box-shadow-light;
   position: relative;
@@ -28,42 +33,82 @@
     background-color: $dark-card-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (min-width: 768px) {
+    max-width: 1200px;
+    /* Largeur par défaut sur écrans moyens */
+    padding: 20px;
+    /* Restaure le padding par défaut */
+  }
 }
 
 /* Bouton de fermeture */
 .modal-close {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 1rem;
+  /* Utilisation de rem pour la position */
+  right: 1rem;
+  /* Utilisation de rem pour la position */
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 1.5rem;
+  /* Utilisation de rem pour la taille de police */
   font-weight: bold;
   cursor: pointer;
   color: $text-color;
+  transition: color 0.3s ease;
 
   .dark-mode & {
     color: $dark-text-color;
+  }
+
+  &:hover {
+    color: #f00;
+    /* Ajout de transition pour un effet plus fluide */
+  }
+
+  @media (min-width: 768px) {
+    font-size: 20px;
+    /* Taille par défaut sur écrans moyens */
+    top: 15px;
+    /* Restaure la position par défaut */
+    right: 15px;
+    /* Restaure la position par défaut */
   }
 }
 
 .modal-header {
-  font-size: 24px;
+  font-size: 1.5rem;
+  /* Utilisation de rem pour la taille de police */
   color: $text-color;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
+  /* Utilisation de rem pour la marge inférieure */
 
   .dark-mode & {
     color: $dark-text-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: 24px;
+    /* Taille par défaut sur écrans moyens */
+    margin-bottom: 15px;
+    /* Restaure la marge par défaut */
+  }
 }
 
 .modal-body {
-  font-size: 16px;
+  font-size: 1rem;
+  /* Utilisation de rem pour la taille de police */
   color: $text-muted-color;
   line-height: 1.6;
 
   .dark-mode & {
     color: $dark-text-muted-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 16px;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -74,21 +119,22 @@
 }
 
 .modal-body ul li {
-  padding: 10px 0;
+  padding: 0.625rem 0;
+  /* Utilisation de rem pour le padding */
   border-bottom: 1px solid #eee;
 
   .dark-mode & {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
+
+  @media (min-width: 768px) {
+    padding: 10px 0;
+    /* Restaure le padding par défaut */
+  }
 }
 
 .modal-body ul li:last-child {
   border-bottom: none;
-}
-
-/* Ajouter un effet au bouton de fermeture */
-.modal-close:hover {
-  color: #f00;
 }
 
 /* Bouton action dans la modal */
@@ -99,20 +145,74 @@
 .modal-footer button {
   background-color: $success-color;
   color: $white-color;
-  padding: 10px 20px;
+  padding: 0.75rem 1.25rem;
+  /* Utilisation de rem pour le padding */
   border: none;
   border-radius: $border-radius;
   cursor: pointer;
+  font-size: 1rem;
+  /* Utilisation de rem pour la taille de police */
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   .dark-mode & {
     background-color: $dark-success-color;
   }
+
+  &:hover {
+    background-color: $success-hover-color;
+
+    .dark-mode & {
+      background-color: $dark-success-hover-color;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 10px 20px;
+    /* Restaure le padding par défaut */
+    font-size: 1rem;
+    /* Taille par défaut sur écrans moyens */
+  }
 }
 
-.modal-footer button:hover {
-  background-color: $success-hover-color;
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .modal-container {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+    max-width: 100%;
+    /* Prend toute la largeur sur très petits écrans */
+  }
 
-  .dark-mode & {
-    background-color: $dark-success-hover-color;
+  .modal-header {
+    font-size: 1.25rem;
+    /* Réduction de la taille du titre */
+    margin-bottom: 0.75rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .modal-body {
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
+  }
+
+  .modal-body ul li {
+    padding: 0.5rem 0;
+    /* Réduction du padding des suggestions */
+  }
+
+  .modal-footer button {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding du bouton */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
+  }
+
+  .modal-close {
+    font-size: 1.25rem;
+    /* Réduction de la taille du bouton de fermeture */
+    top: 0.75rem;
+    /* Réduction de la position */
+    right: 0.75rem;
+    /* Réduction de la position */
   }
 }
