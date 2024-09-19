@@ -2,53 +2,84 @@
 
 /* Conteneur pour la page de connexion */
 .auth-container {
-  max-width: 400px;
+  max-width: 100%;
+  /* Prend toute la largeur sur petits écrans */
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 2.5rem 1.25rem;
+  /* Utilisation de rem pour le padding */
   background-color: $background-color;
   border-radius: $border-radius;
   box-shadow: $box-shadow-light;
   text-align: center;
+  box-sizing: border-box;
+  /* S'assure que le padding est inclus dans la largeur */
 
   .dark-mode & {
     background-color: $dark-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (min-width: 768px) {
+    max-width: 400px;
+    /* Limite la largeur sur les écrans moyens */
+    padding: 40px 20px;
+    /* Restaure le padding par défaut */
+  }
 }
 
 /* Titre du formulaire */
 .auth-header h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
+  /* Utilisation de rem pour la taille de police */
   font-family: $font-family-serif;
   color: $primary-color;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
+  /* Utilisation de rem pour la marge inférieure */
 
   .dark-mode & {
     color: $dark-primary-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 2rem;
+    /* Taille par défaut sur écrans moyens */
+    margin-bottom: 30px;
+    /* Restaure la marge par défaut */
   }
 }
 
 /* Champs de formulaire */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
+  /* Utilisation de rem pour la marge inférieure */
   position: relative;
   text-align: left;
-  /* Aligne les labels à gauche */
 }
 
 .input-field {
-  width: 90%;
-  padding: 12px 15px;
+  width: 100%;
+  /* Utilise toute la largeur disponible */
+  padding: 0.75rem 1rem;
+  /* Utilisation de rem pour le padding */
   border-radius: $border-radius;
   border: 1px solid #ccc;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   background-color: $card-background-color;
+  box-sizing: border-box;
+  /* S'assure que le padding est inclus dans la largeur */
 
   .dark-mode & {
     background-color: $dark-card-background-color;
     border-color: $dark-secondary-color;
     color: $dark-text-color;
+  }
+
+  @media (min-width: 768px) {
+    width: 90%;
+    /* Largeur par défaut sur écrans moyens */
+    padding: 12px 15px;
+    /* Restaure le padding par défaut */
   }
 }
 
@@ -67,18 +98,19 @@
 .form-group.remember-me {
   display: flex;
   justify-content: center;
-  /* Centre horizontalement */
   align-items: center;
-  /* Centre verticalement */
-  margin-top: 20px;
+  margin-top: 1.25rem;
+  /* Utilisation de rem pour la marge supérieure */
 }
 
 .form-group.remember-me input[type="checkbox"] {
-  margin-right: 10px;
+  margin-right: 0.625rem;
+  /* Utilisation de rem pour la marge droite */
 }
 
 .form-label-checkbox {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  /* Utilisation de rem pour la taille de police */
   color: $text-color;
 
   .dark-mode & {
@@ -89,7 +121,8 @@
 /* Bouton de soumission */
 .cta-button {
   width: 100%;
-  padding: 12px;
+  padding: 0.75rem;
+  /* Utilisation de rem pour le padding */
   background-color: $primary-color;
   color: $white-color;
   font-weight: bold;
@@ -101,6 +134,11 @@
   .dark-mode & {
     background-color: $dark-primary-color;
     color: $dark-white-color;
+  }
+
+  @media (min-width: 768px) {
+    padding: 12px;
+    /* Restaure le padding par défaut sur écrans moyens */
   }
 }
 
@@ -114,11 +152,13 @@
 
 /* Liens sous le formulaire */
 .auth-links {
-  margin-top: 20px;
+  margin-top: 1.25rem;
+  /* Utilisation de rem pour la marge supérieure */
 }
 
 .auth-links p {
-  margin: 10px 0;
+  margin: 0.625rem 0;
+  /* Utilisation de rem pour la marge */
 }
 
 .auth-links a {
@@ -129,21 +169,27 @@
   .dark-mode & {
     color: $dark-primary-color;
   }
-}
 
-.auth-links a:hover {
-  text-decoration: underline;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 /* Boutons */
 .btn-login,
 .btn-signup {
-  padding: 8px 15px;
+  padding: 0.5rem 1rem;
+  /* Utilisation de rem pour le padding */
   text-decoration: none;
   font-weight: bold;
   border-radius: $border-radius;
   color: $white-color;
   transition: background-color 0.3s ease;
+
+  @media (min-width: 768px) {
+    padding: 8px 15px;
+    /* Restaure le padding par défaut sur écrans moyens */
+  }
 }
 
 .btn-login {
@@ -152,13 +198,13 @@
   .dark-mode & {
     background-color: $dark-secondary-color;
   }
-}
 
-.btn-login:hover {
-  background-color: $white-color;
+  &:hover {
+    background-color: $secondary-hover-color;
 
-  .dark-mode & {
-    background-color: $dark-secondary-hover-color;
+    .dark-mode & {
+      background-color: $dark-secondary-hover-color;
+    }
   }
 }
 
@@ -168,12 +214,43 @@
   .dark-mode & {
     background-color: $dark-primary-color;
   }
+
+  &:hover {
+    background-color: $primary-hover-color;
+
+    .dark-mode & {
+      background-color: $dark-primary-hover-color;
+    }
+  }
 }
 
-.btn-signup:hover {
-  background-color: $primary-hover-color;
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .auth-container {
+    padding: 1.5rem;
+    /* Réduction du padding sur petits écrans */
+    max-width: 100%;
+    /* Prend toute la largeur sur petits écrans */
+  }
 
-  .dark-mode & {
-    background-color: $dark-primary-hover-color;
+  .auth-header h2 {
+    font-size: 1.5rem;
+    /* Réduction de la taille du titre */
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .input-field {
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
+  }
+
+  .cta-button,
+  .btn-login,
+  .btn-signup {
+    padding: 0.5rem;
+    /* Réduction du padding sur très petits écrans */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
   }
 }

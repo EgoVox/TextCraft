@@ -1,0 +1,253 @@
+@import 'base/variables';
+
+/* Réinitialisation de quelques styles de base */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styles pour le menu mobile */
+#mobileMenu {
+  display: none;
+  /* Masquer le menu par défaut */
+  position: fixed;
+  /* Fixer le menu sur l'écran */
+  top: 0;
+  left: 0;
+  /* Positionner le menu à gauche */
+  width: 100%;
+  /* Prendre toute la largeur de l'écran */
+  height: 100%;
+  /* Prendre toute la hauteur de l'écran */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Fond semi-transparent */
+  z-index: 999;
+  /* Au-dessus de tout le contenu */
+  overflow-y: auto;
+  /* Permettre le défilement vertical */
+  padding: $section-padding;
+  /* Padding pour le contenu du menu */
+}
+
+/* Afficher le menu lorsqu'il a la classe active */
+#mobileMenu.active {
+  display: block;
+  /* Afficher le menu */
+}
+
+/* Liste d'éléments du menu mobile */
+#mobileMenu ul {
+  list-style: none;
+  /* Supprimer les puces de liste */
+  padding: 0;
+  /* Supprimer le padding par défaut */
+  margin-left: 2rem;
+  /* Supprimer les marges par défaut */
+}
+
+/* Élément de la liste du menu mobile */
+#mobileMenu li {
+  margin-bottom: 2px;
+  /* Espacement entre les éléments */
+}
+
+/* Liens du menu mobile */
+.menu-link {
+  box-sizing: content-box;
+  display: block;
+  /* Bloc pour chaque lien */
+  text-align: left;
+  /* Alignement à gauche */
+  width: 20rem !important;
+  /* Prendre toute la largeur */
+  padding: 16px 24px;
+  /* Padding interne */
+  font-size: $text-font-size;
+  /* Taille de la police */
+  font-family: $font-family-sans-serif;
+  /* Police définie */
+  color: $text-color;
+  /* Couleur du texte */
+  background-color: $background-color;
+  /* Couleur de fond */
+  border: 2px solid transparent;
+  /* Bordure par défaut */
+  border-radius: $border-radius;
+  /* Bordure arrondie */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  /* Transitions */
+  text-decoration: none;
+  /* Pas de soulignement */
+}
+
+/* Suppression du hover sur mobile */
+.menu-link:active {
+  color: $primary-color;
+  /* Changer la couleur du texte au toucher */
+  background-color: $card-background-color;
+  /* Couleur de fond au toucher */
+  border-color: $primary-color;
+  /* Bordure colorée au toucher */
+}
+
+/* Styles spécifiques pour le mode sombre */
+.dark-mode .menu-link {
+  background-color: $dark-card-background-color;
+  /* Fond pour le mode sombre */
+  color: $dark-text-color;
+  /* Texte clair pour le mode sombre */
+}
+
+.dark-mode .menu-link:active {
+  color: $dark-primary-color;
+  /* Texte au toucher en mode sombre */
+  background-color: $dark-background-color;
+  /* Fond au toucher en mode sombre */
+  border-color: $dark-primary-color;
+  /* Bordure au toucher en mode sombre */
+}
+
+/* Bouton burger pour ouvrir/fermer le menu */
+.mobile-menu-toggle {
+  position: fixed;
+  /* Position fixe sur l'écran */
+  top: 1rem;
+  /* Espace depuis le haut */
+  left: 1rem;
+  /* Espace depuis la gauche */
+  width: 30px;
+  /* Largeur du bouton */
+  height: 30px;
+  /* Hauteur du bouton */
+  display: flex;
+  /* Utilisation du flexbox */
+  flex-direction: column;
+  /* Colonnes pour les barres */
+  justify-content: space-around;
+  /* Espacement entre les barres */
+  background: transparent;
+  /* Pas de fond */
+  border: none;
+  /* Pas de bordure */
+  cursor: pointer;
+  /* Curseur en forme de main */
+  z-index: 1000;
+  /* Au-dessus des autres éléments */
+}
+
+/* Style des barres du bouton burger */
+.mobile-menu-toggle span {
+  display: block;
+  /* Bloc pour chaque barre */
+  width: 100%;
+  /* Largeur maximale */
+  height: 3px;
+  /* Hauteur des barres */
+  background-color: $primary-color;
+  /* Couleur des barres */
+  border-radius: 5px;
+  /* Légèrement arrondi */
+  transition: background-color 0.3s, transform 0.3s;
+  /* Transition douce */
+}
+
+/* Afficher le menu burger lorsqu'il est activé */
+.mobile-menu-toggle.active span {
+  background-color: $primary-hover-color;
+  /* Changer la couleur des barres */
+}
+
+/* Styles spécifiques pour les boutons */
+.menu-link.btn-primary {
+  background-color: $primary-color;
+  /* Fond principal */
+  color: $btn-text-color;
+  /* Texte */
+  border-color: $primary-color;
+  /* Bordure de la même couleur */
+}
+
+.menu-link.btn-primary:active {
+  background-color: $primary-hover-color;
+  /* Fond au toucher */
+  border-color: $primary-hover-color;
+  /* Bordure au toucher */
+}
+
+.menu-link.btn-secondary {
+  background-color: $secondary-color;
+  /* Fond secondaire */
+  color: $btn-secondary-text-color;
+  /* Texte */
+  border-color: $secondary-color;
+  /* Bordure de la même couleur */
+}
+
+.menu-link.btn-secondary:active {
+  background-color: $secondary-hover-color;
+  /* Fond au toucher */
+  border-color: $secondary-hover-color;
+  /* Bordure au toucher */
+}
+
+.menu-link.btn-danger {
+  background-color: $danger-color;
+  /* Fond danger */
+  color: $white-color;
+  /* Texte */
+  border-color: $danger-color;
+  /* Bordure de la même couleur */
+}
+
+.menu-link.btn-danger:active {
+  background-color: $danger-hover-color;
+  /* Fond au toucher */
+  border-color: $danger-hover-color;
+  /* Bordure au toucher */
+}
+
+/* Gestion du mode sombre pour les boutons */
+.dark-mode .menu-link.btn-primary {
+  background-color: $dark-primary-color;
+  /* Fond pour le mode sombre */
+  border-color: $dark-primary-color;
+  /* Bordure */
+}
+
+.dark-mode .menu-link.btn-primary:active {
+  background-color: $dark-primary-hover-color;
+  /* Fond au toucher */
+  border-color: $dark-primary-hover-color;
+  /* Bordure au toucher */
+}
+
+.dark-mode .menu-link.btn-secondary {
+  background-color: $dark-secondary-color;
+  /* Fond secondaire */
+  border-color: $dark-secondary-color;
+  /* Bordure */
+}
+
+.dark-mode .menu-link.btn-secondary:active {
+  background-color: $dark-secondary-hover-color;
+  /* Fond au toucher */
+  border-color: $dark-secondary-hover-color;
+  /* Bordure au toucher */
+}
+
+.dark-mode .menu-link.btn-danger {
+  background-color: $dark-danger-color;
+  /* Fond danger */
+  border-color: $dark-danger-color;
+  /* Bordure */
+}
+
+.dark-mode .menu-link.btn-danger:active {
+  background-color: $dark-danger-hover-color;
+  /* Fond au toucher */
+  border-color: $dark-danger-hover-color;
+  /* Bordure au toucher */
+}

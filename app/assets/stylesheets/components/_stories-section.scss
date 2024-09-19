@@ -4,19 +4,24 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 20px 0;
+  gap: 1.25rem;
+  /* Utilisation de rem pour l'espacement */
+  margin: 1.25rem 0;
+  /* Utilisation de rem pour la marge verticale */
 
   .last-read-container,
   .last-updated-container,
   .my-stories {
-    flex: 0 1 30%;
-    max-width: 30%;
-    /* Ajoute une limite stricte de largeur */
-    padding: 10px;
+    flex: 0 1 100%;
+    /* Prend toute la largeur sur petits écrans */
+    max-width: 100%;
+    padding: 1rem;
+    /* Utilisation de rem pour le padding */
     background-color: $background-color;
     border-radius: $border-radius;
     box-shadow: $box-shadow-light;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
+    /* Utilisation de rem pour la marge inférieure */
 
     .dark-mode & {
       background-color: $dark-background-color;
@@ -25,8 +30,10 @@
 
     h1 {
       text-align: center;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.25rem;
+      /* Taille ajustée pour petits écrans */
+      margin-bottom: 0.625rem;
+      /* Utilisation de rem pour la marge inférieure */
       color: $text-color;
       font-family: $font-family-serif;
       font-weight: 900;
@@ -34,11 +41,20 @@
       .dark-mode & {
         color: $dark-text-color;
       }
+
+      @media (min-width: 768px) {
+        font-size: 1.5rem;
+        /* Taille par défaut sur écrans moyens */
+        margin-bottom: 10px;
+        /* Restaure la marge par défaut */
+      }
     }
 
     .story-card {
-      margin-bottom: 15px;
-      padding: 10px;
+      margin-bottom: 1rem;
+      /* Utilisation de rem pour la marge inférieure */
+      padding: 0.75rem;
+      /* Utilisation de rem pour le padding */
       border: 1px solid #ddd;
       border-radius: $card-border-radius;
       background-color: $card-background-color;
@@ -68,17 +84,17 @@
     }
 
     .btn {
-      margin-top: 10px;
+      margin-top: 0.625rem;
+      /* Utilisation de rem pour la marge supérieure */
     }
 
-    @media (max-width: 768px) {
-
-      .last-read-container,
-      .last-updated-container,
-      .my-stories {
-        flex: 0 1 100%;
-        max-width: 100%;
-      }
+    @media (min-width: 768px) {
+      flex: 0 1 30%;
+      /* Limite la largeur sur écrans moyens */
+      max-width: 30%;
+      /* Limite stricte de largeur */
+      padding: 10px;
+      /* Restaure le padding par défaut */
     }
   }
 }
@@ -88,6 +104,48 @@
   padding-left: 0;
 
   li {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
+    /* Utilisation de rem pour la marge inférieure */
+  }
+}
+
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .story-sections-container {
+    gap: 1rem;
+    /* Réduction de l'espacement entre les sections */
+    margin: 1rem 0;
+    /* Réduction de la marge verticale */
+  }
+
+  .last-read-container,
+  .last-updated-container,
+  .my-stories {
+    padding: 0.75rem;
+    /* Réduction du padding des sections */
+  }
+
+  h1 {
+    font-size: 1rem;
+    /* Réduction de la taille du titre */
+    margin-bottom: 0.5rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .story-card {
+    margin-bottom: 0.75rem;
+    /* Réduction de la marge inférieure */
+    padding: 0.5rem;
+    /* Réduction du padding de la carte */
+  }
+
+  .btn {
+    margin-top: 0.5rem;
+    /* Réduction de la marge supérieure */
+  }
+
+  .story-list li {
+    margin-bottom: 0.75rem;
+    /* Réduction de la marge inférieure des éléments de la liste */
   }
 }

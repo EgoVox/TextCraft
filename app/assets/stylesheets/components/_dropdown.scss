@@ -2,18 +2,18 @@
 
 .header-categories-dropdown {
   position: relative;
-  margin-left: 20px;
+  margin-left: 1.25rem;
 
   .dropdown-toggle {
     background-color: $primary-color;
     color: $white-color;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     border-radius: 5px;
     font-family: $font-family-serif;
     font-weight: 700;
     cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
     &:hover {
       background-color: $primary-hover-color;
@@ -29,6 +29,15 @@
         color: $white-color;
       }
     }
+
+    @media (max-width: 480px) {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      width: 100%;
+      /* Prendre toute la largeur en mode mobile */
+      text-align: left;
+      /* Alignement à gauche du texte */
+    }
   }
 
   .dropdown-menu {
@@ -40,9 +49,9 @@
     color: $text-color;
     border-radius: 8px;
     box-shadow: $box-shadow-light;
-    padding: 10px 0;
+    padding: 0.5rem 0;
     list-style: none;
-    min-width: 150px;
+    min-width: 9.375rem;
     white-space: nowrap;
     z-index: 1000;
 
@@ -54,7 +63,7 @@
 
     li {
       .dropdown-item {
-        padding: 10px 20px;
+        padding: 0.625rem 1.25rem;
         text-decoration: none;
         color: $text-color;
         font-family: $font-family-serif;
@@ -64,7 +73,7 @@
 
         &:hover {
           background-color: $background-color;
-          color: $white-color;
+          color: $primary-color;
           font-weight: 700;
 
           .dark-mode & {
@@ -76,35 +85,56 @@
         .dark-mode & {
           color: $dark-text-color;
         }
+
+        @media (max-width: 480px) {
+          padding: 0.5rem 1rem;
+          font-size: 0.875rem;
+        }
       }
+    }
+
+    /* Affichage du menu en mode mobile */
+    @media (max-width: 768px) {
+      position: static;
+      /* Position statique en mode mobile */
+      width: 100%;
+      /* Le menu prend toute la largeur */
+      box-shadow: none;
+      /* Supprimer les ombres */
     }
   }
 
   &:hover .dropdown-menu {
-    display: none;
-    color: $white-color;
+    display: block;
   }
 
   &.show .dropdown-menu {
     display: block;
+  }
+
+  /* Ajout d'un espacement vertical en mode mobile */
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+    width: 100%;
+    /* Prendre toute la largeur */
   }
 }
 
 /* Dropdown pour le menu utilisateur */
 .user-menu {
   position: relative;
-  margin-right: 20px;
+  margin-right: 1.25rem;
 
   .dropdown-toggle {
     background-color: $primary-color;
     color: $white-color;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     border-radius: 5px;
     font-family: $font-family-serif;
     font-weight: 700;
     cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
     &:hover {
       background-color: $primary-hover-color;
@@ -122,7 +152,16 @@
     }
 
     i {
-      margin-right: 8px;
+      margin-right: 0.5rem;
+    }
+
+    @media (max-width: 480px) {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      width: auto;
+      /* Garde une largeur automatique */
+      text-align: right;
+      /* Alignement du texte à droite */
     }
   }
 
@@ -135,9 +174,9 @@
     color: $text-color;
     border-radius: 8px;
     box-shadow: $box-shadow-light;
-    padding: 10px 0;
+    padding: 0.5rem 0;
     list-style: none;
-    min-width: 150px;
+    min-width: 9.375rem;
     white-space: nowrap;
     z-index: 1000;
 
@@ -149,7 +188,7 @@
 
     li {
       .dropdown-item {
-        padding: 10px 20px;
+        padding: 0.625rem 1.25rem;
         text-decoration: none;
         color: $text-color;
         font-family: $font-family-serif;
@@ -159,7 +198,7 @@
 
         &:hover {
           background-color: $background-color;
-          color: $white-color;
+          color: $primary-color;
           font-weight: 700;
 
           .dark-mode & {
@@ -171,6 +210,11 @@
         .dark-mode & {
           color: $dark-text-color;
         }
+
+        @media (max-width: 480px) {
+          padding: 0.5rem 1rem;
+          font-size: 0.875rem;
+        }
       }
 
       .btn-logout {
@@ -179,8 +223,9 @@
         border: none;
         width: 100%;
         text-align: left;
-        padding: 10px 20px;
+        padding: 0.625rem 1.25rem;
         cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
           background-color: $primary-color;
@@ -195,11 +240,36 @@
         .dark-mode & {
           color: $dark-text-color;
         }
+
+        @media (max-width: 480px) {
+          padding: 0.5rem 1rem;
+          font-size: 0.875rem;
+        }
       }
+    }
+
+    /* Ajustement du dropdown en mode mobile */
+    @media (max-width: 768px) {
+      position: static;
+      /* Position statique */
+      width: auto;
+      /* Ajuste la taille du menu */
+      box-shadow: none;
+      /* Supprimer les ombres */
     }
   }
 
   &.show .dropdown-menu {
     display: block;
+  }
+
+  /* En mode mobile, place le menu à droite */
+  @media (max-width: 768px) {
+    margin-right: 0;
+    width: 100%;
+    /* Prendre toute la largeur */
+    display: flex;
+    justify-content: flex-end;
+    /* Aligner le menu utilisateur à droite */
   }
 }

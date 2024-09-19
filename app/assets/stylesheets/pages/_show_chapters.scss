@@ -1,26 +1,39 @@
 @import 'base/variables';
 
 .chapter-show-container {
-  padding: $section-padding;
+  padding: 1.5rem;
+  /* Utilisation de rem pour une adaptation fluide */
   background-color: $background-color;
-  padding-left: 300px;
-  padding-right: 300px;
   text-align: center;
 
   .dark-mode & {
     background-color: $dark-background-color;
   }
 
+  @media (min-width: 1024px) {
+    padding-left: 300px;
+    padding-right: 300px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 1.5rem;
+    /* Réduit le padding latéral sur petits écrans */
+    padding-right: 1.5rem;
+  }
+
   .chapter-details {
     display: block;
-    max-width: none;
     width: 100%;
+    max-width: 800px;
+    /* Limite la largeur sur les écrans plus grands */
     margin: 0 auto;
     background-color: $card-background-color;
-    padding: $card-padding;
+    padding: 1.5rem;
+    /* Utilisation de rem pour le padding */
     border-radius: $card-border-radius;
     box-shadow: $box-shadow-light;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
+    /* Utilisation de rem pour la marge inférieure */
 
     .dark-mode & {
       background-color: $dark-card-background-color;
@@ -28,38 +41,64 @@
     }
 
     .chapter-title {
-      font-size: $title-font-size;
+      font-size: 2rem;
+      /* Ajustement pour les petits écrans */
       font-family: $font-family-serif;
       color: $primary-color;
-      margin-bottom: $title-margin-bottom;
+      margin-bottom: 1.5rem;
+      /* Utilisation de rem pour la marge inférieure */
 
       .dark-mode & {
         color: $dark-primary-color;
+      }
+
+      @media (min-width: 768px) {
+        font-size: $title-font-size;
+        /* Taille par défaut sur écrans moyens */
+        margin-bottom: $title-margin-bottom;
+        /* Restaure la marge par défaut */
       }
     }
 
     .chapter-content {
       text-align: left;
-      font-size: $text-font-size;
-      line-height: 1;
+      font-size: 1rem;
+      /* Taille de police réduite pour petits écrans */
+      line-height: 1.5;
+      /* Meilleure lisibilité */
       text-align: justify;
       color: $text-muted-color;
       white-space: pre-line;
-      padding: 20px 0;
+      padding: 1rem 0;
+      /* Utilisation de rem pour le padding vertical */
 
       .dark-mode & {
         color: $dark-text-muted-color;
       }
+
+      @media (min-width: 768px) {
+        font-size: $text-font-size;
+        /* Taille par défaut sur écrans moyens */
+      }
     }
 
     .chapter-actions {
-      margin-top: 20px;
+      margin-top: 1.25rem;
+      /* Utilisation de rem pour la marge supérieure */
 
       .btn {
-        margin-right: 10px;
-        padding: $button-padding;
+        margin-right: 0.625rem;
+        /* Utilisation de rem pour les marges */
+        padding: 0.5rem 1rem;
+        /* Utilisation de rem pour le padding */
         border-radius: $border-radius;
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
+        /* Utilisation de rem pour les marges inférieures */
+
+        @media (min-width: 768px) {
+          padding: $button-padding;
+          /* Restaure le padding par défaut */
+        }
       }
 
       .btn-edit {
@@ -99,15 +138,28 @@
   }
 
   .chapter-navigation {
-    margin: 20px 0;
+    margin: 1.25rem 0;
+    /* Utilisation de rem pour la marge verticale */
     display: flex;
+    flex-wrap: wrap;
+    /* Permet au contenu de s'adapter sur petits écrans */
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
+    /* Utilisation de rem pour les espaces */
 
     .btn {
-      padding: $button-padding;
+      padding: 0.75rem 1.5rem;
+      /* Utilisation de rem pour le padding */
       border-radius: $border-radius;
-      font-size: 1rem;
+      font-size: 0.875rem;
+      /* Taille ajustée pour petits écrans */
+
+      @media (min-width: 768px) {
+        font-size: 1rem;
+        /* Taille par défaut sur écrans moyens */
+        padding: $button-padding;
+        /* Restaure le padding par défaut */
+      }
     }
 
     .btn-secondary {
@@ -146,12 +198,14 @@
   }
 
   .back-to-story {
-    margin-top: 20px;
+    margin-top: 1.25rem;
+    /* Utilisation de rem pour la marge supérieure */
 
     .btn-secondary {
       background-color: $secondary-color;
       color: $white-color;
-      padding: $button-padding;
+      padding: 0.75rem 1.5rem;
+      /* Utilisation de rem pour le padding */
       border-radius: $border-radius;
 
       &:hover {
@@ -166,5 +220,51 @@
         }
       }
     }
+  }
+}
+
+/* Media Queries supplémentaires pour les très petits écrans */
+@media (max-width: 480px) {
+  .chapter-show-container {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  .chapter-details {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  .chapter-details .chapter-title {
+    font-size: 1.5rem;
+    /* Réduction supplémentaire de la taille du titre */
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .chapter-content {
+    font-size: 0.875rem;
+    /* Réduction de la taille de la police */
+    padding: 0.5rem 0;
+    /* Réduction du padding vertical */
+  }
+
+  .chapter-actions .btn {
+    padding: 0.5rem;
+    /* Réduction du padding */
+    margin-right: 0.5rem;
+    /* Réduction des marges */
+  }
+
+  .chapter-navigation .btn {
+    font-size: 0.75rem;
+    /* Réduction de la taille des boutons */
+    padding: 0.5rem;
+    /* Réduction du padding */
+  }
+
+  .back-to-story .btn-secondary {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding du bouton */
   }
 }

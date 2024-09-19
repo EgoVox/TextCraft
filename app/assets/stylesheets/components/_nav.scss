@@ -5,7 +5,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 1.25rem;
+  /* Utilisation de rem pour le padding */
   width: 100%;
 }
 
@@ -17,7 +18,8 @@
 }
 
 .nav-left .logo-link {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  /* Taille ajustée pour petits écrans */
   font-family: $font-family-serif;
   color: $primary-color;
   text-decoration: none;
@@ -25,6 +27,11 @@
 
   .dark-mode & {
     color: $dark-primary-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+    /* Taille par défaut sur écrans moyens */
   }
 }
 
@@ -39,11 +46,14 @@
 /* Liens de navigation */
 .nav-link {
   color: $text-color;
-  padding: 20px;
+  padding: 1rem;
+  /* Utilisation de rem pour le padding */
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.875rem;
+  /* Taille ajustée pour petits écrans */
   font-family: $font-family-serif;
   font-weight: 900;
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: $white-color;
@@ -57,17 +67,28 @@
   .dark-mode & {
     color: $dark-text-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+    /* Taille par défaut sur écrans moyens */
+    padding: 20px;
+    /* Restaure le padding par défaut */
+  }
 }
 
 .signup-link,
 .btn-login {
-  padding: 10px 15px;
-  margin: 20px;
+  padding: 0.625rem 1rem;
+  /* Utilisation de rem pour le padding */
+  margin: 1.25rem;
+  /* Utilisation de rem pour la marge */
   background-color: $primary-color;
   color: $white-color;
   border-radius: $border-radius;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  font-size: 0.875rem;
+  /* Taille ajustée pour petits écrans */
+  transition: background-color 0.3s ease, color 0.3s ease;
 
   &:hover {
     background-color: $primary-hover-color;
@@ -81,6 +102,13 @@
     background-color: $dark-primary-color;
     color: $dark-white-color;
   }
+
+  @media (min-width: 768px) {
+    padding: 10px 15px;
+    /* Restaure le padding par défaut */
+    font-size: 1rem;
+    /* Taille par défaut sur écrans moyens */
+  }
 }
 
 /* Bouton Hamburger pour le menu mobile */
@@ -89,12 +117,19 @@
   cursor: pointer;
   flex-direction: column;
   justify-content: space-between;
-  width: 25px;
-  height: 20px;
+  width: 1.5rem;
+  /* Utilisation de rem pour la largeur */
+  height: 1.25rem;
+  /* Utilisation de rem pour la hauteur */
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
 }
 
 .mobile-menu-toggle span {
-  height: 3px;
+  height: 0.1875rem;
+  /* Utilisation de rem pour la hauteur */
   background-color: $text-color;
   border-radius: 2px;
 
@@ -112,7 +147,8 @@
   background-color: $white-color;
   width: 100%;
   z-index: 999;
-  padding: 15px 0;
+  padding: 0.9375rem 0;
+  /* Utilisation de rem pour le padding vertical */
 
   .dark-mode & {
     background-color: $dark-background-color;
@@ -128,15 +164,19 @@
 
       .nav-link {
         display: block;
-        padding: 10px 15px;
-        color: $white-color;
+        padding: 0.625rem 1rem;
+        /* Utilisation de rem pour le padding */
+        color: $text-color;
         text-decoration: none;
 
         &:hover {
-          background-color: $white-color;
+          background-color: $primary-color;
+          color: $white-color;
+          border-radius: $border-radius;
 
           .dark-mode & {
             background-color: $dark-card-background-color;
+            color: $dark-white-color;
           }
         }
 

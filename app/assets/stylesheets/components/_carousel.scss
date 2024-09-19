@@ -5,7 +5,8 @@
   overflow: hidden;
   width: 100%;
   position: relative;
-  padding: 20px 0;
+  padding: 1.25rem 0;
+  /* Utilisation de rem pour le padding */
 }
 
 /* Carousel avec défilement fluide */
@@ -14,15 +15,19 @@
   flex-wrap: nowrap;
   overflow-x: scroll;
   scroll-behavior: smooth;
-  gap: 20px;
+  gap: 1.25rem;
+  /* Utilisation de rem pour l'espacement */
 }
 
 /* Éléments de la carousel */
 .carousel-item {
   flex: 0 0 auto;
-  min-width: 150px;
-  max-width: 300px;
-  margin: 0 10px;
+  min-width: 9.375rem;
+  /* Utilisation de rem pour la largeur minimale */
+  max-width: 18.75rem;
+  /* Utilisation de rem pour la largeur maximale */
+  margin: 0 0.625rem;
+  /* Utilisation de rem pour la marge */
   text-align: center;
   background-color: $card-background-color;
   border-radius: $card-border-radius;
@@ -33,10 +38,20 @@
     background-color: $dark-card-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (max-width: 768px) {
+    min-width: 7.5rem;
+    /* Réduction de la largeur minimale sur petits écrans */
+    max-width: 100%;
+    /* Prend toute la largeur sur petits écrans */
+    margin: 0 0.5rem;
+    /* Réduction de la marge */
+  }
 }
 
 .carousel-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-0.3125rem);
+  /* Utilisation de rem pour la translation */
   box-shadow: $box-shadow-hover;
 
   .dark-mode & {
@@ -47,7 +62,8 @@
 /* Image de couverture */
 .story-cover {
   width: 100%;
-  height: 200px;
+  height: 12.5rem;
+  /* Utilisation de rem pour la hauteur */
   object-fit: cover;
   border-radius: $card-border-radius;
   box-shadow: $box-shadow-light;
@@ -55,24 +71,42 @@
   .dark-mode & {
     box-shadow: $dark-box-shadow-light;
   }
+
+  @media (max-width: 480px) {
+    height: 10rem;
+    /* Réduction de la hauteur sur petits écrans */
+  }
 }
 
 /* Informations sur l'histoire */
 .story-info {
-  padding: $card-padding;
+  padding: 0.75rem;
+  /* Utilisation de rem pour le padding */
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    /* Réduction du padding sur petits écrans */
+  }
 }
 
 .story-title {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  /* Utilisation de rem pour la taille de police */
   color: $text-color;
   font-family: $font-family-serif;
-  font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 0.3125rem;
+  /* Utilisation de rem pour la marge inférieure */
   text-decoration: none;
+  transition: color 0.3s ease;
 
   .dark-mode & {
     color: $dark-text-color;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.875rem;
+    /* Réduction de la taille de police sur petits écrans */
   }
 }
 
@@ -92,6 +126,11 @@ small {
   .dark-mode & {
     color: $dark-text-muted-color;
   }
+
+  @media (max-width: 480px) {
+    font-size: 0.75rem;
+    /* Réduction de la taille de police sur petits écrans */
+  }
 }
 
 /* Boutons de navigation de la carousel */
@@ -102,7 +141,8 @@ small {
   background-color: rgba(0, 0, 0, 0.5);
   color: $white-color;
   border: none;
-  padding: 10px;
+  padding: 0.625rem;
+  /* Utilisation de rem pour le padding */
   cursor: pointer;
   border-radius: 50%;
   z-index: 1;
@@ -111,6 +151,11 @@ small {
   .dark-mode & {
     background-color: rgba(255, 255, 255, 0.5);
     color: $dark-white-color;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+    /* Réduction du padding sur petits écrans */
   }
 }
 
@@ -124,22 +169,27 @@ small {
 
 /* Bouton gauche */
 .carousel-container .carousel-button.left {
-  left: 10px;
+  left: 0.625rem;
+  /* Utilisation de rem pour la position */
 }
 
 /* Bouton droit */
 .carousel-container .carousel-button.right {
-  right: 10px;
+  right: 0.625rem;
+  /* Utilisation de rem pour la position */
 }
 
 /* Media query pour rendre la carousel plus responsive */
 @media (max-width: 768px) {
   .carousel-item {
-    min-width: 120px;
+    min-width: 7.5rem;
+    /* Réduction de la largeur minimale sur petits écrans */
     max-width: 100%;
+    /* Prend toute la largeur sur petits écrans */
   }
 
   .carousel-container .carousel-button {
-    padding: 8px;
+    padding: 0.5rem;
+    /* Réduction du padding des boutons sur petits écrans */
   }
 }

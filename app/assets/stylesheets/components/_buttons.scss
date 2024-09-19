@@ -3,7 +3,8 @@
 /* Composant de base pour les boutons */
 .btn {
   display: inline-block;
-  padding: $button-padding;
+  padding: 0.75rem 1.5rem;
+  /* Utilisation de rem pour le padding */
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
@@ -11,11 +12,23 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s ease;
+  width: 100%;
+  /* Prend toute la largeur sur petits écrans */
+  max-width: 7.5rem;
+  /* Limite la largeur sur petits écrans */
+  box-sizing: border-box;
+  /* S'assure que le padding est inclus dans la largeur */
+
+  @media (min-width: 768px) {
+    width: auto;
+    /* Revient à la largeur par défaut sur écrans moyens */
+    max-width: none;
+    /* Supprime la limite de largeur */
+  }
 }
 
 /* Bouton Lire */
 .btn-read {
-  width: 120px;
   background-color: $success-color;
   color: $white-color;
   border: 2px solid $success-color;
@@ -45,9 +58,7 @@
 
 /* Bouton Modifier */
 .btn-edit {
-  width: 120px;
   background-color: #ffc107;
-  /* Spécifique */
   color: $white-color;
   border: 2px solid #ffc107;
 
@@ -76,7 +87,6 @@
 
 /* Bouton Supprimer */
 .btn-delete {
-  width: 120px;
   background-color: $danger-color;
   color: $white-color;
   border: 2px solid $danger-color;
@@ -106,12 +116,11 @@
 
 /* Bouton Créer une nouvelle histoire */
 .btn-create {
-  width: 120px;
   background-color: $secondary-color;
   color: $white-color;
   border: 2px solid $secondary-color;
-  display: inline-block;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  /* Réduction de la taille de police pour petits écrans */
 
   &:hover {
     background-color: $secondary-hover-color;
@@ -133,5 +142,17 @@
     &:active {
       background-color: darken($dark-secondary-color, 10%);
     }
+  }
+}
+
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .btn {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding sur petits écrans */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police */
+    max-width: 100%;
+    /* Prend toute la largeur sur très petits écrans */
   }
 }

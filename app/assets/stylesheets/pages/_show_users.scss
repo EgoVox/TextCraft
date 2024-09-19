@@ -1,17 +1,29 @@
 @import 'base/variables';
 
 .user-profile-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: $section-padding;
+  max-width: 100%;
+  /* Prend toute la largeur sur petits écrans */
+  margin: 1.5rem auto;
+  /* Ajustement des marges */
+  padding: 1.5rem;
+  /* Ajustement du padding pour les petits écrans */
+
+  @media (min-width: 768px) {
+    max-width: 900px;
+    /* Limite la largeur sur les écrans moyens */
+    padding: $section-padding;
+    /* Restaure le padding par défaut */
+  }
 }
 
 .user-details {
   background-color: $background-color;
-  padding: $card-padding;
+  padding: 1.5rem;
+  /* Ajustement du padding pour petits écrans */
   border-radius: $card-border-radius;
   box-shadow: $box-shadow-light;
-  margin-bottom: 40px;
+  margin-bottom: 2.5rem;
+  /* Utilisation de rem */
   text-align: left;
 
   .dark-mode & {
@@ -20,18 +32,29 @@
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
+    /* Réduction de la taille pour petits écrans */
     font-family: $font-family-serif;
-    margin-bottom: $title-margin-bottom;
+    margin-bottom: 1rem;
+    /* Utilisation de rem */
 
     .dark-mode & {
       color: $dark-text-color;
     }
+
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+      /* Restaure la taille par défaut sur écrans moyens */
+      margin-bottom: $title-margin-bottom;
+      /* Restaure la marge par défaut */
+    }
   }
 
   p {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1rem;
+    /* Ajusté pour les petits écrans */
+    margin-bottom: 0.625rem;
+    /* Utilisation de rem */
 
     .dark-mode & {
       color: $dark-text-muted-color;
@@ -40,11 +63,17 @@
     strong {
       font-weight: bold;
     }
+
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+      /* Restaure la taille par défaut sur écrans moyens */
+    }
   }
 
   .btn-primary {
     background-color: #007bff;
-    padding: $button-padding;
+    padding: 0.75rem 1.5rem;
+    /* Utilisation de rem pour le padding */
     font-size: 1rem;
     border-radius: $border-radius;
     color: $white-color;
@@ -65,7 +94,8 @@
 }
 
 .story-title {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  /* Réduction de la taille de police pour petits écrans */
   color: $primary-color;
   font-weight: bold;
   text-decoration: none;
@@ -77,28 +107,50 @@
   .dark-mode & {
     color: $dark-primary-color;
   }
+
+  @media (min-width: 768px) {
+    font-size: 1.4rem;
+    /* Restaure la taille par défaut sur écrans moyens */
+  }
 }
 
 /* Mes histoires */
 .my-stories {
   .section-title {
-    font-size: $title-font-size;
-    margin-bottom: 30px;
+    font-size: 1.5rem;
+    /* Réduction de la taille pour les petits écrans */
+    margin-bottom: 1.5rem;
+    /* Utilisation de rem */
 
     .dark-mode & {
       color: $dark-text-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: $title-font-size;
+      /* Taille par défaut sur écrans moyens */
+      margin-bottom: 30px;
+      /* Restaure la marge par défaut */
     }
   }
 
   .stories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Adaptation automatique des cartes */
+    gap: 1.25rem;
+    /* Utilisation de rem */
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      /* Restaure les colonnes par défaut */
+    }
   }
 
   .story-card {
     background-color: $card-background-color;
-    padding: $card-padding;
+    padding: 1rem;
+    /* Ajustement du padding pour les petits écrans */
     border-radius: $card-border-radius;
     box-shadow: $box-shadow-light;
     transition: transform 0.3s ease;
@@ -118,36 +170,56 @@
     }
 
     .story-cover {
-      width: 75%;
-      height: 75%;
+      width: 100%;
+      /* Prend toute la largeur sur les petits écrans */
+      height: auto;
+      /* Maintient le ratio de l'image */
       object-fit: cover;
       border-radius: $card-border-radius;
-      margin-bottom: 15px;
+      margin-bottom: 1rem;
+      /* Utilisation de rem */
     }
 
     .story-info {
       text-align: center;
 
       .story-description {
-        margin-top: 10px;
-        font-size: $text-font-size;
+        margin-top: 0.625rem;
+        /* Utilisation de rem */
+        font-size: 0.875rem;
+        /* Ajusté pour les petits écrans */
         color: $text-muted-color;
 
         .dark-mode & {
           color: $dark-text-muted-color;
         }
+
+        @media (min-width: 768px) {
+          font-size: $text-font-size;
+          /* Taille par défaut sur écrans moyens */
+        }
       }
 
       .story-actions {
-        margin-top: 15px;
+        margin-top: 1rem;
+        /* Utilisation de rem */
         display: flex;
         justify-content: space-between;
 
         .btn {
-          padding: $button-padding;
-          font-size: $small-text-font-size;
+          padding: 0.5rem 1rem;
+          /* Utilisation de rem pour le padding */
+          font-size: 0.875rem;
+          /* Taille ajustée pour les petits écrans */
           border-radius: $border-radius;
           cursor: pointer;
+
+          @media (min-width: 768px) {
+            font-size: $small-text-font-size;
+            /* Restaure la taille par défaut sur écrans moyens */
+            padding: $button-padding;
+            /* Restaure le padding par défaut */
+          }
 
           &.btn-read {
             background-color: $success-color;
@@ -191,8 +263,10 @@
 /* Bouton créer une nouvelle histoire */
 .btn-create {
   display: block;
-  margin-top: 20px;
-  padding: $button-padding;
+  margin-top: 1.5rem;
+  /* Utilisation de rem */
+  padding: 0.75rem 1.5rem;
+  /* Utilisation de rem */
   background-color: #007bff;
   color: $white-color;
   text-align: center;
@@ -214,13 +288,15 @@
 
 /* Lien de retour */
 .back-link {
-  margin-top: 40px;
+  margin-top: 2.5rem;
+  /* Utilisation de rem */
   text-align: center;
 
   .btn-secondary {
     background-color: $secondary-color;
     color: $white-color;
-    padding: $button-padding;
+    padding: 0.75rem 1.5rem;
+    /* Utilisation de rem */
     border-radius: $border-radius;
 
     &:hover {
@@ -234,5 +310,47 @@
         background-color: $dark-secondary-hover-color;
       }
     }
+  }
+}
+
+/* Media Queries pour les très petits écrans */
+@media (max-width: 480px) {
+  .user-profile-container {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  .user-details h1 {
+    font-size: 1.8rem;
+    /* Réduction supplémentaire de la taille du titre */
+    margin-bottom: 0.75rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .my-stories .section-title {
+    font-size: 1.3rem;
+    /* Taille de titre réduite */
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .story-card .story-info .story-description {
+    font-size: 0.8rem;
+    /* Réduction de la taille de la description */
+    margin-top: 0.5rem;
+    /* Réduction de la marge supérieure */
+  }
+
+  .story-actions .btn {
+    font-size: 0.75rem;
+    /* Réduction de la taille des boutons */
+    padding: 0.5rem;
+    /* Réduction du padding */
+  }
+
+  .btn-create,
+  .back-link .btn-secondary {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding des boutons */
   }
 }

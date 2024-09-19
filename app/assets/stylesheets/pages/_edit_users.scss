@@ -1,9 +1,12 @@
 @import 'base/variables';
 
 .edit-user-container {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: $section-padding;
+  max-width: 100%;
+  /* Prend toute la largeur sur petits écrans */
+  margin: 1.5rem auto;
+  /* Utilisation de rem pour les marges */
+  padding: 1.5rem;
+  /* Utilisation de rem pour le padding */
   background-color: $background-color;
   border-radius: $border-radius;
   box-shadow: $box-shadow-light;
@@ -14,36 +17,63 @@
     box-shadow: $dark-box-shadow-light;
   }
 
+  @media (min-width: 768px) {
+    max-width: 700px;
+    /* Limite la largeur sur les écrans moyens */
+    padding: $section-padding;
+    /* Restaure le padding par défaut */
+  }
+
   h2 {
     font-family: $font-family-serif;
-    font-size: 2.5rem;
+    font-size: 2rem;
+    /* Ajustement pour petits écrans */
     color: $primary-color;
-    margin-bottom: 30px;
+    margin-bottom: 1.5rem;
+    /* Utilisation de rem pour la marge inférieure */
     text-align: center;
 
     .dark-mode & {
       color: $dark-primary-color;
     }
+
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+      /* Taille par défaut sur écrans moyens */
+      margin-bottom: 30px;
+      /* Restaure la marge par défaut */
+    }
   }
 
   .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
+    /* Utilisation de rem pour la marge inférieure */
 
     label {
       font-family: $font-family-serif;
-      font-size: 1.1rem;
+      font-size: 1rem;
+      /* Taille ajustée pour petits écrans */
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 0.625rem;
+      /* Utilisation de rem pour la marge inférieure */
       display: block;
 
       .dark-mode & {
         color: $dark-text-color;
       }
+
+      @media (min-width: 768px) {
+        font-size: 1.1rem;
+        /* Taille par défaut sur écrans moyens */
+        margin-bottom: 10px;
+        /* Restaure la marge par défaut */
+      }
     }
 
     .form-control {
       width: 100%;
-      padding: 10px;
+      padding: 0.75rem;
+      /* Utilisation de rem pour le padding */
       font-size: 1rem;
       border-radius: 5px;
       border: 1px solid #ddd;
@@ -68,7 +98,8 @@
     }
 
     small {
-      font-size: $small-text-font-size;
+      font-size: 0.875rem;
+      /* Utilisation de rem pour la taille */
       color: $text-muted-color;
 
       .dark-mode & {
@@ -79,12 +110,14 @@
 
   .actions {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 1.5rem;
+    /* Utilisation de rem pour la marge supérieure */
 
     .btn-primary {
       background-color: $primary-color;
       color: $white-color;
-      padding: $button-padding;
+      padding: 0.75rem 1.5rem;
+      /* Utilisation de rem pour le padding */
       border-radius: 5px;
       transition: background-color 0.3s ease;
 
@@ -99,17 +132,24 @@
           background-color: $dark-primary-hover-color;
         }
       }
+
+      @media (min-width: 768px) {
+        padding: $button-padding;
+        /* Restaure le padding par défaut */
+      }
     }
   }
 
   .edit-user-footer {
-    margin-top: 40px;
+    margin-top: 2.5rem;
+    /* Utilisation de rem pour la marge supérieure */
     text-align: center;
 
     .btn-secondary {
       background-color: $secondary-color;
       color: $white-color;
-      padding: $button-padding;
+      padding: 0.75rem 1.5rem;
+      /* Utilisation de rem pour le padding */
       border-radius: 5px;
       transition: background-color 0.3s ease;
 
@@ -124,14 +164,21 @@
           background-color: $dark-secondary-hover-color;
         }
       }
+
+      @media (min-width: 768px) {
+        padding: $button-padding;
+        /* Restaure le padding par défaut */
+      }
     }
 
     .btn-danger {
       background-color: $danger-color;
       color: $white-color;
-      padding: $button-padding;
+      padding: 0.75rem 1.5rem;
+      /* Utilisation de rem pour le padding */
       border-radius: 5px;
-      margin-top: 15px;
+      margin-top: 1rem;
+      /* Utilisation de rem pour la marge supérieure */
 
       &:hover {
         background-color: $danger-hover-color;
@@ -144,6 +191,47 @@
           background-color: $dark-danger-hover-color;
         }
       }
+
+      @media (min-width: 768px) {
+        padding: $button-padding;
+        /* Restaure le padding par défaut */
+        margin-top: 15px;
+        /* Restaure la marge par défaut */
+      }
     }
+  }
+}
+
+/* Media Queries pour très petits écrans */
+@media (max-width: 480px) {
+  .edit-user-container {
+    padding: 1rem;
+    /* Réduction du padding sur petits écrans */
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    /* Réduction supplémentaire de la taille du titre */
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+    /* Réduction de la marge inférieure */
+  }
+
+  .actions .btn-primary,
+  .edit-user-footer .btn-secondary,
+  .edit-user-footer .btn-danger {
+    padding: 0.5rem 1rem;
+    /* Réduction du padding des boutons */
+    font-size: 0.875rem;
+    /* Réduction de la taille de police des boutons */
+  }
+
+  .edit-user-footer .btn-danger {
+    margin-top: 0.5rem;
+    /* Réduction de la marge supérieure */
   }
 }
