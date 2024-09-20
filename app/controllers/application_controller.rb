@@ -1,6 +1,12 @@
 class ApplicationController < ActionController::Base
   layout :set_layout
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_user_color
+
+  def set_user_color
+    @user_color = current_user&.primary_color || "#ff6f61"
+    puts "Couleur utilisateur (#{current_user&.username}): #{@user_color}" if current_user
+  end
 
   protected
 
