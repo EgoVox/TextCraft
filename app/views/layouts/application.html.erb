@@ -7,121 +7,62 @@
     <%= csp_meta_tag %>
 
     <%= javascript_include_tag 'https://code.jquery.com/jquery-3.6.0.min.js' %>
-
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
-
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 
-<script>
-  // Fonction pour calculer la couleur opposée
-  function getOppositeColor(hex) {
-    let color = hex.substring(1); // Supprimer le "#"
-    if (color.length === 3) {
-      color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
-    }
-    const r = (255 - parseInt(color.substring(0, 2), 16)).toString(16).padStart(2, '0');
-    const g = (255 - parseInt(color.substring(2, 4), 16)).toString(16).padStart(2, '0');
-    const b = (255 - parseInt(color.substring(4, 6), 16)).toString(16).padStart(2, '0');
-    return `#${r}${g}${b}`;
-  }
-
-  // Fonction pour appliquer la couleur principale et la couleur opposée
-  function applyPrimaryColor(color) {
-    const oppositeColor = getOppositeColor(color);
-    document.documentElement.style.setProperty('--primary-color', color);
-
-    // Mettre à jour les liens avec la classe .card-index__title_main a
-    const style = document.createElement('style');
-    style.innerHTML = `
-      .card-index__title_main a {
-        color: ${oppositeColor} !important;
+    <!-- Charger la couleur de l'utilisateur ou la couleur par défaut -->
+    <style>
+      :root {
+        --primary-color: <%= @user_color %>;
+        --opposite-color: <%= current_user&.opposite_color || "#FFFFFF" %>;
       }
-    `;
-    document.head.appendChild(style);
+    </style>
 
-    // Sauvegarder la couleur dans le localStorage
-    localStorage.setItem('primaryColor', color);
-  }
-
-  // Vérifie s'il y a une couleur principale sauvegardée dans le localStorage et l'applique
-  const savedColor = localStorage.getItem('primaryColor');
-  if (savedColor) {
-    applyPrimaryColor(savedColor);
-  }
-
-  // Gérer le changement de couleur avec le color picker
-  document.addEventListener('DOMContentLoaded', function() {
-    const colorPicker = document.getElementById('primaryColorPicker');
-    if (colorPicker) {
-      // Appliquer la couleur sauvegardée à l'input color picker
-      const savedColor = localStorage.getItem('primaryColor');
-      if (savedColor) {
-        colorPicker.value = savedColor;
-      }
-
-      // Ajouter un listener pour les changements de couleur
-      colorPicker.addEventListener('input', function(event) {
-        const newColor = event.target.value;
-        applyPrimaryColor(newColor); // Appliquer la nouvelle couleur immédiatement
-      });
-    }
-  });
-</script>
-
-
-
-    </head>
-
-  <body data-turbo="false">
+  </head>
+  <body data-turbo="false" data-user-color="<%= @user_color %>" data-opposite-color="<%= current_user&.opposite_color || '#FFFFFF' %>">
     <header class="main-header">
       <% if user_signed_in? %>
-      <nav class="nav-container">
-        <!-- Section gauche : Accueil et Catégories -->
-        <div class="nav-left">
-          <%= link_to 'Accueil', stories_path, class: 'nav-link logo-link' %>
-          <!-- Menu déroulant pour les catégories -->
-          <div class="header-categories-dropdown">
-            <button class="nav-link dropdown-toggle" id="categoriesDropdown" type="button" aria-expanded="false">
-              Catégories
+        <nav class="nav-container">
+          <!-- Section gauche : Accueil et Catégories -->
+          <div class="nav-left">
+            <%= link_to 'Accueil', stories_path, class: 'nav-link logo-link' %>
+            <!-- Menu déroulant pour les catégories -->
+            <div class="header-categories-dropdown">
+              <button class="nav-link dropdown-toggle" id="categoriesDropdown" type="button" aria-expanded="false">
+                Catégories
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+                <% Category.all.each do |category| %>
+                  <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="color-picker-container">
+              <label for="primaryColorPicker">Couleur principale :</label>
+              <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="<%= @user_color %>">
+            </div>
+          </div>
+
+          <!-- Section droite : Menu utilisateur -->
+          <div class="dropdown user-menu">
+            <button class="nav-link dropdown-toggle" type="button" id="userDropdown" aria-expanded="false">
+              <i class="fas fa-user"></i> <%= current_user.username || current_user.email %>
             </button>
-            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-              <% Category.all.each do |category| %>
-                <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
-              <% end %>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
+              <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'dropdown-item' %></li>
+              <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item btn-logout' %></li>
             </ul>
           </div>
-          <div class="color-picker-container">
-            <label for="color-picker-button">Couleur principale</label>
-            <!-- Bouton cliquable pour afficher la couleur sélectionnée -->
-            <button id="color-picker-button" style="width: 30px; height: 30px; border: none; cursor: pointer;"></button>
-            <!-- Color picker caché, déclenché par le bouton -->
-            <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="#ff6f61" style="display:none;">
-          </div>
-        </div>
-
-        <!-- Section droite : Menu utilisateur -->
-        <div class="dropdown user-menu">
-          <button class="nav-link dropdown-toggle" type="button" id="userDropdown" aria-expanded="false">
-            <i class="fas fa-user"></i> <%= current_user.username || current_user.email %>
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="userDropdown">
-            <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
-            <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'dropdown-item' %></li>
-            <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'dropdown-item btn-logout' %></li>
-          </ul>
-        </div>
-      </div>
-      </nav>
+        </nav>
       <% else %>
         <nav class="nav-container">
           <div class="nav-left">
@@ -143,32 +84,32 @@
 
       <!-- Menu mobile caché par défaut et placé à gauche -->
       <nav id="mobileMenu" class="mobile-menu">
-      <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to 'Accueil', authenticated_root_path, class: 'menu-link btn btn-primary' %></li>
-          <li><%= link_to 'Histoires', stories_path, class: 'menu-link btn btn-primary' %></li>
-          <li><%= link_to 'Catégories', categories_path, class: 'menu-link btn btn-primary' %></li>
-          <li><%= link_to 'Mon Profil', user_path(current_user), class: 'menu-link btn btn-secondary' %></li>
-          <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'menu-link btn btn-secondary' %></li>
-          <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'menu-link btn btn-danger' %></li>
-          <li>
-            <!-- Label caché pour l'accessibilité -->
-            <label for="primaryColorPicker" class="visually-hidden">Choisir la couleur principale</label>
+        <ul>
+          <% if user_signed_in? %>
+            <li><%= link_to 'Accueil', authenticated_root_path, class: 'menu-link btn btn-primary' %></li>
+            <li><%= link_to 'Histoires', stories_path, class: 'menu-link btn btn-primary' %></li>
+            <li><%= link_to 'Catégories', categories_path, class: 'menu-link btn btn-primary' %></li>
+            <li><%= link_to 'Mon Profil', user_path(current_user), class: 'menu-link btn btn-secondary' %></li>
+            <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'menu-link btn btn-secondary' %></li>
+            <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'menu-link btn btn-danger' %></li>
+            <li>
+              <!-- Label caché pour l'accessibilité -->
+              <label for="primaryColorPicker" class="visually-hidden">Choisir la couleur principale</label>
 
-            <!-- Bouton personnalisé pour ouvrir le color picker -->
-            <button id="color-picker-button" class="menu-link btn btn-secondary" onclick="document.getElementById('primaryColorPicker').click();">
-              Couleur principale
-            </button>
+              <!-- Bouton personnalisé pour ouvrir le color picker -->
+              <button id="color-picker-button" class="menu-link btn btn-secondary" onclick="document.getElementById('primaryColorPicker').click();">
+                Couleur principale
+              </button>
 
-            <!-- Input color caché -->
-            <input type="color" id="primaryColorPicker" value="#ff6f61" style="display:none;">
-          </li>
-        <% else %>
-          <li><%= link_to 'TextCraft', unauthenticated_root_path, class: 'menu-link btn btn-primary' %></li>
-          <li><%= link_to 'Se connecter', new_user_session_path, class: 'menu-link btn btn-success' %></li>
-          <li><%= link_to "S'inscrire", new_user_registration_path, class: 'menu-link btn btn-success' %></li>
-        <% end %>
-      </ul>
+              <!-- Input color caché -->
+              <input type="color" id="primaryColorPicker" value="<%= current_user&.primary_color || '#ff6f61' %>" style="display:none;">
+            </li>
+          <% else %>
+            <li><%= link_to 'TextCraft', unauthenticated_root_path, class: 'menu-link btn btn-primary' %></li>
+            <li><%= link_to 'Se connecter', new_user_session_path, class: 'menu-link btn btn-success' %></li>
+            <li><%= link_to "S'inscrire", new_user_registration_path, class: 'menu-link btn btn-success' %></li>
+          <% end %>
+        </ul>
       </nav>
     </header>
 
@@ -192,28 +133,29 @@
       </div>
     <% end %>
 
-<script>
-  function closeModal() {
-    document.querySelector('.modal-overlay').style.display = 'none';
-  }
-</script>
+    <script>
+      function closeModal() {
+        document.querySelector('.modal-overlay').style.display = 'none';
+      }
+    </script>
 
-  <%= yield %>
+    <%= yield %>
 
-  <footer class="main-footer">
-    <div class="footer-container">
-      <p>© 2024 TextCraft. Tous droits réservés.</p>
-      <nav class="footer-nav">
-        <ul>
-        <li><%= link_to 'Confidentialité', privacy_path %></li>
-        <li><%= link_to 'Conditions', terms_path %></li>
-        <li><%= link_to 'Contact', contact_path %></li>
-        </ul>
-      </nav>
-    </div>
-  </footer>
+    <footer class="main-footer">
+      <div class="footer-container">
+        <p>© 2024 TextCraft. Tous droits réservés.</p>
+        <nav class="footer-nav">
+          <ul>
+            <li><%= link_to 'Confidentialité', privacy_path %></li>
+            <li><%= link_to 'Conditions', terms_path %></li>
+            <li><%= link_to 'Contact', contact_path %></li>
+          </ul>
+        </nav>
+      </div>
+    </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="module" src="<%= asset_path 'color_picker.js' %>"></script>
+    <script type="module" src="<%= asset_path 'init_color.js' %>"></script>
   </body>
 </html>

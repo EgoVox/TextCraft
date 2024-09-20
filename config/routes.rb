@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   # Routes pour les stories et les chapitres
   resources :stories do
     # Routes imbriquées pour les chapitres
-    resources :chapters, except: [:index]
+    resources :chapters, except: [:index] do
       # Routes imbriquées pour les commentaires (sur les chapitres)
       resources :comments, only: [:create, :destroy]
+    end
 
     # Routes imbriquées pour les commentaires (sur les stories)
     resources :comments, only: [:create, :destroy]
@@ -41,7 +42,11 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
 
   # Routes pour voir le profil de l'utilisateur, ses histoires, etc.
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    collection do
+      post :update_color # Route personnalisée pour mettre à jour la couleur
+    end
+  end
 
   # Pages statiques
   get 'privacy', to: 'pages#privacy'

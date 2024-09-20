@@ -24,10 +24,13 @@ function injectStyles(primaryColor, oppositeColor, darkColor) {
     document.head.appendChild(style);
   }
 
+  console.log('Injection des styles avec la couleur:', primaryColor);
+
   style.innerHTML = `
     :root {
-      --primary-color: ${primaryColor};
-      --primary-hover-color: ${darkColor};
+      --primary-color: ${primaryColor} !important;
+      --primary-hover-color: ${darkColor} !important;
+      --opposite-color: ${oppositeColor} !important;
     }
     .card-index__title_main a {
       color: ${oppositeColor} !important;
@@ -39,43 +42,40 @@ function injectStyles(primaryColor, oppositeColor, darkColor) {
 }
 
 // Fonction pour appliquer la couleur principale et la couleur opposée
-function applyPrimaryColor(color) {
+export function applyPrimaryColor(color) {
+  console.log("Couleur appliquée:", color);
   const darkColor = darkenColor(color, 20); // Assombrir la couleur
   const oppositeColor = getOppositeColor(color); // Calculer la couleur opposée
 
   // Injecter les styles immédiatement
   injectStyles(color, oppositeColor, darkColor);
+  console.log("Styles injectés avec couleur:", color, "couleur opposée:", oppositeColor, "couleur sombre:", darkColor);
 
-  // Sauvegarder les couleurs dans le localStorage
-  localStorage.setItem('primaryColor', color);
-  localStorage.setItem('oppositeColor', oppositeColor);
-
-  // Mettre à jour l'aperçu du bouton
-  const colorPickerButton = document.getElementById('color-picker-button');
-  if (colorPickerButton) {
-    colorPickerButton.style.backgroundColor = color;
-  }
+  // Mettre à jour la base de données
+  fetch('/users/update_color', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ user: { primary_color: color, opposite_color: oppositeColor } })
+  }).then(response => {
+    if (response.ok) {
+      console.log("Couleur mise à jour avec succès");
+    } else {
+      console.error("Erreur lors de la mise à jour de la couleur");
+    }
+  });
 }
 
-// Charger la couleur sauvegardée au chargement de la page
+// Sélecteur pour l'input de couleur
 document.addEventListener('DOMContentLoaded', () => {
-  const savedColor = localStorage.getItem('primaryColor') || '#ff6f61';
-  const savedOppositeColor = localStorage.getItem('oppositeColor');
-
-  // Appliquer les couleurs sauvegardées immédiatement si elles existent
-  if (savedColor && savedOppositeColor) {
-    const darkColor = darkenColor(savedColor, 20);
-    injectStyles(savedColor, savedOppositeColor, darkColor);
-  }
-
-  // Sélecteur pour l'input de couleur
   const colorPicker = document.getElementById('primaryColorPicker');
   const colorPickerButton = document.getElementById('color-picker-button');
 
-  // Initialiser la valeur du color picker
   if (colorPicker) {
-    // Assigner la couleur sauvegardée ou la valeur par défaut
-    colorPicker.value = savedColor;
+    // Initialiser la valeur du color picker
+    colorPicker.value = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
 
     colorPicker.addEventListener('input', function(event) {
       const newColor = event.target.value;
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Afficher le color picker lors du clic sur le bouton
   if (colorPickerButton) {
-    colorPickerButton.style.backgroundColor = savedColor; // Définir la couleur initiale du bouton
+    colorPickerButton.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim(); // Définir la couleur initiale du bouton
     colorPickerButton.addEventListener('click', function() {
       if (colorPicker) {
         // Ouvrir le color picker natif
@@ -94,3 +94,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+export { getOppositeColor, darkenColor, injectStyles };

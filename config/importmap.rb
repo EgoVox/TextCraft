@@ -14,5 +14,6 @@ pin "user_menu_dropdown", to: "user_menu_dropdown.js"
 pin "switch_mode", to: "switch_mode.js"
 pin "color_picker", to: "color_picker.js"
 pin "color_utils", to: "color_utils.js"
+pin "init_color", to: "init_color.js"
 
 pin_all_from "app/javascript", under: "javascript"

@@ -12,6 +12,7 @@ import "user_menu_dropdown";
 import "switch_mode";
 import "color_picker";
 import "color_utils";
+import "init_color";
 
 import "trix"
 import "@rails/actiontext"
