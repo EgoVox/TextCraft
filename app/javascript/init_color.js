@@ -1,4 +1,4 @@
-import { applyPrimaryColor } from './color_picker';
+import { applyPrimaryColor } from 'color_picker';
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.remove('loading');
