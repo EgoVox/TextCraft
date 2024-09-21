@@ -1,11 +1,15 @@
 <div class="story-show-container">
   <!-- Détails de l'histoire -->
   <div class="story-details card-story-show">
+      <p><strong>Tags:</strong>
+        <% @story.tags.each do |tag| %>
+          <span class="badge badge-info"><%= tag.name %></span>
+        <% end %>
+      </p>
     <div class="story-header">
       <% if @story.cover_image.attached? %>
         <%= image_tag url_for(@story.cover_image), class: "story-cover-large" %>
       <% end %>
-
       <div class="story-info">
         <h1 class="story-title"><%= @story.title %></h1>
         <p class="story-description"><%= @story.description %></p>

@@ -5,7 +5,7 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :description, "Description", class: 'form-label' %>
+    <%= form.label :description, "Description", class: 'form-label', for: "description" %>
 <%= form.text_area :description, maxlength: 500, class: 'form-control input-field-desc', id: 'description' %>
 <p id="charCount"></p>
 
@@ -27,6 +27,9 @@
     textarea.addEventListener('input', updateCharCount);
   });
 </script>
+  </div>
+  <%= form.label :tag_ids, "Tags" %>
+  <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, { multiple: true, class: "form-control", name: "story[tag_ids][]", id: "story_tag_ids" } %>
   </div>
 
   <div class="form-group">

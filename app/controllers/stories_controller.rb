@@ -39,6 +39,7 @@ class StoriesController < ApplicationController
 
   def create
     @story = current_user.stories.build(story_params)
+
     if @story.save
       redirect_to @story, notice: 'L\'histoire a été créée avec succès.'
     else
@@ -50,9 +51,16 @@ class StoriesController < ApplicationController
   end
 
   def update
-    if @story.update(story_params)
+    # Charge l'histoire existante
+    @story = Story.find_by!(slug: params[:id])
+
+    # Assigner les nouveaux attributs à l'histoire existante
+    @story.assign_attributes(story_params)
+
+    if @story.save
       redirect_to @story, notice: 'L\'histoire a été mise à jour avec succès.'
     else
+      Rails.logger.debug "Erreurs : #{@story.errors.full_messages.join(", ")}"
       render :edit
     end
   end
@@ -69,6 +77,6 @@ class StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:story).permit(:title, :description, :category_id, :cover_image_url)
+    params.require(:story).permit(:title, :description, :category_id, :cover_image_url, tag_ids: [])
   end
 end

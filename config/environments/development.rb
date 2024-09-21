@@ -64,6 +64,8 @@ Rails.application.configure do
   # config/environments/development.rb
   config.active_storage.service = :local
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
@@ -75,4 +77,15 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'example.com',
+  user_name:            '<your_email>',
+  password:             '<your_password>',
+  authentication:       'plain',
+  enable_starttls_auto: true
+}
 end

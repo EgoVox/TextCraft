@@ -13,7 +13,8 @@ import "switch_mode";
 import "color_picker";
 import "color_utils";
 import "init_color";
-import "carousel"
+import "carousel";
+import "tag_limit";
 
 import "trix"
 import "@rails/actiontext"
