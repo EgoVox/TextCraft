@@ -1,4 +1,6 @@
 class Story < ApplicationRecord
+  include PgSearch::Model
+
   has_one_attached :cover_image
 
   belongs_to :user
@@ -21,6 +23,16 @@ class Story < ApplicationRecord
   before_validation :generate_slug, on: :create
 
   validates :cover_image_url, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), message: 'doit être une URL valide' }, allow_blank: true
+
+  pg_search_scope :search_by_title_description_and_tags,
+                against: [:title, :description],
+                associated_against: {
+                  tags: [:name]
+                },
+                using: {
+                  tsearch: { prefix: true } # Le préfixe permet de rechercher des mots partiels
+                }
+
 
   def to_param
     slug

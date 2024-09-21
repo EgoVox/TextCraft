@@ -2,7 +2,15 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_story, only: [:show, :edit, :update, :destroy]
 
+
   def index
+
+    if params[:query].present?
+      @stories = Story.search_by_title_description_and_tags(params[:query])
+    else
+      @stories = Story.joins(:chapters).distinct.order(updated_at: :desc).limit(8)
+    end
+
     if user_signed_in?
       @read_stories = Story.joins(:reads)
                           .where(reads: { user_id: current_user.id })
@@ -68,6 +76,14 @@ class StoriesController < ApplicationController
   def destroy
     @story.destroy
     redirect_to stories_url, notice: 'L\'histoire a été supprimée avec succès.'
+  end
+
+  def search
+    if params[:query].present?
+      @stories = Story.search_by_title_description_and_tags(params[:query])
+    else
+      @stories = Story.all
+    end
   end
 
   private

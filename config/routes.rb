@@ -48,6 +48,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'search', to: 'stories#search', as: 'search_stories'
+
   # Pages statiques
   get 'privacy', to: 'pages#privacy'
   get 'terms', to: 'pages#terms'

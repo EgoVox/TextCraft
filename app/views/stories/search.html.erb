@@ -1,0 +1,41 @@
+<div class="layout-container search-page">
+    <div class="search-results-container">
+        <div class="search-results section">
+            <h1 class="section-title">Résultats de la recherche</h1>
+            <% if @stories.any? %>
+                <div class="carousel-container">
+                    <button class="carousel-button left" onclick="scrollCarousel('left', 'search-carousel')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="carousel" id="search-carousel">
+                        <% @stories.each do |story| %>
+                            <div class="carousel-item card-index">
+                                <% if story.cover_image_url.present? %>
+                                    <%= image_tag story.cover_image_url, class: "card-index__image" %>
+                                <% else %>
+                                    <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card-index__image") %>
+                                <% end %>
+                                <div class="card-index__overlay">
+                                    <div class="card-index__header">
+                                        <h3 class="card-index__title_main">
+                                            <%= link_to story.title, story_path(story) %>
+                                        </h3>
+                                        <span class="card-index__tagline">par <%= story.user.username %></span>
+                                    </div>
+                                    <div class="card-index__description-container">
+                                        <p class="card-index__description"><%= story.description.truncate(100) %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                    <button class="carousel-button right" onclick="scrollCarousel('right', 'search-carousel')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            <% else %>
+                <p class="no-results">Aucune histoire trouvée pour "<%= params[:query] %>".</p>
+            <% end %>
+        </div>
+    </div>
+</div>

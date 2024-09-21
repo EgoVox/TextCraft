@@ -49,6 +49,17 @@
               <label for="primaryColorPicker"></label>
               <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="<%= @user_color %>">
             </div>
+
+            <%= form_with url: search_stories_path, method: :get, local: true, class: "tag-search-form" do %>
+              <div class="form-group">
+                <%= label_tag :query, "Rechercher des histoires" %>
+                <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: "Recherche par titre, description ou tags" %>
+              </div>
+              <div class="form-group">
+                <%= submit_tag 'Rechercher', class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+
           </div>
 
           <!-- Section droite : Menu utilisateur -->
