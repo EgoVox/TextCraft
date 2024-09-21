@@ -1,165 +1,114 @@
 @import 'base/variables';
 
-/* Conteneur de la carousel */
 .carousel-container {
   overflow: hidden;
   width: 100%;
   position: relative;
+  display: flex; // Afficher les éléments en flex pour les aligner correctement
+  align-items: center;
   padding: 1.25rem 0;
-  /* Utilisation de rem pour le padding */
 }
 
-/* Carousel avec défilement fluide */
 .carousel {
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: scroll;
+  overflow-x: auto; // Permet le défilement horizontal
   scroll-behavior: smooth;
-  gap: 1.25rem;
-  /* Utilisation de rem pour l'espacement */
+  gap: 1rem; // Espacement entre les éléments
 }
 
-/* Éléments de la carousel */
 .carousel-item {
-  flex: 0 0 auto;
-  min-width: 9.375rem;
-  /* Utilisation de rem pour la largeur minimale */
-  max-width: 18.75rem;
-  /* Utilisation de rem pour la largeur maximale */
-  margin: 0 0.625rem;
-  /* Utilisation de rem pour la marge */
-  text-align: center;
+  flex: 0 0 300px; // Augmenter la largeur des cartes à 300px (ou ajuster selon les besoins)
+  max-width: 300px; // Assurer que la largeur maximale des cartes soit 300px
   background-color: $card-background-color;
   border-radius: $card-border-radius;
   box-shadow: $box-shadow-light;
+  margin-right: 1rem; // Espacement entre les éléments
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   .dark-mode & {
     background-color: $dark-card-background-color;
     box-shadow: $dark-box-shadow-light;
   }
+}
 
-  @media (max-width: 768px) {
-    min-width: 7.5rem;
-    /* Réduction de la largeur minimale sur petits écrans */
+/* Ajustements pour les écrans mobiles */
+@media (max-width: 768px) {
+  .carousel-item {
+    min-width: 90%;
+    /* Les éléments prennent presque toute la largeur */
+    max-width: 90%;
+    margin: 0 auto;
+    /* Centrer les éléments */
+  }
+
+  .story-cover {
+    height: 15rem;
+    /* Ajuster la hauteur en fonction de la largeur */
+  }
+
+  .card-index__image {
+    height: 200px;
+    /* Adapter la hauteur pour une meilleure lisibilité */
+  }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 480px) {
+  .carousel-item {
+    min-width: 100%;
+    /* Les éléments prennent toute la largeur */
     max-width: 100%;
-    /* Prend toute la largeur sur petits écrans */
-    margin: 0 0.5rem;
-    /* Réduction de la marge */
+    margin: 0 auto;
+    /* Centrer les éléments */
+  }
+
+  .story-cover {
+    height: 12rem;
+    /* Réduire la hauteur sur les petits écrans */
+  }
+
+  .card-index__image {
+    height: 180px;
+    /* Adapter la hauteur pour les très petits écrans */
   }
 }
 
-.carousel-item:hover {
-  transform: translateY(-0.3125rem);
-  /* Utilisation de rem pour la translation */
-  box-shadow: $box-shadow-hover;
-
-  .dark-mode & {
-    box-shadow: $dark-box-shadow-hover;
-  }
-}
-
-/* Image de couverture */
-.story-cover {
+.card-index__image {
   width: 100%;
-  height: 12.5rem;
-  /* Utilisation de rem pour la hauteur */
-  object-fit: cover;
+  height: 250px; // Ajuster la hauteur des images si nécessaire, par exemple 250px
+  object-fit: cover; // Assurer que l'image couvre toute la carte
   border-radius: $card-border-radius;
-  box-shadow: $box-shadow-light;
-
-  .dark-mode & {
-    box-shadow: $dark-box-shadow-light;
-  }
-
-  @media (max-width: 480px) {
-    height: 10rem;
-    /* Réduction de la hauteur sur petits écrans */
-  }
 }
 
-/* Informations sur l'histoire */
-.story-info {
-  padding: 0.75rem;
-  /* Utilisation de rem pour le padding */
-
-  @media (max-width: 480px) {
-    padding: 0.5rem;
-    /* Réduction du padding sur petits écrans */
-  }
-}
-
-.story-title {
-  font-weight: bold;
-  font-size: 1rem;
-  /* Utilisation de rem pour la taille de police */
-  color: $text-color;
-  font-family: $font-family-serif;
-  margin-bottom: 0.3125rem;
-  /* Utilisation de rem pour la marge inférieure */
-  text-decoration: none;
-  transition: color 0.3s ease;
-
-  .dark-mode & {
-    color: $dark-text-color;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.875rem;
-    /* Réduction de la taille de police sur petits écrans */
-  }
-}
-
-.story-title:hover {
-  color: $secondary-color;
-
-  .dark-mode & {
-    color: $dark-secondary-color;
-  }
-}
-
-small {
-  font-family: $font-family-serif;
-  font-weight: 300;
-  color: $text-muted-color;
-
-  .dark-mode & {
-    color: $dark-text-muted-color;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 0.75rem;
-    /* Réduction de la taille de police sur petits écrans */
-  }
-}
-
-/* Boutons de navigation de la carousel */
-.carousel-container .carousel-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.carousel-button {
   background-color: rgba(0, 0, 0, 0.5);
   color: $white-color;
   border: none;
-  padding: 0.625rem;
-  /* Utilisation de rem pour le padding */
-  cursor: pointer;
   border-radius: 50%;
-  z-index: 1;
-  transition: background-color 0.3s ease;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .dark-mode & {
     background-color: rgba(255, 255, 255, 0.5);
     color: $dark-white-color;
   }
 
-  @media (max-width: 480px) {
-    padding: 0.5rem;
-    /* Réduction du padding sur petits écrans */
+  &.left {
+    position: absolute;
+    left: 10px;
+  }
+
+  &.right {
+    position: absolute;
+    right: 10px;
   }
 }
 
-.carousel-container .carousel-button:hover {
+.carousel-button:hover {
   background-color: rgba(0, 0, 0, 0.7);
 
   .dark-mode & {
@@ -167,29 +116,9 @@ small {
   }
 }
 
-/* Bouton gauche */
-.carousel-container .carousel-button.left {
-  left: 0.625rem;
-  /* Utilisation de rem pour la position */
-}
-
-/* Bouton droit */
-.carousel-container .carousel-button.right {
-  right: 0.625rem;
-  /* Utilisation de rem pour la position */
-}
-
-/* Media query pour rendre la carousel plus responsive */
 @media (max-width: 768px) {
   .carousel-item {
-    min-width: 7.5rem;
-    /* Réduction de la largeur minimale sur petits écrans */
-    max-width: 100%;
-    /* Prend toute la largeur sur petits écrans */
-  }
-
-  .carousel-container .carousel-button {
-    padding: 0.5rem;
-    /* Réduction du padding des boutons sur petits écrans */
+    flex: 0 0 150px; // Réduire la taille des éléments pour les petits écrans
+    margin-right: 0.5rem;
   }
 }

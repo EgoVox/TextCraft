@@ -4,24 +4,32 @@
     <!-- Dernières histoires mises à jour -->
     <div class="last-updated section">
       <h1 class="section-title">Dernières histoires mises à jour</h1>
-      <div class="stories-grid">
-        <% @stories.each do |story| %>
-          <div class="card-index">
-            <% if story.cover_image_url.present? %>
-              <%= image_tag story.cover_image_url, class: "card-index__image" %>
-            <% else %>
-              <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card__image") %>
-            <% end %>
-            <div class="card-index__overlay">
-              <div class="card-index__header">
-                <h3 class="card-index__title_main"><%= link_to story.title, story_path(story) %></h3>
-                <span class="card-index__tagline">par <%= story.user.username %></span>
-                <p class="card-index__description"><%= story.description %></p>
+      <div class="carousel-container">
+        <button class="carousel-button left" onclick="scrollCarousel('left')">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carousel">
+          <% @stories.each do |story| %>
+            <div class="carousel-item card-index">
+              <% if story.cover_image_url.present? %>
+                <%= image_tag story.cover_image_url, class: "card-index__image" %>
+              <% else %>
+                <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card-index__image") %>
+              <% end %>
+              <div class="card-index__overlay">
+                <div class="card-index__header">
+                  <h3 class="card-index__title_main"><%= link_to story.title, story_path(story) %></h3>
+                  <span class="card-index__tagline">par <%= story.user.username %></span>
+                  <p class="card-index__description"><%= story.description %></p>
+                </div>
+                <div class="card-index__arrow">↑</div>
               </div>
-              <div class="card-index__arrow">↑</div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+        <button class="carousel-button right" onclick="scrollCarousel('right')">
+          <i class="fas fa-chevron-right"></i>
+        </button>
       </div>
     </div>
   </div>

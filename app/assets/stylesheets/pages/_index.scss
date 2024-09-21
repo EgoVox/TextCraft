@@ -2,7 +2,7 @@
 
 .layout-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 1.5rem;
   /* Réduction de l'espacement */
   padding: 1rem;
@@ -16,10 +16,11 @@
   }
 }
 
-.main-column,
-.sidebar-column {
-  gap: 1.25rem;
-  /* Réduction de l'espacement entre les sections */
+.main-column {
+  flex: 2; // Largeur de la colonne principale
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
 }
 
 .section {
