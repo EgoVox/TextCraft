@@ -1,0 +1,96 @@
+/* CSS spécifique pour la page de recherche */
+.search-page {
+  .layout-container {
+    display: flex;
+    justify-content: center;
+    /* Centre la section sur l'axe horizontal */
+    align-items: flex-start;
+    /* Aligne les enfants en haut */
+    padding: 2rem 0;
+    /* Espace autour du conteneur */
+  }
+
+  .search-results-container {
+    width: 100%;
+    max-width: 1200px;
+    /* Largeur maximale pour le centrage */
+    margin: 0 auto;
+    /* Centre horizontalement */
+    padding: 1.5rem;
+    background-color: $background-color;
+    border-radius: $card-border-radius;
+    box-shadow: $box-shadow-light;
+
+    .dark-mode & {
+      background-color: $dark-background-color;
+      box-shadow: $dark-box-shadow-light;
+    }
+
+    @media (max-width: 768px) {
+      padding: 1rem;
+      max-width: 95%;
+      /* Largeur maximale sur petits écrans */
+    }
+  }
+
+  .search-results {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    /* Centre le texte */
+  }
+
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centre le carousel horizontalement */
+    overflow: hidden;
+    /* Cache le débordement */
+  }
+
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    /* Défilement horizontal */
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+    max-width: 100%;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    min-width: 250px;
+    /* Largeur minimale des cartes */
+    max-width: 300px;
+    /* Largeur maximale des cartes */
+    margin: 0 1rem;
+    text-align: center;
+  }
+
+  .carousel-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: $white-color;
+    border: none;
+    padding: 0.75rem;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+
+    .dark-mode & {
+      background-color: rgba(255, 255, 255, 0.5);
+      color: $dark-white-color;
+    }
+  }
+
+  .no-results {
+    text-align: center;
+    font-size: 1.25rem;
+    color: $text-color;
+    padding: 2rem 0;
+
+    .dark-mode & {
+      color: $dark-text-color;
+    }
+  }
+}
