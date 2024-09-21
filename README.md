@@ -1,3 +1,10 @@
+Utilisez par exemple :
+
+Utilisateur salome.pierre@example.com confirmé / azerty
+Utilisateur rania.belaid@example.com confirmé / azerty
+
+pour le tester
+
 # TextCraft
 
 **TextCraft** est une plateforme d'écriture en ligne où les utilisateurs peuvent créer, lire et partager des histoires. Le projet est développé en Ruby on Rails et propose des fonctionnalités telles que l'analyse automatique de la qualité du texte, la gestion des chapitres, et l'évaluation de l'intérêt du récit via GPT.
