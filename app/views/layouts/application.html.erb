@@ -46,7 +46,7 @@
               </ul>
             </div>
             <div class="color-picker-container">
-              <label for="primaryColorPicker">Couleur principale :</label>
+              <label for="primaryColorPicker"></label>
               <input type="color" id="primaryColorPicker" name="primaryColorPicker" value="<%= @user_color %>">
             </div>
           </div>
@@ -94,11 +94,10 @@
             <li><%= button_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'menu-link btn btn-danger' %></li>
             <li>
               <!-- Label caché pour l'accessibilité -->
-              <label for="primaryColorPicker" class="visually-hidden">Choisir la couleur principale</label>
+              <label for="primaryColorPicker" class="visually-hidden"></label>
 
               <!-- Bouton personnalisé pour ouvrir le color picker -->
               <button id="color-picker-button" class="menu-link btn btn-secondary" onclick="document.getElementById('primaryColorPicker').click();">
-                Couleur principale
               </button>
 
               <!-- Input color caché -->

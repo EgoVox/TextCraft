@@ -7,6 +7,9 @@ class Story < ApplicationRecord
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, dependent: :destroy
 
+  has_many :story_tags, dependent: :destroy
+  has_many :tags, through: :story_tags
+
   has_many :reads, dependent: :destroy
   has_many :users_who_read, through: :reads, source: :user
 
