@@ -40,7 +40,7 @@
   <% end %>
 
     <!-- Section des commentaires -->
-<% if @story.user =! current_user.username %>
+<% if @story.user != current_user.username %>
   <!-- Formulaire pour ajouter un commentaire -->
   <%= form_with(model: [ @chapter, Comment.new ], local: true) do |form| %>
     <div class="field">
@@ -56,7 +56,6 @@
 <!-- Afficher les commentaires -->
 <h2>Commentaires</h2>
 <% @chapter.comments.each do |comment| %>
-  <p><%= comment.content %> - <%= comment.user.username %></p>
   <div class="comment">
     <p><strong><%= comment.user.username %> :</strong> <%= comment.content %></p>
     <% if comment.user == current_user %>

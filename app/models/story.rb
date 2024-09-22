@@ -47,6 +47,13 @@ class Story < ApplicationRecord
     likes.count
   end
 
+    # Méthode pour compter les commentaires de l'histoire et de ses chapitres
+  def total_comments_count
+    story_comments_count = comments.size
+    chapter_comments_count = chapters.joins(:comments).count('comments.id')
+    story_comments_count + chapter_comments_count
+  end
+
   private
 
   def generate_slug
