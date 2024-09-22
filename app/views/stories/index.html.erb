@@ -86,7 +86,7 @@
                 <div class="card-index__header">
                   <h3 class="card-index__title_main"><%= link_to story.title, story_path(story) %></h3>
                   <span class="card-index__tagline">par <%= story.user.username %></span>
-                  <span class="card-index__comments">💬 <%= story.comments_count %> commentaires</span>
+                  <span class="card-index__comments">💬 <%= story.total_comments_count %> commentaires</span>
                   <p class="card-index__description"><%= story.description %></p>
                 </div>
                 <div class="card-index__arrow">↑</div>
