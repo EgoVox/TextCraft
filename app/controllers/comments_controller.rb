@@ -34,6 +34,10 @@ class CommentsController < ApplicationController
     end
   end
 
+  def comments_count
+    comments.size
+  end
+
   private
 
   def set_commentable

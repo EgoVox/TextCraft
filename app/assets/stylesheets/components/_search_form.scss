@@ -1,0 +1,93 @@
+/* app/assets/stylesheets/search_form.scss */
+.tag-search-form {
+  .custom-search {
+    display: flex;
+    align-items: center;
+    background-color: $background-color;
+    border-radius: $border-radius;
+    padding: 0.5rem 1rem;
+    box-shadow: $box-shadow-light;
+    margin-left: 4rem;
+
+    /* Media queries pour les petits écrans */
+    @media (max-width: 768px) {
+      flex-direction: column;
+      /* Les éléments seront empilés verticalement */
+      padding: 1rem;
+      /* Augmenter l'espace interne pour les petits écrans */
+      margin-left: 0;
+      /* Supprimer la marge à gauche */
+    }
+
+    .search-label {
+      margin-right: 0.5rem;
+      font-size: 1rem;
+      color: $text-color;
+
+      /* Réduire la taille de la police sur les petits écrans */
+      @media (max-width: 768px) {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        /* Espace sous le label */
+      }
+    }
+
+    .search-input {
+      flex-grow: 1;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: $border-radius;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+      &:focus {
+        border-color: $primary-color;
+        box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        outline: none;
+      }
+
+      .dark-mode & {
+        background-color: $dark-background-color;
+        color: $dark-text-color;
+        border-color: $dark-secondary-color;
+      }
+
+      /* Pleine largeur sur petits écrans */
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        /* Espace sous l'input */
+      }
+    }
+
+    .search-button {
+      margin-left: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: $primary-color;
+      color: $white-color;
+      border: none;
+      border-radius: $border-radius;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $primary-hover-color;
+      }
+
+      .dark-mode & {
+        background-color: $dark-primary-color;
+
+        &:hover {
+          background-color: $dark-primary-hover-color;
+        }
+      }
+
+      /* Pleine largeur sur petits écrans */
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-left: 0;
+        /* Supprime la marge à gauche */
+      }
+    }
+  }
+}

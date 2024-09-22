@@ -43,6 +43,10 @@ class Story < ApplicationRecord
     read ? read.chapter : nil
   end
 
+  def likes_count
+    likes.count
+  end
+
   private
 
   def generate_slug

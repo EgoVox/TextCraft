@@ -2,43 +2,55 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_story, only: [:show, :edit, :update, :destroy]
 
-
   def index
-
+    # Si une recherche est effectuée, utiliser la méthode de recherche
     if params[:query].present?
       @stories = Story.search_by_title_description_and_tags(params[:query])
     else
+      # Par défaut, afficher les 8 dernières histoires mises à jour
       @stories = Story.joins(:chapters).distinct.order(updated_at: :desc).limit(8)
     end
 
     if user_signed_in?
+      # Histoires lues par l'utilisateur
       @read_stories = Story.joins(:reads)
-                          .where(reads: { user_id: current_user.id })
-                          .where.not(user_id: current_user.id)  # Exclure les histoires créées par l'utilisateur
-                          .group('stories.id')
-                          .order('MAX(reads.created_at) DESC')
-                          .limit(10)
+                           .where(reads: { user_id: current_user.id })
+                           .where.not(user_id: current_user.id) # Exclure les histoires de l'utilisateur
+                           .group('stories.id')
+                           .order('MAX(reads.created_at) DESC')
+                           .limit(8)
 
-      # Récupérer uniquement le dernier chapitre lu pour chaque histoire
-      @last_read_chapters = @read_stories.map do |story|
-        story.last_read_chapter_for_user(current_user)
-      end
+      # Histoires avec le plus de commentaires
+      @most_commented_stories = Story.joins(:comments)
+                                     .group('stories.id')
+                                     .order('COUNT(comments.id) DESC')
+                                     .limit(8)
+
+      # Histoires avec le plus de likes
+      @top_liked_stories = Story.left_joins(:likes)
+                                .group(:id)
+                                .order('COUNT(likes.id) DESC')
+                                .limit(10)
 
       # Récupérer les histoires créées par l'utilisateur
       @my_stories = current_user.stories.order(created_at: :desc)
 
-      # Afficher les 8 dernières histoires mises à jour (toutes les histoires)
-      @stories = Story.joins(:chapters).distinct.order(updated_at: :desc).limit(8)
-    # else
-    #   # Si l'utilisateur n'est pas connecté : collection vide
-    #   @read_stories = []
-    #   # Afficher les 5 dernières histoires mises à jour pour les utilisateurs non connectés
-    #   @stories = Story.order(updated_at: :desc).limit(5)
+      # Récupérer le dernier chapitre lu pour chaque histoire
+      @last_read_chapters = @read_stories.map do |story|
+        story.last_read_chapter_for_user(current_user)
+      end
+    else
+      # Si l'utilisateur n'est pas connecté, ces collections sont vides
+      @read_stories = []
+      @most_commented_stories = []
+      @top_liked_stories = []
+      @my_stories = []
+      @last_read_chapters = []
     end
   end
 
   def show
-    # @story = Story.find_by(slug: params[:id])  # Recherche l'histoire par son slug
+    # L'histoire est déjà chargée par le before_action :set_story
   end
 
   def new
@@ -56,11 +68,11 @@ class StoriesController < ApplicationController
   end
 
   def edit
+    # L'histoire est déjà chargée par le before_action :set_story
   end
 
   def update
-    # Charge l'histoire existante
-    @story = Story.find_by!(slug: params[:id])
+    # L'histoire est déjà chargée par le before_action :set_story
 
     # Assigner les nouveaux attributs à l'histoire existante
     @story.assign_attributes(story_params)
@@ -90,6 +102,9 @@ class StoriesController < ApplicationController
 
   def set_story
     @story = Story.find_by!(slug: params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "Histoire introuvable."
+    redirect_to stories_path
   end
 
   def story_params
