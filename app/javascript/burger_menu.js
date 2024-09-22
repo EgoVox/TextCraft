@@ -1,32 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const mobileMenu = document.getElementById('mobileMenu');
-  const colorPickerButton = document.getElementById('color-picker-button');
-  const primaryColorPicker = document.getElementById('primary-color-picker');
+
+    // Vérification de l'existence des éléments
+  console.log('mobileMenuToggle:', mobileMenuToggle);
+  console.log('mobileMenu:', mobileMenu);
 
   // Toggle du menu mobile
   if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', () => {
+    mobileMenuToggle.addEventListener('click', (event) => {
+      event.stopPropagation(); // Empêche la propagation de l'événement vers le document
       mobileMenu.classList.toggle('active');
     });
 
     // Fermer le menu lorsqu'on clique en dehors de celui-ci
     document.addEventListener('click', (event) => {
+      console.log('Document clicked'); // Vérifie si l'événement est capté
       if (!mobileMenu.contains(event.target) && !mobileMenuToggle.contains(event.target)) {
+        console.log('Closing menu'); // Vérifie si la condition est remplie
         mobileMenu.classList.remove('active');
       }
     });
-  }
 
-  // Afficher le color picker lorsqu'on clique sur le bouton
-  if (colorPickerButton && primaryColorPicker) {
-    colorPickerButton.addEventListener('click', () => {
-      primaryColorPicker.click();
-    });
-
-    // Changer la couleur principale lorsqu'une couleur est sélectionnée
-    primaryColorPicker.addEventListener('input', (event) => {
-      document.documentElement.style.setProperty('--primary-color', event.target.value);
+    // Empêcher la propagation des clics à l'intérieur du menu
+    mobileMenu.addEventListener('click', (event) => {
+      event.stopPropagation(); // Empêche la fermeture du menu lorsqu'on clique dedans
     });
   }
 });

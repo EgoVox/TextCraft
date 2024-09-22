@@ -15,12 +15,12 @@
   /* Masquer le menu par défaut */
   position: fixed;
   /* Fixer le menu sur l'écran */
-  top: 0;
+  top: 10;
   left: 0;
   /* Positionner le menu à gauche */
-  width: 100%;
+  width: 20rem;
   /* Prendre toute la largeur de l'écran */
-  height: 100%;
+  height: 30rem;
   /* Prendre toute la hauteur de l'écran */
   background-color: rgba(0, 0, 0, 0.8);
   /* Fond semi-transparent */
@@ -29,6 +29,7 @@
   overflow-y: auto;
   /* Permettre le défilement vertical */
   padding: $section-padding;
+  border-radius: 8px;
   /* Padding pour le contenu du menu */
 
   @media (min-width: 768px) {
