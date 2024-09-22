@@ -1,459 +1,459 @@
-@import 'base/variables';
+  @import 'base/variables';
 
-/* Section principale - Page d'accueil */
-.hero-section {
-  background: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
-  height: 60vh;
-  /* Réduction de la hauteur pour petits écrans */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  padding: 1.5rem;
-  /* Ajout d'un padding pour éviter le chevauchement des éléments */
-
-  .dark-mode & {
-    background: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
-  }
-
-  @media (min-width: 768px) {
-    height: 80vh;
-    /* Hauteur par défaut sur écrans moyens */
-  }
-}
-
-.story-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  /* Grille flexible */
-  gap: 1.25rem;
-  /* Utilisation de rem pour l'espacement */
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-    /* Grille par défaut sur écrans moyens */
-  }
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(2, 1fr);
-    /* Deux colonnes sur écrans moyens */
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    /* Une seule colonne sur petits écrans */
-  }
-}
-
-.hero-content {
-  color: $text-color;
-  text-align: center;
-  animation: floatAnimation 5s ease-in-out infinite;
-  padding: 1rem;
-  /* Ajout d'un padding pour éviter le chevauchement des éléments */
-
-  .dark-mode & {
-    color: $dark-text-color;
-  }
-}
-
-.hero-image {
-  max-width: 250px;
-  /* Réduction de la largeur pour petits écrans */
-  margin-bottom: 1.25rem;
-  /* Utilisation de rem pour la marge inférieure */
-  border-radius: $border-radius;
-  animation: shineAnimation 3s infinite alternate;
-
-  .dark-mode & {
-    opacity: 0.9;
-  }
-
-  @media (min-width: 768px) {
-    max-width: 400px;
-    /* Largeur par défaut sur écrans moyens */
-  }
-}
-
-@keyframes shineAnimation {
-  from {
-    opacity: 0.8;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
-}
-
-h1 {
-  font-size: 2rem;
-  /* Taille ajustée pour petits écrans */
-  font-family: $font-family-serif;
-  color: $primary-color;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
-  /* Ajout d'une marge inférieure */
-
-  .dark-mode & {
-    color: $dark-primary-color;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.1);
-  }
-
-  @media (min-width: 768px) {
-    font-size: 3rem;
-    /* Taille par défaut sur écrans moyens */
-  }
-}
-
-p {
-  font-size: 1rem;
-  /* Taille ajustée pour petits écrans */
-  color: $text-muted-color;
-  margin-bottom: 1rem;
-  /* Ajout d'une marge inférieure */
-
-  .dark-mode & {
-    color: $dark-text-muted-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.2rem;
-    /* Taille par défaut sur écrans moyens */
-  }
-}
-
-.cta-button {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  /* Utilisation de rem pour le padding */
-  background-color: $primary-color;
-  color: $white-color;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow-light;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-
-  .dark-mode & {
-    background-color: $dark-primary-color;
-    box-shadow: $dark-box-shadow-light;
-  }
-
-  @media (min-width: 768px) {
-    padding: 1rem 2rem;
-    /* Padding par défaut sur écrans moyens */
-  }
-}
-
-.cta-button:hover {
-  background-color: $primary-hover-color;
-  box-shadow: $box-shadow-hover;
-
-  .dark-mode & {
-    background-color: $dark-primary-hover-color;
-    box-shadow: $dark-box-shadow-hover;
-  }
-}
-
-/* Section des histoires populaires */
-.popular-stories {
-  padding: 1.5rem;
-  /* Utilisation de rem pour le padding */
-  background-color: $background-color;
-  text-align: center;
-
-  .dark-mode & {
-    background-color: $dark-background-color;
-  }
-
-  @media (min-width: 768px) {
-    padding: $section-padding;
-    /* Padding par défaut sur écrans moyens */
-  }
-}
-
-.popular-stories h2 {
-  font-size: 1.8rem;
-  /* Taille ajustée pour petits écrans */
-  font-family: $font-family-serif;
-  color: $text-color;
-  margin-bottom: 1.5rem;
-  /* Utilisation de rem pour la marge inférieure */
-
-  .dark-mode & {
-    color: $dark-text-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
-    /* Taille par défaut sur écrans moyens */
-    margin-bottom: 2rem;
-    /* Restaure la marge par défaut */
-  }
-}
-
-.category-name {
-  font-size: 1.25rem;
-  /* Taille ajustée pour petits écrans */
-  color: $primary-color;
-  text-align: center;
-  margin-bottom: 0.625rem;
-  /* Utilisation de rem pour la marge inférieure */
-
-  .dark-mode & {
-    color: $dark-primary-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
-    /* Taille par défaut sur écrans moyens */
-  }
-}
-
-.card-home {
-  position: relative;
-  display: block;
-  max-width: 100%;
-  /* Prend toute la largeur sur petits écrans */
-  margin: 0 auto;
-  border-radius: $card-border-radius;
-  overflow: hidden;
-  text-decoration: none;
-  background-color: transparent;
-
-  .dark-mode & {
-    background-color: $dark-card-background-color;
-  }
-
-  @media (min-width: 768px) {
-    max-width: 350px;
-    /* Limite la largeur sur écrans moyens */
-  }
-}
-
-.card-home__image {
-  width: 100%;
-  height: 300px;
-  /* Réduction de la hauteur pour petits écrans */
-  object-fit: cover;
-  transition: transform 0.3s ease;
-
-  @media (min-width: 768px) {
-    height: 450px;
-    /* Hauteur par défaut sur écrans moyens */
-  }
-}
-
-.card-home__image:hover {
-  transform: scale(1.05);
-}
-
-.card-home__overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: $white-color;
-  padding: 1rem;
-  /* Utilisation de rem pour le padding */
-  transition: height 0.3s ease-in-out;
-  height: 5rem;
-  /* Utilisation de rem pour la hauteur */
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  .dark-mode & {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: $dark-white-color;
-  }
-
-  @media (min-width: 768px) {
-    padding: 1.25rem;
-    /* Padding par défaut sur écrans moyens */
-    height: 90px;
-    /* Hauteur par défaut sur écrans moyens */
-  }
-}
-
-.card-home__title {
-  font-size: 1.5rem !important;
-  /* Taille ajustée pour petits écrans */
-  margin: 0;
-  color: $primary-color;
-
-  .dark-mode & {
-    color: $dark-primary-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.7rem !important;
-    /* Taille par défaut sur écrans moyens */
-  }
-}
-
-.card-home__title a {
-  color: $primary-color;
-  text-decoration: none;
-
-  .dark-mode & {
-    color: $dark-primary-color;
-  }
-}
-
-.card-home__tagline {
-  font-size: 1rem !important;
-  /* Taille ajustée pour petits écrans */
-  color: #ddd;
-
-  .dark-mode & {
-    color: $dark-tagline-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.2rem !important;
-    /* Taille par défaut sur écrans moyens */
-  }
-}
-
-.card-home__description {
-  font-size: 0.875rem !important;
-  /* Taille ajustée pour petits écrans */
-  margin-top: 0.625rem;
-  /* Utilisation de rem pour la marge supérieure */
-  display: none;
-  color: $white-color;
-
-  .dark-mode & {
-    color: $dark-white-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1rem !important;
-    /* Taille par défaut sur écrans moyens */
-    margin-top: 1rem;
-    /* Restaure la marge par défaut */
-  }
-}
-
-.card-home:hover .card-home__overlay {
-  height: 100%;
-  padding-top: 1.25rem;
-  /* Utilisation de rem pour le padding */
-}
-
-.card-home:hover .card-home__description {
-  display: block;
-}
-
-.card-home__arrow {
-  position: absolute;
-  bottom: 0.3125rem;
-  /* Utilisation de rem pour la position */
-  left: 10%;
-  transform: translateX(-50%);
-  font-size: 1.25rem;
-  /* Taille ajustée pour petits écrans */
-  color: $white-color;
-  transition: transform 0.3s ease;
-  animation: bounce 2s infinite;
-
-  .dark-mode & {
-    color: $dark-white-color;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
-    /* Taille par défaut sur écrans moyens */
-  }
-}
-
-@keyframes bounce {
-
-  0%,
-  100% {
-    transform: translate(-50%, 0);
-  }
-
-  50% {
-    transform: translate(-50%, 10px);
-  }
-}
-
-.card-home:hover .card-home__arrow {
-  transform: translate(-50%, -100%);
-}
-
-/* Media Queries supplémentaires pour les très petits écrans */
-@media (max-width: 480px) {
+  /* Section principale - Page d'accueil */
   .hero-section {
-    height: 50vh;
-    /* Réduction de la hauteur pour très petits écrans */
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecd2 100%);
+    height: 60vh;
+    /* Réduction de la hauteur pour petits écrans */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 1.5rem;
+    /* Ajout d'un padding pour éviter le chevauchement des éléments */
+
+    .dark-mode & {
+      background: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
+    }
+
+    @media (min-width: 768px) {
+      height: 80vh;
+      /* Hauteur par défaut sur écrans moyens */
+    }
   }
 
-  h1 {
-    font-size: 1.5rem;
-    /* Réduction supplémentaire de la taille du titre */
+  .story-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    /* Grille flexible */
+    gap: 1.25rem;
+    /* Utilisation de rem pour l'espacement */
+    max-width: 1200px;
+    margin: 0 auto;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+      /* Grille par défaut sur écrans moyens */
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+      /* Deux colonnes sur écrans moyens */
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      /* Une seule colonne sur petits écrans */
+    }
   }
 
-  p {
-    font-size: 0.875rem;
-    /* Réduction de la taille du texte */
-  }
+  .hero-content {
+    color: $text-color;
+    text-align: center;
+    animation: floatAnimation 5s ease-in-out infinite;
+    padding: 1rem;
+    /* Ajout d'un padding pour éviter le chevauchement des éléments */
 
-  .cta-button {
-    padding: 0.5rem 1rem;
-    /* Réduction du padding du bouton */
-    font-size: 0.875rem;
-    /* Réduction de la taille de police du bouton */
+    .dark-mode & {
+      color: $dark-text-color;
+    }
   }
 
   .hero-image {
-    max-width: 200px;
-    /* Réduction supplémentaire de la taille de l'image */
+    max-width: 250px;
+    /* Réduction de la largeur pour petits écrans */
+    margin-bottom: 1.25rem;
+    /* Utilisation de rem pour la marge inférieure */
+    border-radius: $border-radius;
+    animation: shineAnimation 3s infinite alternate;
+
+    .dark-mode & {
+      opacity: 0.9;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 400px;
+      /* Largeur par défaut sur écrans moyens */
+    }
+  }
+
+  @keyframes shineAnimation {
+    from {
+      opacity: 0.8;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes floatAnimation {
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    /* Taille ajustée pour petits écrans */
+    font-family: $font-family-serif;
+    color: $primary-color;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    /* Ajout d'une marge inférieure */
+
+    .dark-mode & {
+      color: $dark-primary-color;
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+      /* Taille par défaut sur écrans moyens */
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    /* Taille ajustée pour petits écrans */
+    color: $text-muted-color;
+    margin-bottom: 1rem;
+    /* Ajout d'une marge inférieure */
+
+    .dark-mode & {
+      color: $dark-text-muted-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.2rem;
+      /* Taille par défaut sur écrans moyens */
+    }
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    /* Utilisation de rem pour le padding */
+    background-color: $primary-color;
+    color: $white-color;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    .dark-mode & {
+      background-color: $dark-primary-color;
+      box-shadow: $dark-box-shadow-light;
+    }
+
+    @media (min-width: 768px) {
+      padding: 1rem 2rem;
+      /* Padding par défaut sur écrans moyens */
+    }
+  }
+
+  .cta-button:hover {
+    background-color: $primary-hover-color;
+    box-shadow: $box-shadow-hover;
+
+    .dark-mode & {
+      background-color: $dark-primary-hover-color;
+      box-shadow: $dark-box-shadow-hover;
+    }
+  }
+
+  /* Section des histoires populaires */
+  .popular-stories {
+    padding: 1.5rem;
+    /* Utilisation de rem pour le padding */
+    background-color: $background-color;
+    text-align: center;
+
+    .dark-mode & {
+      background-color: $dark-background-color;
+    }
+
+    @media (min-width: 768px) {
+      padding: $section-padding;
+      /* Padding par défaut sur écrans moyens */
+    }
   }
 
   .popular-stories h2 {
-    font-size: 1.5rem;
-    /* Réduction de la taille du titre */
+    font-size: 1.8rem;
+    /* Taille ajustée pour petits écrans */
+    font-family: $font-family-serif;
+    color: $text-color;
+    margin-bottom: 1.5rem;
+    /* Utilisation de rem pour la marge inférieure */
+
+    .dark-mode & {
+      color: $dark-text-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 2.5rem;
+      /* Taille par défaut sur écrans moyens */
+      margin-bottom: 2rem;
+      /* Restaure la marge par défaut */
+    }
   }
 
   .category-name {
-    font-size: 1rem;
-    /* Réduction de la taille de la catégorie */
+    font-size: 1.25rem;
+    /* Taille ajustée pour petits écrans */
+    color: $primary-color;
+    text-align: center;
+    margin-bottom: 0.625rem;
+    /* Utilisation de rem pour la marge inférieure */
+
+    .dark-mode & {
+      color: $dark-primary-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+      /* Taille par défaut sur écrans moyens */
+    }
+  }
+
+  .card-home {
+    position: relative;
+    display: block;
+    max-width: 100%;
+    /* Prend toute la largeur sur petits écrans */
+    margin: 0 auto;
+    border-radius: $card-border-radius;
+    overflow: hidden;
+    text-decoration: none;
+    background-color: transparent;
+
+    .dark-mode & {
+      background-color: $dark-card-background-color;
+    }
+
+    @media (min-width: 768px) {
+      max-width: 350px;
+      /* Limite la largeur sur écrans moyens */
+    }
+  }
+
+  .card-home__image {
+    width: 100%;
+    height: 300px;
+    /* Réduction de la hauteur pour petits écrans */
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    @media (min-width: 768px) {
+      height: 450px;
+      /* Hauteur par défaut sur écrans moyens */
+    }
+  }
+
+  .card-home__image:hover {
+    transform: scale(1.05);
+  }
+
+  .card-home__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: $white-color;
+    padding: 1rem;
+    /* Utilisation de rem pour le padding */
+    transition: height 0.3s ease-in-out;
+    height: 5rem;
+    /* Utilisation de rem pour la hauteur */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .dark-mode & {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: $dark-white-color;
+    }
+
+    @media (min-width: 768px) {
+      padding: 1.25rem;
+      /* Padding par défaut sur écrans moyens */
+      height: 90px;
+      /* Hauteur par défaut sur écrans moyens */
+    }
   }
 
   .card-home__title {
-    font-size: 1.25rem !important;
-    /* Réduction de la taille du titre */
+    font-size: 1.5rem !important;
+    /* Taille ajustée pour petits écrans */
+    margin: 0;
+    color: $primary-color;
+
+    .dark-mode & {
+      color: $dark-primary-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.7rem !important;
+      /* Taille par défaut sur écrans moyens */
+    }
+  }
+
+  .card-home__title a {
+    color: $primary-color;
+    text-decoration: none;
+
+    .dark-mode & {
+      color: $dark-primary-color;
+    }
+  }
+
+  .card-home__tagline {
+    font-size: 1rem !important;
+    /* Taille ajustée pour petits écrans */
+    color: #ddd;
+
+    .dark-mode & {
+      color: $dark-tagline-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.2rem !important;
+      /* Taille par défaut sur écrans moyens */
+    }
   }
 
   .card-home__description {
-    font-size: 0.75rem !important;
-    /* Réduction de la taille de la description */
+    font-size: 0.875rem !important;
+    /* Taille ajustée pour petits écrans */
+    margin-top: 0.625rem;
+    /* Utilisation de rem pour la marge supérieure */
+    display: none;
+    color: $white-color;
+
+    .dark-mode & {
+      color: $dark-white-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1rem !important;
+      /* Taille par défaut sur écrans moyens */
+      margin-top: 1rem;
+      /* Restaure la marge par défaut */
+    }
+  }
+
+  .card-home:hover .card-home__overlay {
+    height: 100%;
+    padding-top: 1.25rem;
+    /* Utilisation de rem pour le padding */
+  }
+
+  .card-home:hover .card-home__description {
+    display: block;
   }
 
   .card-home__arrow {
-    font-size: 1rem;
-    /* Réduction de la taille de la flèche */
+    position: absolute;
+    bottom: 0.3125rem;
+    /* Utilisation de rem pour la position */
+    left: 10%;
+    transform: translateX(-50%);
+    font-size: 1.25rem;
+    /* Taille ajustée pour petits écrans */
+    color: $white-color;
+    transition: transform 0.3s ease;
+    animation: bounce 2s infinite;
+
+    .dark-mode & {
+      color: $dark-white-color;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+      /* Taille par défaut sur écrans moyens */
+    }
   }
-}
+
+  @keyframes bounce {
+
+    0%,
+    100% {
+      transform: translate(-50%, 0);
+    }
+
+    50% {
+      transform: translate(-50%, 10px);
+    }
+  }
+
+  .card-home:hover .card-home__arrow {
+    transform: translate(-50%, -100%);
+  }
+
+  /* Media Queries supplémentaires pour les très petits écrans */
+  @media (max-width: 480px) {
+    .hero-section {
+      height: 50vh;
+      /* Réduction de la hauteur pour très petits écrans */
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      /* Réduction supplémentaire de la taille du titre */
+    }
+
+    p {
+      font-size: 0.875rem;
+      /* Réduction de la taille du texte */
+    }
+
+    .cta-button {
+      padding: 0.5rem 1rem;
+      /* Réduction du padding du bouton */
+      font-size: 0.875rem;
+      /* Réduction de la taille de police du bouton */
+    }
+
+    .hero-image {
+      max-width: 200px;
+      /* Réduction supplémentaire de la taille de l'image */
+    }
+
+    .popular-stories h2 {
+      font-size: 1.5rem;
+      /* Réduction de la taille du titre */
+    }
+
+    .category-name {
+      font-size: 1rem;
+      /* Réduction de la taille de la catégorie */
+    }
+
+    .card-home__title {
+      font-size: 1.25rem !important;
+      /* Réduction de la taille du titre */
+    }
+
+    .card-home__description {
+      font-size: 0.75rem !important;
+      /* Réduction de la taille de la description */
+    }
+
+    .card-home__arrow {
+      font-size: 1rem;
+      /* Réduction de la taille de la flèche */
+    }
+  }

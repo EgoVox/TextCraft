@@ -1,0 +1,7 @@
+<!-- app/views/shared/_search_form.html.erb -->
+<%= form_with url: search_stories_path, method: :get, local: true, class: "tag-search-form" do %>
+  <div class="custom-search">
+    <%= text_field_tag :query, params[:query], placeholder: "Recherche par titre, description ou tags", class: 'search-input' %>
+    <%= submit_tag 'Rechercher', class: 'search-button' %>
+  </div>
+<% end %>

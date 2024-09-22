@@ -1,6 +1,7 @@
 <div class="layout-container">
   <!-- Colonne principale -->
   <div class="main-column">
+
     <!-- Dernières histoires mises à jour -->
     <div class="last-updated section">
       <h1 class="section-title">Dernières histoires mises à jour</h1>
@@ -30,9 +31,76 @@
         <button class="carousel-button right" onclick="scrollCarousel('right')">
           <i class="fas fa-chevron-right"></i>
         </button>
-      </div>
-    </div>
-  </div>
+      </div> <!-- Fin du carousel-container pour les dernières histoires -->
+    </div> <!-- Fin de la section last-updated -->
+
+    <!-- Carousel des histoires les plus likées -->
+    <div class="top-liked-stories section">
+      <h1 class="section-title">Histoires les plus likées</h1>
+      <div class="carousel-container">
+        <button class="carousel-button left" onclick="scrollCarousel('left', 'top-liked-carousel')">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carousel" id="top-liked-carousel">
+          <% @top_liked_stories.each do |story| %>
+            <div class="carousel-item card-index">
+              <% if story.cover_image_url.present? %>
+                <%= image_tag story.cover_image_url, class: "card-index__image" %>
+              <% else %>
+                <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card-index__image") %>
+              <% end %>
+              <div class="card-index__overlay">
+                <div class="card-index__header">
+                  <h3 class="card-index__title_main"><%= link_to story.title, story_path(story) %></h3>
+                  <span class="card-index__tagline">par <%= story.user.username %></span>
+                  <span class="card-index__likes">❤️ <%= story.likes_count %> likes</span>
+                  <p class="card-index__description"><%= story.description %></p>
+                </div>
+                <div class="card-index__arrow">↑</div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <button class="carousel-button right" onclick="scrollCarousel('right', 'top-liked-carousel')">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div> <!-- Fin du carousel-container pour les histoires les plus likées -->
+    </div> <!-- Fin de la section top-liked-stories -->
+
+    <!-- Carousel des histoires avec le plus de commentaires -->
+    <div class="most-commented-stories section">
+      <h1 class="section-title">Histoires les plus commentées</h1>
+      <div class="carousel-container">
+        <button class="carousel-button left" onclick="scrollCarousel('left', 'most-commented-carousel')">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carousel" id="most-commented-carousel">
+          <% @most_commented_stories.each do |story| %>
+            <div class="carousel-item card-index">
+              <% if story.cover_image_url.present? %>
+                <%= image_tag story.cover_image_url, class: "card-index__image" %>
+              <% else %>
+                <%= image_tag("default.jpg", alt: "Couverture de #{story.title}", class: "card-index__image") %>
+              <% end %>
+              <div class="card-index__overlay">
+                <div class="card-index__header">
+                  <h3 class="card-index__title_main"><%= link_to story.title, story_path(story) %></h3>
+                  <span class="card-index__tagline">par <%= story.user.username %></span>
+                  <span class="card-index__comments">💬 <%= story.comments_count %> commentaires</span>
+                  <p class="card-index__description"><%= story.description %></p>
+                </div>
+                <div class="card-index__arrow">↑</div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        <button class="carousel-button right" onclick="scrollCarousel('right', 'most-commented-carousel')">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div> <!-- Fin du carousel-container pour les histoires les plus commentées -->
+    </div> <!-- Fin de la section most-commented-stories -->
+
+  </div> <!-- Fin de la colonne principale -->
 
   <!-- Colonne latérale -->
   <div class="sidebar-column">
@@ -84,5 +152,6 @@
         </div>
       </div>
     <% end %>
-  </div>
-</div>
+  </div> <!-- Fin de la colonne latérale -->
+
+</div> <!-- Fin de la layout-container -->

@@ -173,7 +173,7 @@ end
 
 def analyze_readability_with_gpt(content)
   client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-  prompt = "Analyse ce texte en tant que critique littéraire. Si le texte ne respecte pas les conventions littéraires de base, donne 'non' suivi des trois principales raisons détaillées et précises du refus (Comme la structure du texte et des dialogues, le vocabulaire non pertinent). Si le texte est acceptable, évalue les critères suivants : orthographe, grammaire, conjugaison, complexité du texte, vulgarité, et lisibilité générale. Donne une note globale sur 100 avec un feedback de 2 phrases maximum. Voici le texte : #{content}"
+  prompt = "Analyse ce texte en tant que critique littéraire. Si le texte ne respecte pas les conventions littéraires de base, donne 'non' suivi des trois principales raisons détaillées et précises du refus (Comme la structure du texte et des dialogues, le vocabulaire non pertinent). Si le texte est acceptable, évalue les critères suivants : orthographe, grammaire, conjugaison, complexité du texte, vulgarité (5 si pas de vulgarité, 0 si trop), et lisibilité générale. Donne une note globale sur 100 avec un feedback de 2 phrases maximum. Voici le texte : #{content}"
 
   begin
     response = client.chat(
