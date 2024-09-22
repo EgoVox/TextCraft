@@ -1,0 +1,11 @@
+<div class="container">
+  <h1 class="category-title">Liste des catégories</h1>
+  <ul class="category-list">
+    <% @categories.each do |category| %>
+      <li class="category-list-item">
+        <h2><%= link_to category.name, category_path(category), class: "category-link" %></h2>
+        <%= category.description %>
+      </li>
+    <% end %>
+  </ul>
+</div>

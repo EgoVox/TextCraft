@@ -100,11 +100,13 @@
   &.left {
     position: absolute;
     left: 10px;
+    z-index: 1;
   }
 
   &.right {
     position: absolute;
     right: 10px;
+    z-index: 1;
   }
 }
 

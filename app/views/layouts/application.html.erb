@@ -98,7 +98,6 @@
         <ul>
           <% if user_signed_in? %>
             <li><%= link_to 'Accueil', authenticated_root_path, class: 'menu-link btn btn-primary' %></li>
-            <li><%= link_to 'Histoires', stories_path, class: 'menu-link btn btn-primary' %></li>
             <li><%= link_to 'Catégories', categories_path, class: 'menu-link btn btn-primary' %></li>
             <li><%= link_to 'Mon Profil', user_path(current_user), class: 'menu-link btn btn-secondary' %></li>
             <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'menu-link btn btn-secondary' %></li>
@@ -120,8 +119,8 @@
             <li><%= link_to "S'inscrire", new_user_registration_path, class: 'menu-link btn', style: "background-color: #ff6f61" %></li>
           <% end %>
         </ul>
-
-                    <%= form_with url: search_stories_path, method: :get, local: true, class: "tag-search-form" do %>
+          <% if user_signed_in? %>
+            <%= form_with url: search_stories_path, method: :get, local: true, class: "tag-search-form" do %>
               <div class="form-group">
                 <%= label_tag :query, "Rechercher des histoires" %>
                 <%= text_field_tag :query, params[:query], class: 'form-control', placeholder: "Recherche par titre, description ou tags" %>
@@ -130,6 +129,7 @@
                 <%= submit_tag 'Rechercher', class: 'btn btn-primary' %>
               </div>
             <% end %>
+          <% end %>
       </nav>
     </header>
 
