@@ -2,6 +2,7 @@
   <!-- Titre et contenu du chapitre -->
   <div class="chapter-details card">
     <h1 class="chapter-title"><%= @chapter.title %></h1>
+    <p>Temps de lecture estimé : <%= @chapter.reading_time %></p>
     <div class="chapter-content">
       <div class="chapter-content">
         <%= @chapter.content %>
