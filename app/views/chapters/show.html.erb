@@ -42,15 +42,19 @@
     <!-- Section des commentaires -->
 <% if @story.user != current_user.username %>
   <!-- Formulaire pour ajouter un commentaire -->
-  <%= form_with(model: [ @chapter, Comment.new ], local: true) do |form| %>
-    <div class="field">
-      <%= form.label :content, "Ajouter un commentaire" %><br>
-      <%= form.text_area :content %>
-    </div>
-    <div class="actions">
-      <%= form.submit "Poster le Commentaire" %>
-    </div>
-  <% end %>
+  <div class="comment-form card">
+    <h2 class="section-title">Ajouter un commentaire</h2>
+    <%= form_with(model: [ @chapter, Comment.new ], local: true, class: 'comment-form') do |form| %>
+      <div class="form-group">
+        <%= form.label :content, "Votre commentaire", class: 'form-label' %>
+        <%= form.text_area :content, class: 'form-control', rows: 3 %>
+      </div>
+      <div class="form-actions">
+        <%= form.submit "Poster le commentaire", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+</div>
+
 <% end %>
 
 <!-- Afficher les commentaires -->

@@ -59,15 +59,12 @@
 
       <ul class="comments-list">
         <% @story.comments.each do |comment| %>
-          <li class="comment-card">
-            <div class="comment-header">
-              <strong><%= comment.user.username %>:</strong>
+          <div class="comment">
+            <p><strong><%= comment.user.username %> :</strong> <%= comment.content %></p>
               <% if current_user == comment.user %>
                 <%= button_to '🗑️ Supprimer', story_comment_path(@story, comment), method: :delete, data: { confirm: 'Es-tu sûr ?', turbo: false }, class: 'btn btn-danger btn-sm' %>
               <% end %>
-            </div>
-            <p class="comment-content"><%= comment.content %></p>
-          </li>
+          </div>
         <% end %>
       </ul>
     </div>
