@@ -21,6 +21,19 @@ class Chapter < ApplicationRecord
     story.chapters.where("position > ?", self.position).order(position: :asc).first
   end
 
+  def reading_time
+    word_count = self.content.to_plain_text.split.size
+    minutes = (word_count / 200.0).ceil
+
+    if minutes < 60
+      "#{minutes} minute#{'s' if minutes > 1}"
+    else
+      hours = minutes / 60
+      remaining_minutes = minutes % 60
+      "#{hours} hour#{'s' if hours > 1} #{remaining_minutes} minute#{'s' if remaining_minutes > 1}"
+    end
+  end
+
   private
 
   def update_story_timestamp
