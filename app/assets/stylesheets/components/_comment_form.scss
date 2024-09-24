@@ -1,0 +1,40 @@
+.comment-form {
+  background-color: var(--primary-color);
+  /* Utiliser la couleur principale du site */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.comment-form .form-group {
+  margin-bottom: 16px;
+}
+
+.comment-form .form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--opposite-color);
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.comment-form .btn {
+  background-color: var(--primary-color);
+  color: var(--opposite-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.comment-form .btn:hover {
+  background-color: var(--opposite-color);
+  color: var(--primary-color);
+}
+
+.comment-form .btn {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
