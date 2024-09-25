@@ -23,12 +23,27 @@
     </div>
   </div>
 
-  <div>
-    <% if @story.cover_image_url.present? %>
-      <%= image_tag @story.cover_image_url, class: "story-show-img" %>
-    <% else %>
-      <%= image_tag("default.jpg", alt: "Couverture de #{@story.title}", class: "story-show-img") %>
-    <% end %>
+    <div class="story-show-container">
+      <% if @story.cover_image_url.present? %>
+      <div class="story-show-centered-container">
+        <div class="story-cover-container">
+          <%= image_tag @story.cover_image_url, class: "story-show-img" %>
+          <div class="like-button-container">
+            <% if @story.likes.exists?(user: current_user) %>
+              <%= button_to story_unlike_path(@story), method: :delete, class: 'like-button liked', data: { turbo: false } do %>
+                <i class="fas fa-heart"></i> <!-- Icône de cœur rempli pour like -->
+              <% end %>
+            <% else %>
+              <%= button_to story_like_path(@story), method: :post, class: 'like-button', data: { turbo: false } do %>
+                <i class="far fa-heart"></i> <!-- Icône de cœur vide pour unlike -->
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <%= image_tag("default.jpg", alt: "Couverture de #{@story.title}", class: "story-show-img") %>
+      <% end %>
+    </div>
   </div>
 
   <!-- Liste des chapitres -->
@@ -68,18 +83,6 @@
         <% end %>
       </ul>
     </div>
-
-  <!-- Likes -->
-  <div class="likes-section card">
-    <h2>❤️ Likes</h2>
-    <% if current_user %>
-      <% if @story.likes.exists?(user: current_user) %>
-        <%= button_to '❤️ Ne plus aimer', story_unlike_path(@story), method: :delete, data: { turbo: false }, class: 'btn btn-danger' %>
-      <% else %>
-        <%= button_to '❤️ Aimer', story_like_path(@story), method: :post, data: { turbo: false }, class: 'btn btn-primary' %>
-      <% end %>
-    <% end %>
-  </div>
   <% end %>
 
   <div class="back-link">
