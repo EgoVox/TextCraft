@@ -91,7 +91,6 @@
   }
 
   .story-show-img {
-    margin: 0 auto;
     display: block;
     width: 100%;
     /* Prenez toute la largeur sur les petits écrans */
@@ -107,6 +106,46 @@
     .dark-mode & {
       box-shadow: $dark-box-shadow-hover;
     }
+  }
+
+  .story-show-centered-container{
+    display: flex;
+    justify-content: center;
+  }
+
+  .story-cover-container {
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center !important;
+  }
+
+  .like-button-container {
+    position: absolute;
+    // top: 20rem;
+    /* Ajuste la position selon tes besoins */
+    right: 50%;
+    /* Ajuste la position selon tes besoins */
+    background-color: transparent;
+  }
+
+  .like-button {
+    border: none;
+    background-color: transparent;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    /* Bord blanc initial */
+  }
+
+  .like-button.liked {
+    color: red;
+    /* Couleur rouge lorsqu'il est liké */
+  }
+
+  .like-button:hover {
+    color: red;
+    /* Couleur rouge au survol */
   }
 
   .chapters-section {

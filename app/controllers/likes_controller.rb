@@ -5,9 +5,15 @@ class LikesController < ApplicationController
   def create
     @like = @story.likes.build(user: current_user)
     if @like.save
-      redirect_to @story, notice: 'Vous aimez cette histoire'
+      respond_to do |format|
+        format.js # like.js.erb
+        format.html { redirect_to @story, notice: 'Vous aimez cette histoire' }
+      end
     else
-      redirect_to @story, alert: 'Un problème est survenu lors de la sauvegarde de votre like'
+      respond_to do |format|
+        format.js { render 'error.js.erb' }
+        format.html { redirect_to @story, alert: 'Un problème est survenu lors de la sauvegarde de votre like' }
+      end
     end
   end
 
@@ -15,9 +21,15 @@ class LikesController < ApplicationController
     @like = @story.likes.find_by(user: current_user)
     if @like
       @like.destroy
-      redirect_to @story, notice: 'Vous n\'aimez plus cette histoire'
+      respond_to do |format|
+        format.js # unlike.js.erb
+        format.html { redirect_to @story, notice: 'Vous n\'aimez plus cette histoire' }
+      end
     else
-      redirect_to @story, alert: 'Un problème est survenu lors de la suppression de votre like'
+      respond_to do |format|
+        format.js { render 'error.js.erb' }
+        format.html { redirect_to @story, alert: 'Un problème est survenu lors de la suppression de votre like' }
+      end
     end
   end
 
