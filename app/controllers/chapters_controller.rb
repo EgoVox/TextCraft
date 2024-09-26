@@ -285,8 +285,9 @@ end
     lisibility_feedback = analysis_result[:readability_feedback]
 
     # Si le score est -333, afficher uniquement les raisons du refus
-    if score == -333
+    if score == -333 || score <= 0
       return <<~FEEDBACK
+        <i class="fa-solid fa-circle-xmark" style="color: #FF0000;"></i>
         <strong>Malheureusement, votre chapitre ne peut être publié en l'état.</strong><br>
         #{lisibility_feedback}<br>
       FEEDBACK
@@ -295,6 +296,7 @@ end
     # Si le score n'est pas -333, générer le message habituel
     if score >= 70
       <<~FEEDBACK
+        <i class="fa-solid fa-check" style="color: #00FF00;"></i>
         <strong>Félicitations, votre chapitre peut être publié en l'état.</strong><br>
         Votre score est de #{score} / 100.<br><br>
         <strong>Suggestions :</strong><br>
@@ -302,8 +304,9 @@ end
         - Qualité : #{analysis_result[:chapter_quality_feedback]}<br>
         - Conseils : #{analysis_result[:detailed_feedback]}
       FEEDBACK
-    elsif score >= 50
+    elsif score <= 50 && score > 0
       <<~FEEDBACK
+        <i class="fa-solid fa-gear" style="color: #FF8000;"></i>
         <strong>Votre chapitre nécessite des améliorations avant d'être publié.</strong><br>
         Votre score est de #{score} / 100.<br><br>
         <strong>À corriger :</strong><br>
@@ -313,6 +316,7 @@ end
       FEEDBACK
     else
       <<~FEEDBACK
+        <i class="fa-solid fa-gear" style="color: #FF8000;"></i>
         <strong>Malheureusement, votre chapitre ne peut être publié en l'état.</strong><br>
         Votre score est de #{score} / 100, ce qui est trop bas.<br><br>
         <strong>Améliorations :</strong><br>
