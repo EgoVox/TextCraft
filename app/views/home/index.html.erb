@@ -24,7 +24,11 @@
 
     <section class="popular-stories">
       <h2>Histoires Populaires par Catégorie</h2>
-      <div class="carousel" id="search-carousel">
+      <div class="carousel-container" id="search-carousel">
+        <button class="carousel-button left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+      <div class="carousel">
         <% @categories.each do |category_data| %>
         <div class="carousel-item card-index">
 
@@ -49,26 +53,15 @@
               <div class="card-home__arrow">⇧</div>
             </div>
           </div>
-      </div>
+        </div>
       <% end %>
       </div>
+
+        <button class="carousel-button right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+      </div>
     </section>
-
-    <div class="triptik-container">
-      <h1>Simple comme bonjour</h1>
-
-      <div class="first triptik-card">
-        <strong><h2>Clic</h2></strong>
-        <%= image_tag("inscrire.png", class: "triptik-img") %>
-      </div>
-      <div class="second triptik-card">
-        <strong><h2>Lis</h2></strong>
-        <%= image_tag("lire.png", class: "triptik-img") %>
-      </div>
-      <div class="third triptik-card">
-        <strong><h2>Ecris</h2></strong>
-        <%= image_tag("écrire.png", class: "triptik-img") %>
-      </div>
-    </div>
   </body>
 </html>
