@@ -5,10 +5,10 @@
     <!-- Dernières histoires mises à jour -->
     <div class="last-updated section">
       <h1 class="section-title">Dernières histoires mises à jour</h1>
-      <div class="carousel-container">
-        <button class="carousel-button left" onclick="scrollCarousel('left')">
-          <i class="fas fa-chevron-left"></i>
-        </button>
+        <div class="carousel-container" id="last-updated-carousel">
+          <button class="carousel-button left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
         <div class="carousel">
           <% @stories.each do |story| %>
             <div class="carousel-item card-index">
@@ -28,7 +28,7 @@
             </div>
           <% end %>
         </div>
-        <button class="carousel-button right" onclick="scrollCarousel('right')">
+        <button class="carousel-button right">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div> <!-- Fin du carousel-container pour les dernières histoires -->
@@ -37,11 +37,11 @@
     <!-- Carousel des histoires les plus likées -->
     <div class="top-liked-stories section">
       <h1 class="section-title">Histoires les plus likées</h1>
-      <div class="carousel-container">
-        <button class="carousel-button left" onclick="scrollCarousel('left', 'top-liked-carousel')">
+        <div class="carousel-container" id="top-liked-carousel">
+          <button class="carousel-button left">
           <i class="fas fa-chevron-left"></i>
         </button>
-        <div class="carousel" id="top-liked-carousel">
+        <div class="carousel">
           <% @top_liked_stories.each do |story| %>
             <div class="carousel-item card-index">
               <% if story.cover_image_url.present? %>
@@ -61,7 +61,7 @@
             </div>
           <% end %>
         </div>
-        <button class="carousel-button right" onclick="scrollCarousel('right', 'top-liked-carousel')">
+          <button class="carousel-button right">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div> <!-- Fin du carousel-container pour les histoires les plus likées -->
@@ -70,11 +70,11 @@
     <!-- Carousel des histoires avec le plus de commentaires -->
     <div class="most-commented-stories section">
       <h1 class="section-title">Histoires les plus commentées</h1>
-      <div class="carousel-container">
-        <button class="carousel-button left" onclick="scrollCarousel('left', 'most-commented-carousel')">
+      <div class="carousel-container" id="most-commented-carousel">
+          <button class="carousel-button left">
           <i class="fas fa-chevron-left"></i>
         </button>
-        <div class="carousel" id="most-commented-carousel">
+        <div class="carousel">
           <% @most_commented_stories.each do |story| %>
             <div class="carousel-item card-index">
               <% if story.cover_image_url.present? %>
@@ -94,7 +94,7 @@
             </div>
           <% end %>
         </div>
-        <button class="carousel-button right" onclick="scrollCarousel('right', 'most-commented-carousel')">
+        <button class="carousel-button right">
           <i class="fas fa-chevron-right"></i>
         </button>
       </div> <!-- Fin du carousel-container pour les histoires les plus commentées -->
