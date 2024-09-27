@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const maxTags = 5; // Par exemple, 5 tags maximum
+  const maxTags = 8; // Par exemple, 8 tags maximum
   const tagSelect = document.querySelector('select[multiple]');
   const page = document.body.getAttribute('data-page');
 

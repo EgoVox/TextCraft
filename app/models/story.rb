@@ -65,6 +65,6 @@ class Story < ApplicationRecord
   end
 
   def validate_tags
-    errors.add(:tags, "doit contenir entre 1 et 5 tags.") if tags.size > 5
+    errors.add(:tags, "doit contenir entre 1 et 8 tags.") if tags.size > 5
   end
 end

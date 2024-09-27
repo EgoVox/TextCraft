@@ -101,7 +101,7 @@ class StoriesController < ApplicationController
 
   def analyze_story_summary(description)
     client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-    prompt = "Extrait uniquement 5 mots-clés de cette histoire et sépare-les par des virgules : #{description}"
+    prompt = "Imagine 10 mots-clés pertinents pour ce résumé d'histoire et sépare-les par des virgules : #{description}"
 
     begin
       response = client.chat(
