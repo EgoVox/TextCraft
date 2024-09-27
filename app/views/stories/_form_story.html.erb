@@ -37,7 +37,7 @@
 
   <!-- Bouton pour analyser l'histoire -->
   <div class="form-group">
-    <%= link_to "Analyser l'histoire", analyze_story_path(@story), remote: true, method: :post, class: 'btn btn-outline-primary btn-analyze' %>
+    <%= link_to "Analyser le résumé pour obtenir des tags", analyze_story_path(@story), remote: true, method: :post, class: 'btn btn-outline-primary btn-analyze' %>
   </div>
 
   <div id="suggested-tags" class="form-group">
