@@ -1,0 +1,47 @@
+.presentation-container {
+  display: flex;
+  justify-content: center;
+  /* Centre le contenu horizontalement */
+  align-items: center;
+  /* Centre le contenu verticalement */
+  gap: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    /* Centre le contenu dans chaque cellule */
+    align-items: center;
+    /* Centre le contenu verticalement */
+  }
+}
+
+.presentation-section {
+  display: inline-block;
+  width: 50%;
+  padding: 1rem;
+  background-color: $background-color;
+  border-radius: $card-border-radius;
+  box-shadow: $box-shadow-light;
+  margin: 2rem auto;
+  /* Centre l'élément horizontalement */
+  font-size: 1.2rem;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    /* Réduit la largeur sur les petits écrans pour l'ajuster */
+    margin: 1rem auto;
+    /* Centre l'élément horizontalement */
+  }
+}
+
+.presentation-section strong {
+  color: $primary-color;
+}
+
+.presentation-section ul>li {
+  list-style-type: none;
+  font-size: 1.2rem;
+}

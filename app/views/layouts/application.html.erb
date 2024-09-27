@@ -70,7 +70,7 @@
       <% else %>
         <nav class="nav-container">
           <div class="nav-left">
-            <%= link_to 'TextCraft', unauthenticated_root_path, class: 'logo-link' %>
+            <%= link_to 'TextCraft', presentation_path, class: 'logo-link' %>
           </div>
           <div class="nav-right">
             <%= link_to 'Se connecter', new_user_session_path, class: 'btn btn-login' %>
@@ -107,7 +107,7 @@
               <input type="color" id="primaryColorPicker" value="<%= current_user&.primary_color || '#ff6f61' %>" style="display:none;">
             </li>
           <% else %>
-            <li><%= link_to 'TextCraft', unauthenticated_root_path, class: 'menu-link btn btn-primary' %></li>
+            <li><%= link_to 'TextCraft', presentation_path, class: 'menu-link btn btn-primary' %></li>
             <li><%= link_to 'Se connecter', new_user_session_path, class: 'menu-link btn', style: "background-color: #ff6f61" %></li>
             <li><%= link_to "S'inscrire", new_user_registration_path, class: 'menu-link btn', style: "background-color: #ff6f61" %></li>
           <% end %>
