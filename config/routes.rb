@@ -34,6 +34,12 @@ Rails.application.routes.draw do
     delete 'unlike', to: 'likes#destroy'
   end
 
+  resources :stories, param: :id do
+    member do
+      post 'analyze', to: 'stories#analyze'
+    end
+  end
+
   resources :chapters do
     resources :comments, only: [:create, :destroy]
   end

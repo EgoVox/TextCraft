@@ -26,8 +26,41 @@
     // Mettre à jour le compteur à chaque fois que l'utilisateur tape dans le champ
     textarea.addEventListener('input', updateCharCount);
   });
+
+  // Ajoute un événement pour masquer les tags existants lors de l'analyse
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.btn-analyze').addEventListener('click', function() {
+    document.getElementById("existing-tags").style.display = 'none';
+  });
+});
 </script>
+
+  <!-- Bouton pour analyser l'histoire -->
+  <div class="form-group">
+    <%= link_to "Analyser l'histoire", analyze_story_path(@story), remote: true, method: :post, class: 'btn btn-outline-primary btn-analyze' %>
   </div>
+
+  <div id="suggested-tags" class="form-group">
+  <!-- Les tags suggérés apparaîtront ici -->
+</div>
+
+  <!-- Tags suggérés -->
+  <div id="suggested-tags" class="form-group">
+    <% if @suggested_tags.present? %>
+      <h4>Tags suggérés :</h4>
+      <div class="suggested-tags-container">
+        <% @suggested_tags.each do |tag| %>
+          <div class="form-check">
+            <%= check_box_tag "story[tags][]", tag, false, class: 'form-check-input' %>
+            <%= label_tag "story_tags_#{tag}", tag, class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div id="existing-tags" class="form-group">
   <%= form.label :tag_ids, "Tags" %>
   <%= form.collection_select :tag_ids, Tag.all, :id, :name, {}, { multiple: true, class: "form-control", name: "story[tag_ids][]", id: "story_tag_ids" } %>
   </div>

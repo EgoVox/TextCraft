@@ -1,46 +1,38 @@
 class StoriesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_story, only: [:show, :edit, :update, :destroy]
+  before_action :set_story, only: [:show, :edit, :update, :destroy, :analyze]
 
   def index
-    # Si une recherche est effectuée, utiliser la méthode de recherche
     if params[:query].present?
       @stories = Story.search_by_title_description_and_tags(params[:query])
     else
-      # Par défaut, afficher les 8 dernières histoires mises à jour
       @stories = Story.joins(:chapters).distinct.order(updated_at: :desc).limit(8)
     end
 
     if user_signed_in?
-      # Histoires lues par l'utilisateur
       @read_stories = Story.joins(:reads)
                            .where(reads: { user_id: current_user.id })
-                           .where.not(user_id: current_user.id) # Exclure les histoires de l'utilisateur
+                           .where.not(user_id: current_user.id)
                            .group('stories.id')
                            .order('MAX(reads.created_at) DESC')
                            .limit(8)
 
-      # Histoires avec le plus de commentaires
       @most_commented_stories = Story.joins(:comments)
                                      .group('stories.id')
                                      .order('COUNT(comments.id) DESC')
                                      .limit(8)
 
-      # Histoires avec le plus de likes
       @top_liked_stories = Story.left_joins(:likes)
                                 .group(:id)
                                 .order('COUNT(likes.id) DESC')
                                 .limit(10)
 
-      # Récupérer les histoires créées par l'utilisateur
       @my_stories = current_user.stories.order(created_at: :desc)
 
-      # Récupérer le dernier chapitre lu pour chaque histoire
       @last_read_chapters = @read_stories.map do |story|
         story.last_read_chapter_for_user(current_user)
       end
     else
-      # Si l'utilisateur n'est pas connecté, ces collections sont vides
       @read_stories = []
       @most_commented_stories = []
       @top_liked_stories = []
@@ -50,7 +42,6 @@ class StoriesController < ApplicationController
   end
 
   def show
-    # L'histoire est déjà chargée par le before_action :set_story
   end
 
   def new
@@ -61,24 +52,21 @@ class StoriesController < ApplicationController
     @story = current_user.stories.build(story_params)
 
     if @story.save
-      redirect_to @story, notice: 'L\'histoire a été créée avec succès.'
+      redirect_to @story, notice: "L'histoire a été créée avec succès."
     else
       render :new
     end
   end
 
   def edit
-    # L'histoire est déjà chargée par le before_action :set_story
   end
 
   def update
-    # L'histoire est déjà chargée par le before_action :set_story
-
-    # Assigner les nouveaux attributs à l'histoire existante
     @story.assign_attributes(story_params)
 
     if @story.save
-      redirect_to @story, notice: 'L\'histoire a été mise à jour avec succès.'
+      @story.save_tags(params[:story][:tags]) if params[:story][:tags].present?
+      redirect_to @story, notice: "L'histoire a été mise à jour avec succès."
     else
       Rails.logger.debug "Erreurs : #{@story.errors.full_messages.join(", ")}"
       render :edit
@@ -87,7 +75,7 @@ class StoriesController < ApplicationController
 
   def destroy
     @story.destroy
-    redirect_to stories_url, notice: 'L\'histoire a été supprimée avec succès.'
+    redirect_to stories_url, notice: "L'histoire a été supprimée avec succès."
   end
 
   def search
@@ -98,7 +86,41 @@ class StoriesController < ApplicationController
     end
   end
 
+  def analyze
+    # @story = Story.find(params[:id])
+    @suggested_tags = analyze_story_summary(@story.description)
+    puts "#{@story.description}"
+
+    respond_to do |format|
+      format.js # Rend le fichier analyze.js.erb
+      format.json { render json: { tags: @suggested_tags } } # Optionnel pour le debug
+    end
+  end
+
   private
+
+  def analyze_story_summary(description)
+    client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+    prompt = "Extrait uniquement 5 mots-clés de cette histoire et sépare-les par des virgules : #{description}"
+
+    begin
+      response = client.chat(
+        parameters: {
+          model: "gpt-3.5-turbo",
+          messages: [
+                { role: "system", content: "Tu es un algorythme d'extraction de mot clé pour un site qui publie des manuscrits" },
+                { role: "user", content: prompt }
+          ],
+          # max_tokens: 50
+        }
+      )
+      response["choices"].first["message"]["content"].strip.split(", ").map(&:strip)
+      # response["choices"].first["text"].strip.split(", ").map(&:strip)
+    rescue => e
+      Rails.logger.error "Erreur lors de l'analyse : #{e.message}"
+      []
+    end
+  end
 
   def set_story
     @story = Story.find_by!(slug: params[:id])

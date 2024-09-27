@@ -1,0 +1,14 @@
+<!-- _suggested_tags.html.erb -->
+<h4>Tags suggérés :</h4>
+<% if tags.present? %>
+  <div class="suggested-tags-container">
+    <% tags.each do |tag| %>
+      <div class="form-check">
+        <%= check_box_tag "story[tags][]", tag, false, class: 'form-check-input' %>
+        <%= label_tag "story_tags_#{tag}", tag, class: 'form-check-label' %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>Aucun tag suggéré. Essayez de nouveau ou ajustez le résumé.</p>
+<% end %>

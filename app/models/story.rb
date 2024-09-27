@@ -18,7 +18,7 @@ class Story < ApplicationRecord
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
   validates :description, length: { maximum: 500 }
-
+  validate :validate_tags
 
   before_validation :generate_slug, on: :create
 
@@ -33,7 +33,6 @@ class Story < ApplicationRecord
                   tsearch: { prefix: true } # Le préfixe permet de rechercher des mots partiels
                 }
 
-
   def to_param
     slug
   end
@@ -47,11 +46,16 @@ class Story < ApplicationRecord
     likes.count
   end
 
-    # Méthode pour compter les commentaires de l'histoire et de ses chapitres
   def total_comments_count
     story_comments_count = comments.size
     chapter_comments_count = chapters.joins(:comments).count('comments.id')
     story_comments_count + chapter_comments_count
+  end
+
+  def save_tags(tag_list)
+    return unless tag_list.present?
+
+    self.tags = tag_list.map { |tag_name| Tag.find_or_create_by(name: tag_name.strip) }
   end
 
   private
@@ -60,4 +64,7 @@ class Story < ApplicationRecord
     self.slug = title.parameterize if slug.blank?
   end
 
+  def validate_tags
+    errors.add(:tags, "doit contenir entre 1 et 5 tags.") if tags.size > 5
+  end
 end
