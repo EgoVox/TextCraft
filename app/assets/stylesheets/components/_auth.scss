@@ -150,6 +150,37 @@
   }
 }
 
+.btn-analyze {
+  width: 100%;
+  padding: 0.75rem;
+  /* Utilisation de rem pour le padding */
+  background-color: $primary-color;
+  color: $white-color;
+  font-weight: bold;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+  }
+
+  @media (min-width: 768px) {
+    padding: 12px;
+    /* Restaure le padding par défaut sur écrans moyens */
+  }
+}
+
+.btn-analyze:hover {
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
+}
+
 /* Liens sous le formulaire */
 .auth-links {
   margin-top: 1.25rem;
