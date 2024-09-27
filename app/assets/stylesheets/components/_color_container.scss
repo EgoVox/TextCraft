@@ -1,0 +1,35 @@
+/* Conteneur pour les images superposées */
+.color-switch-container {
+  position: relative;
+  /* Permet le positionnement absolu des éléments enfants */
+  max-width: 400px;
+  /* Ajuste la largeur du conteneur selon tes besoins */
+  margin: 20px auto;
+  /* Centre le conteneur et ajoute une marge */
+}
+
+/* Image de fond */
+.color-image-background {
+  width: 100%;
+  /* La première image prend toute la largeur du conteneur */
+  border-radius: 10px;
+  /* Optionnel : ajoute un coin arrondi à l'image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Optionnel : ajoute une ombre */
+}
+
+/* Image superposée */
+.color-image-overlay {
+  position: absolute;
+  /* Position absolue par rapport au conteneur */
+  bottom: 0;
+  /* Ajuste la position verticale */
+  right: 0;
+  /* Ajuste la position horizontale */
+  width: 70%;
+  /* Ajuste la taille de l'image superposée */
+  border-radius: 10px;
+  /* Optionnel : ajoute un coin arrondi */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  /* Optionnel : ajoute une ombre plus marquée */
+}

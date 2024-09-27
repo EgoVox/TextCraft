@@ -1,0 +1,81 @@
+<!-- app/views/pages/presentation.html.erb -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>TextCraft - Présentation</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
+  <%= javascript_importmap_tags %>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body data-page="<%= controller_name %>_<%= action_name %>">
+  <!-- Main Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <%= image_tag 'TextCraft.webp', alt: 'TextCraft', class: 'hero-image' %>
+      <h1>Bienvenue sur TextCraft</h1>
+      <p>Découvrez un monde d'histoires captivantes créées par des écrivains passionnés. TextCraft vous permet de lire, de partager et d'écrire vos propres aventures.</p>
+      <%= link_to "Commencer votre aventure", new_user_registration_path, class: 'cta-button' %>
+    </div>
+  </div>
+
+<div class="presentation-container">
+    <section class="presentation-section">
+      <h2>Qu'est-ce que TextCraft ?</h2>
+      <p class="presentation-card">TextCraft est une plateforme communautaire dédiée à la création et à la lecture d'histoires.
+        <br><br>
+        <strong>Elle permet aux utilisateurs de publier leurs récits, d'interagir avec d'autres écrivains et lecteurs,
+        et de recevoir des retours sur leurs œuvres</strong>.
+        <br><br>
+        Les utilisateurs peuvent également
+        explorer différentes catégories d'histoires, commenter et aimer les chapitres,
+        et suivre leurs auteurs préférés.</p>
+    </section>
+
+    <section class="presentation-section">
+      <h2>Pourquoi TextCraft ?</h2>
+      <p>TextCraft se distingue par son système
+        <strong>d'analyse de texte qui aide les auteurs à améliorer la qualité de leurs
+        écrits avant publication.</strong>
+        <br><br>
+        Grâce à l'intelligence artificielle, TextCraft vous dit
+        si votrre texte correspond aux standards de l'écriture.
+        <br><br>
+        Si ce n'est pas le cas, l'analyse
+        vous indique ce que vous devriez faire pour que votre chapitre soit publié.
+        Textcraft vous oriente ensuite pour rendre votre histoire encore plus exceptionnelle.</p>
+    </section>
+
+    <section class="presentation-section">
+      <h2>Comment ?</h2>
+      <ul>
+        <li><strong>Explorez</strong> des histoires : Pas de liste de catégories interminables, juste ce qu'il faut, en plus
+        d'une recherche efficace.</li>
+          <hr>
+        <li><strong>Participez</strong> à une communauté de lecteurs et d'auteurs : Commentez avec pertinence, likez avec avidité,
+          suivez avec bienveillance.</li>
+          <hr>
+        <li><strong>Écrivez</strong> vos propres histoires : Avec du style, de l'intérêt, une lisibilité simple et accrue.</li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<div>
+  <div class="color-switch-container">
+    <!-- Image de fond -->
+    <%= image_tag 'couleur-1.png', alt: 'Couleur du site 1', class: 'color-image color-image-background' %>
+    <!-- Image superposée -->
+    <%= image_tag 'couleur-2.png', alt: 'Couleur du site 2', class: 'color-image color-image-overlay' %>
+  </div>
+</div>
+
+  <footer>
+    <%= link_to 'Retour à l\'accueil', unauthenticated_root_path, class: 'btn btn-secondary' %>
+  </footer>
+</body>
+</html>

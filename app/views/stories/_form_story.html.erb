@@ -36,9 +36,16 @@
 </script>
 
   <!-- Bouton pour analyser l'histoire -->
+<% if @story&.persisted? %>
   <div class="form-group">
     <%= link_to "Analyser le résumé pour obtenir des tags", analyze_story_path(@story), remote: true, method: :post, class: 'btn btn-outline-primary btn-analyze' %>
   </div>
+<% else %>
+  <div class="form-group">
+    <button class="btn btn-outline-primary" disabled>Analyser le résumé pour obtenir des tags</button>
+    <p class="text-muted">Enregistrez l'histoire d'abord pour analyser le résumé.</p>
+  </div>
+<% end %>
 
   <div id="suggested-tags" class="form-group">
   <!-- Les tags suggérés apparaîtront ici -->

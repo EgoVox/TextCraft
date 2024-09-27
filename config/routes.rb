@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'pages/privacy'
   get 'pages/terms'
   get 'pages/contact'
+  get 'pages/presentation'
 
   # Routes pour la gestion des utilisateurs avec Devise
   devise_for :users, controllers: {
@@ -60,4 +61,5 @@ Rails.application.routes.draw do
   get 'privacy', to: 'pages#privacy'
   get 'terms', to: 'pages#terms'
   get 'contact', to: 'pages#contact'
+  get 'presentation', to: 'pages#presentation'
 end
