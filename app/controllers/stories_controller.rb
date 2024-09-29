@@ -59,16 +59,27 @@ class StoriesController < ApplicationController
   end
 
   def edit
+    @suggested_tags = @story.suggested_tags || [] # Assure qu'il s'agit d'un tableau vide si nil
   end
 
   def update
     @story.assign_attributes(story_params)
 
+    # Gérer les tags prédéfinis (via leur ID)
+    if params[:story][:tag_ids].present?
+      @story.tag_ids = params[:story][:tag_ids].reject(&:blank?)
+    end
+
+    # Gérer les tags suggérés (stockés en tant que tableau de chaînes dans suggested_tags)
+    if params[:story][:suggested_tags].present?
+      # Ici, on ne modifie pas l'association tags, mais on stocke les tags suggérés en tant que chaînes de caractères
+      @story.suggested_tags = params[:story][:suggested_tags].reject(&:blank?)
+    end
+
     if @story.save
-      @story.save_tags(params[:story][:tags]) if params[:story][:tags].present?
       redirect_to @story, notice: "L'histoire a été mise à jour avec succès."
     else
-      Rails.logger.debug "Erreurs : #{@story.errors.full_messages.join(", ")}"
+      Rails.logger.debug "Erreurs : #{@story.errors.full_messages.join(', ')}"
       render :edit
     end
   end
@@ -87,7 +98,6 @@ class StoriesController < ApplicationController
   end
 
   def analyze
-    # @story = Story.find(params[:id])
     @suggested_tags = analyze_story_summary(@story.description)
     puts "#{@story.description}"
 
@@ -108,14 +118,12 @@ class StoriesController < ApplicationController
         parameters: {
           model: "gpt-3.5-turbo",
           messages: [
-                { role: "system", content: "Tu es un algorythme d'extraction de mot clé pour un site qui publie des manuscrits" },
+                { role: "system", content: "Tu es un algorithme d'extraction de mots-clés pour un site qui publie des manuscrits." },
                 { role: "user", content: prompt }
           ],
-          # max_tokens: 50
         }
       )
       response["choices"].first["message"]["content"].strip.split(", ").map(&:strip)
-      # response["choices"].first["text"].strip.split(", ").map(&:strip)
     rescue => e
       Rails.logger.error "Erreur lors de l'analyse : #{e.message}"
       []
@@ -130,6 +138,6 @@ class StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:story).permit(:title, :description, :category_id, :cover_image_url, tag_ids: [])
+    params.require(:story).permit(:title, :description, :category_id, :cover_image_url, tag_ids: [], suggested_tags: [])
   end
 end

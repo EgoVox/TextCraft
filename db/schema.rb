@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_22_155612) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_29_164549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -158,6 +158,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_22_155612) do
     t.datetime "updated_at", null: false
     t.string "cover_image_url"
     t.integer "comments_count"
+    t.string "suggested_tags", default: [], array: true
+    t.string "predifined_tags"
     t.index ["category_id"], name: "index_stories_on_category_id"
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
@@ -171,7 +173,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_22_155612) do
     t.index ["tag_id"], name: "index_story_tags_on_tag_id"
   end
 
+  create_table "suggested_tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_suggested_tags_on_story_id"
+  end
+
+  create_table "suggestedtags", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.string "tag_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "temporary_tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -219,4 +241,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_22_155612) do
   add_foreign_key "stories", "users"
   add_foreign_key "story_tags", "stories"
   add_foreign_key "story_tags", "tags"
+  add_foreign_key "suggested_tags", "stories"
 end

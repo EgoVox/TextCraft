@@ -29,3 +29,39 @@ select[multiple] {
 select[multiple] option {
   padding: 8px;
 }
+
+/* Conteneur pour les tags prédéfinis */
+.predefined-tags-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* Espace entre les éléments */
+}
+
+.predefined-tags-container .form-check {
+  flex: 1 1 calc(33.333% - 10px);
+  /* 3 colonnes */
+  box-sizing: border-box;
+}
+
+/* Conteneur pour les tags suggérés */
+.suggested-tags-container {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* Espace entre les éléments */
+}
+
+.suggested-tags-container .form-check {
+  flex: 1 1 calc(33.333% - 10px);
+  /* 3 colonnes */
+  box-sizing: border-box;
+}
