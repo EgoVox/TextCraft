@@ -1,24 +1,23 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const maxTags = 8; // Par exemple, 8 tags maximum
-  const tagSelect = document.querySelector('select[multiple]');
-  const page = document.body.getAttribute('data-page');
+  const maxTags = 8;
+  const predifinedTagSelect = document.querySelector('#story_predifined_tags');
+  const suggestedTagInputs = document.querySelectorAll('input[name="story[suggested_tags][]"]');
 
+  function updateTagCount() {
+    const predifinedCount = predifinedTagSelect.selectedOptions.length;
+    const suggestedCount = Array.from(suggestedTagInputs).filter(input => input.checked).length;
 
-  if (page !== 'home_index') {
-    if (tagSelect) { // Vérifie que l'élément existe avant d'ajouter l'écouteur
-      tagSelect.addEventListener('change', function() {
-        if (tagSelect.selectedOptions.length > maxTags) {
-          alert(`Vous pouvez sélectionner au maximum ${maxTags} tags.`);
-          // Désélectionner le dernier ajouté
-          Array.from(tagSelect.options).forEach(option => {
-            if (option.selected && !Array.from(tagSelect.selectedOptions).includes(option)) {
-              option.selected = false;
-            }
-          });
-        }
-      });
-    } else {
-      console.error("L'élément de sélection des tags n'existe pas sur cette page.");
+    const totalTagsCount = predifinedCount + suggestedCount;
+    if (totalTagsCount > maxTags) {
+      alert(`Vous pouvez sélectionner au maximum ${maxTags} tags au total.`);
+      return false;
     }
+    return true;
   }
+
+  // Écouter les changements sur les deux listes
+  predifinedTagSelect.addEventListener('change', updateTagCount);
+  suggestedTagInputs.forEach(input => {
+    input.addEventListener('change', updateTagCount);
+  });
 });

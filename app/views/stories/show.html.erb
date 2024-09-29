@@ -1,11 +1,13 @@
 <div class="story-show-container">
   <!-- Détails de l'histoire -->
   <div class="story-details card-story-show">
-      <p><strong>Tags:</strong>
-        <% @story.tags.each do |tag| %>
-          <span class="badge badge-info"><%= tag.name %></span>
-        <% end %>
-      </p>
+  <p><strong>Tags:</strong>
+    <% all_tags = @story.tags.map(&:name) + (@story.suggested_tags || []) %>
+    <% all_tags.each do |tag| %>
+      <span class="badge badge-info"><%= tag.capitalize %></span>
+    <% end %>
+  </p>
+
     <div class="story-header">
       <% if @story.cover_image.attached? %>
         <%= image_tag url_for(@story.cover_image), class: "story-cover-large" %>
