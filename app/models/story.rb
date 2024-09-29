@@ -60,8 +60,10 @@ class Story < ApplicationRecord
 
   # Valider le nombre total de tags (prédéfinis et suggérés)
   def total_tags_limit
-    total_tags_count = (suggested_tags || []).size + tags.size
-    errors.add(:base, "Le total des tags ne peut pas dépasser 8") if total_tags_count > 8
+    total_tags_count = (suggested_tags || []).size + (tag_ids || []).size
+    if total_tags_count > 8
+      errors.add(:base, "Le total des tags ne peut pas dépasser 8")
+    end
   end
 
   private
