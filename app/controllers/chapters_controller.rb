@@ -142,59 +142,53 @@ def analyze_text_with_gpt(content)
   # 1. Analyse de la lisibilité, vulgarité, répétitions, etc.
   readability_result = analyze_readability_with_gpt(plain_text_content)
 
-  # Si le score de lisibilité est -333, retourner immédiatement le résultat
-  return {
-    final_score: -333,
-    readability_feedback: readability_result[:feedback],
-    chapter_quality_feedback: '',
-    detailed_feedback: '',
-    passed: false
-  } if readability_result[:score] == -333
-
   # 2. Évaluation de la qualité en tant que chapitre de livre
   chapter_quality_result = evaluate_chapter_quality_with_gpt(plain_text_content)
 
   # 3. Feedback détaillé et concis de GPT
-  detailed_feedback_result = call_gpt_for_detailed_feedback(plain_text_content, chapter_quality_result[:score])
+  # detailed_feedback_result = call_gpt_for_detailed_feedback(plain_text_content, chapter_quality_result[:score])
 
   # 4. Calcul de la nouvelle moyenne avec le score de lisibilité, qualité, et feedback
-  final_score = (readability_result[:score] + chapter_quality_result[:score] + detailed_feedback_result[:score]) / 2.0
+  final_score = (readability_result[:score] + chapter_quality_result[:score]) / 2.0
 
   {
     final_score: final_score.round(2),
     readability_feedback: readability_result[:feedback],
     chapter_quality_feedback: chapter_quality_result[:feedback],
-    detailed_feedback: detailed_feedback_result[:feedback],
+    # detailed_feedback: detailed_feedback_result[:feedback],
     passed: final_score >= 70
   }
 end
 
-
-
 def analyze_readability_with_gpt(content)
   client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-  prompt = "Analyse ce texte en tant que critique littéraire. Si le texte ne respecte pas les conventions littéraires de base, donne 'non' suivi des trois principales raisons détaillées et précises du refus (Comme la structure du texte et des dialogues, le vocabulaire non pertinent). Si le texte est acceptable, évalue les critères suivants : orthographe, grammaire, conjugaison, complexité du texte, vulgarité (5 si pas de vulgarité, 0 si trop), et lisibilité générale. Donne une note globale sur 100 avec un feedback de 2 phrases maximum. Voici le texte : #{content}"
+  prompt = "Analyse ce texte en tant que critique littéraire en examinant les éléments suivants :
+              - **Respect des conventions littéraires** (note sur 5),
+              - **Structre du texte** (note sur 5),
+              - **Vocabulaire** (note sur 5),
+              - **Originalité** (note sur 5),
+              - **Orthographe** (note sur 5),
+              - **Grammaire** (note sur 5),
+              - **Conjugaison** (note sur 5),
+              - **Complexité** (note sur 5),
+              - **Absence de vulgarité** (5 si aucune, 0 si trop présente),
+              - **Fluidité** (note sur 5).
+
+            N'indique pas le calcul. Multipilie le total par 2 et ne donne que la note sur 100. Justifie ta note en deux phrases.
+            Voici le texte : #{content}"
 
   begin
     response = client.chat(
       parameters: {
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: "Tu es un expert en linguistique et littérature. Évalue les textes avec précision et concision." },
+          { role: "system", content: "Tu es un expert en linguistique et littérature. Évalue les textes de manière précise et concise en fonction des conventions littéraires classiques." },
           { role: "user", content: prompt }
         ],
-        max_tokens: 450  # Limiter le nombre de tokens pour forcer la concision
+        max_tokens: 300  # Limiter le nombre de tokens pour forcer la concision
       }
     )
 
-    response_text = response['choices'].first['message']['content'].strip.downcase
-
-    if response_text.start_with?('non')
-      # Récupérer les deux principales raisons du refus
-      reasons = response_text.split('-').last.strip
-      puts "Chapitre rejeté par GPT pour les raisons suivantes : #{reasons}"
-      return { score: -333, feedback: "Le texte ne correspond pas aux conventions littéraires pour les raisons suivantes : #{reasons}" }
-    else
       feedback = response['choices'].first['message']['content']
       score = extract_score_from_feedback(feedback)
 
@@ -202,7 +196,7 @@ def analyze_readability_with_gpt(content)
       clean_feedback = feedback.split(', orthographe')[0] # Limiter le feedback jusqu'à la note d'orthographe
       puts "Score de lisibilité reçu de GPT : #{score}"
       { score: score, feedback: clean_feedback }
-    end
+
   rescue StandardError => e
     Rails.logger.error "Erreur OpenAI : #{e.message}"
     { score: 0, feedback: "Erreur lors de l'évaluation de la lisibilité." }
@@ -212,17 +206,22 @@ end
 
   def evaluate_chapter_quality_with_gpt(content)
     client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-    prompt = "Évalue ce texte en tant que chapitre d'un livre. Donne une note sur 100 et un retour concis (1 phrase) sur ce qui pourrait être amélioré. Utilise un langage simple et direct. Voici le texte : #{content}"
+    prompt = "Donne obligatoirement une note globale sur 100 en évaluant ce texte en tant que chapitre d'un livre en considérant les aspects suivants :
+              1. **Cohérence** dans le contexte d'un récit plus vaste (transition fluide, continuité).
+              2. **Engagement du lecteur** (impact émotionnel, suspense, intérêt maintenu).
+              3. **Clarté de la narration** (compréhension générale, fluidité des descriptions et dialogues).
+              Ne donne qu'une analyse d'ensemble en 4 phrases.
+              Voici le texte : #{content}"
 
     begin
       response = client.chat(
         parameters: {
           model: "gpt-3.5-turbo",
           messages: [
-            { role: "system", content: "Tu es un expert en critique littéraire. Fournis des évaluations concises." },
+            { role: "system", content: "Tu es un expert en critique littéraire et spécialisé dans l'analyse de chapitres de livres." },
             { role: "user", content: prompt }
           ],
-          max_tokens: 150  # Limiter le nombre de tokens pour un retour concis
+          max_tokens: 300  # Limiter le nombre de tokens pour un retour concis
         }
       )
 
@@ -236,37 +235,37 @@ end
     end
   end
 
-  def call_gpt_for_detailed_feedback(content, score)
-    puts "Appel à GPT pour un feedback détaillé et concis"
-    client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
+  # def call_gpt_for_detailed_feedback(content, score)
+  #   puts "Appel à GPT pour un feedback détaillé et concis"
+  #   client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
 
-    prompt = if score < 70
-                "Le texte suivant a obtenu un score de #{score}/100. Fournis 3 critiques courtes (1 phrase chacune) sur les principales faiblesses du texte. Utilise un langage direct et sans explications supplémentaires. Voici le texte : #{content}"
-              else
-                "Le texte suivant a obtenu un score de #{score}/100. Fournis 3 conseils précis (1 phrase chacun) pour améliorer le texte. Utilise un langage direct et sans explications supplémentaires. Voici le texte : #{content}"
-              end
+  #   prompt = if score < 70
+  #               "Le texte suivant a obtenu un score de #{score}/100. Fournis 3 critiques courtes (1 phrase chacune) sur les principales faiblesses du texte. Utilise un langage direct et sans explications supplémentaires. Voici le texte : #{content}"
+  #             else
+  #               "Le texte suivant a obtenu un score de #{score}/100. Fournis 3 conseils précis (1 phrase chacun) pour améliorer le texte. Utilise un langage direct et sans explications supplémentaires. Voici le texte : #{content}"
+  #             end
 
-    begin
-      response = client.chat(
-        parameters: {
-          model: "gpt-3.5-turbo",
-          messages: [
-            { role: "system", content: "Tu es un critique littéraire spécialisé dans l'évaluation de chapitres de romans. Sois concis." },
-            { role: "user", content: prompt }
-          ],
-          max_tokens: 150  # Limiter le nombre de tokens pour un retour concis
-        }
-      )
+  #   begin
+  #     response = client.chat(
+  #       parameters: {
+  #         model: "gpt-3.5-turbo",
+  #         messages: [
+  #           { role: "system", content: "Tu es un critique littéraire spécialisé dans l'évaluation de chapitres de romans. Sois concis." },
+  #           { role: "user", content: prompt }
+  #         ],
+  #         max_tokens: 150  # Limiter le nombre de tokens pour un retour concis
+  #       }
+  #     )
 
-      feedback = response['choices'].first['message']['content']
-      score = extract_score_from_feedback(feedback)
-      puts "Feedback détaillé reçu de GPT : #{feedback}"
-      { feedback: feedback, score: score }
-    rescue StandardError => e
-      Rails.logger.error "Erreur OpenAI : #{e.message}"
-      { feedback: "Erreur lors de l'évaluation avec GPT.", score: 0 }
-    end
-  end
+  #     feedback = response['choices'].first['message']['content']
+  #     score = extract_score_from_feedback(feedback)
+  #     puts "Feedback détaillé reçu de GPT : #{feedback}"
+  #     { feedback: feedback, score: score }
+  #   rescue StandardError => e
+  #     Rails.logger.error "Erreur OpenAI : #{e.message}"
+  #     { feedback: "Erreur lors de l'évaluation avec GPT.", score: 0 }
+  #   end
+  # end
 
   def extract_score_from_feedback(feedback)
     if feedback.match(/(\d{1,2})\/100/)
@@ -284,16 +283,6 @@ end
     score = analysis_result[:final_score]
     lisibility_feedback = analysis_result[:readability_feedback]
 
-    # Si le score est -333, afficher uniquement les raisons du refus
-    if score == -333 || score <= 0
-      return <<~FEEDBACK
-        <i class="fa-solid fa-circle-xmark" style="color: #FF0000;"></i>
-        <strong>Malheureusement, votre chapitre ne peut être publié en l'état.</strong><br>
-        #{lisibility_feedback}<br>
-      FEEDBACK
-    end
-
-    # Si le score n'est pas -333, générer le message habituel
     if score >= 70
       <<~FEEDBACK
         <i class="fa-solid fa-check" style="color: #00FF00;"></i>
@@ -302,17 +291,15 @@ end
         <strong>Suggestions :</strong><br>
         - Lisibilité : #{lisibility_feedback}<br>
         - Qualité : #{analysis_result[:chapter_quality_feedback]}<br>
-        - Conseils : #{analysis_result[:detailed_feedback]}
       FEEDBACK
     elsif score <= 50 && score > 0
       <<~FEEDBACK
         <i class="fa-solid fa-gear" style="color: #FF8000;"></i>
         <strong>Votre chapitre nécessite des améliorations avant d'être publié.</strong><br>
         Votre score est de #{score} / 100.<br><br>
-        <strong>À corriger :</strong><br>
+        <strong>Pour viser plus haut :</strong><br>
         - Lisibilité : #{lisibility_feedback}<br>
         - Qualité : #{analysis_result[:chapter_quality_feedback]}<br>
-        - Critiques : #{analysis_result[:detailed_feedback]}
       FEEDBACK
     else
       <<~FEEDBACK
@@ -322,7 +309,6 @@ end
         <strong>Améliorations :</strong><br>
         - Lisibilité : #{lisibility_feedback}<br>
         - Qualité : #{analysis_result[:chapter_quality_feedback]}<br>
-        - Conseils : #{analysis_result[:detailed_feedback]}
       FEEDBACK
     end
   end

@@ -58,3 +58,35 @@ users = [
 users.each do |user_data|
   User.create!(user_data)
 end
+
+
+# clara.borel@example.com -
+# nathan.duval@example.com -
+# clara.dupont@example.com -
+# lea.martin@example.com -
+# thomas.dupuis@example.com -
+# elodie.leclerc@example.com -
+# camille.durand@example.com -
+# etienne.lefevre@example.com -
+# lucas.meunier@example.com -
+# sophie.leroy@example.com -
+# julien.caron@example.com -
+# chloe.bernard@example.com -
+# clara.dupuis@example.com -
+# amelie.durieux@example.com -
+# leon.montreuil@example.com -
+# vincent.perrot@example.com -
+# julie.roux@example.com -
+# sarah.lefebvre@example.com -
+# claire.moreau@example.com -
+# alexandre.dumont@example.com -
+# elwin.faure@example.com -
+# luc.girard@example.com -
+# emma.dupont@example.com -
+# stephane@wivzem.fr -
+# thomas.travis@example.com -
+# elphine.langlet@hotmail.fr -
+# stepha=> loties@gmail.com -
+# damien.leclerc@example.com -
+# antoine.morel@example.com -
+# mael.gauthier@example.com
