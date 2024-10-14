@@ -17,5 +17,6 @@ pin "color_utils", to: "color_utils.js"
 pin "init_color", to: "init_color.js"
 pin "carousel", to: "carousel.js"
 pin "tag_limit", to: "tag_limit.js"
+pin "hidebuttontext", to: "hidebuttontext.js"
 
 pin_all_from "app/javascript", under: "javascript"
