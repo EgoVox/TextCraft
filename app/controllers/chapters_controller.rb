@@ -9,6 +9,10 @@ class ChaptersController < ApplicationController
   before_action :set_chapter_by_position, only: [:show, :destroy]
   before_action :set_chapter_by_id, only: [:edit, :update]
 
+require 'docx'
+require 'pdf-reader'
+require 'odf'
+
   MAX_TEXT_LENGTH = 20000
 
   def show
@@ -24,6 +28,23 @@ class ChaptersController < ApplicationController
 
     # Réinitialiser les informations d'analyse avant une nouvelle analyse
     reset_analysis_info
+
+    # Vérifier s'il y a des pièces jointes via ActionText (dans ActiveStorage)
+    if @chapter.content.body.attachments.any?
+      attachment = @chapter.content.body.attachments.first
+      if valid_attachment?(attachment)
+        extracted_text = extract_text_from_attachment(attachment)
+        if extracted_text
+          @chapter.content = ActionText::Content.new(extracted_text)  # Remplacer le contenu par le texte extrait
+        else
+          flash.now[:alert] = "Impossible d'extraire le texte de la pièce jointe."
+          return render :new
+        end
+      else
+        flash.now[:alert] = "Seuls les fichiers PDF, DOCX, et ODT sont acceptés."
+        return render :new
+      end
+    end
 
     # Effectuer l'analyse
     analysis_result = analyze_text_with_gpt(@chapter.content)
@@ -135,6 +156,53 @@ class ChaptersController < ApplicationController
   end
 
 private
+
+  def valid_attachment?(attachment)
+    attachment.content_type.in?(%w(application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.oasis.opendocument.text))
+  end
+
+# Méthode pour extraire le texte de la pièce jointe
+  def extract_text_from_attachment(attachment)
+    if attachment.content_type == 'application/pdf'
+      extract_text_from_pdf(attachment)
+    elsif attachment.content_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      extract_text_from_docx(attachment)
+    elsif attachment.content_type == 'application/vnd.oasis.opendocument.text'
+      extract_text_from_odt(attachment)
+    end
+  end
+
+  def extract_text_from_pdf(attachment)
+    begin
+      # Utiliser StringIO pour transformer le flux binaire en fichier temporaire
+      pdf_io = StringIO.new(attachment.download)
+      reader = PDF::Reader.new(pdf_io)
+
+      text = ''
+      reader.pages.each { |page| text += page.text }
+      text
+    rescue StandardError => e
+      Rails.logger.error "Erreur lors de l'extraction du PDF: #{e.message}"
+      nil
+    end
+  end
+
+  def extract_text_from_docx(attachment)
+    doc = Docx::Document.open(StringIO.new(attachment.download))
+    text = doc.paragraphs.map(&:text).join("\n")
+    text
+  rescue StandardError => e
+    Rails.logger.error "Erreur lors de l'extraction du DOCX: #{e.message}"
+    nil
+  end
+
+  def extract_text_from_odt(attachment)
+    odt = ODF::Text.new(StringIO.new(attachment.download))
+    odt.text
+  rescue StandardError => e
+    Rails.logger.error "Erreur lors de l'extraction de l'ODT: #{e.message}"
+    nil
+  end
 
 def analyze_text_with_gpt(content)
   plain_text_content = content.to_s
