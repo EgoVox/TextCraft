@@ -10,11 +10,13 @@ gem 'faraday'
 gem 'sassc-rails'
 gem "activestorage"
 gem "pg_search"
-# gem "trix"
 gem "actiontext"
 gem 'toastr-rails'
-# gem 'commontator'
-# gem 'jquery-rails'
+
+gem 'docx'
+gem 'pdf-reader'
+gem 'odf'
+
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4"
