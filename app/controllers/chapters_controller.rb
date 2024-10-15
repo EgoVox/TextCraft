@@ -174,18 +174,22 @@ private
 
   def extract_text_from_pdf(attachment)
     begin
-      # Utiliser StringIO pour transformer le flux binaire en fichier temporaire
-      pdf_io = StringIO.new(attachment.download)
+      # Télécharge le fichier PDF
+      pdf_io = StringIO.new(attachment.download.force_encoding('BINARY'))  # Assure que le contenu est binaire
       reader = PDF::Reader.new(pdf_io)
 
       text = ''
-      reader.pages.each { |page| text += page.text }
+      reader.pages.each do |page|
+        text += page.text.encode('UTF-8', invalid: :replace, undef: :replace, replace: '') + "\n"
+      end
+
       text
     rescue StandardError => e
       Rails.logger.error "Erreur lors de l'extraction du PDF: #{e.message}"
       nil
     end
   end
+
 
   def extract_text_from_docx(attachment)
     doc = Docx::Document.open(StringIO.new(attachment.download))
@@ -204,29 +208,29 @@ private
     nil
   end
 
-def analyze_text_with_gpt(content)
-  plain_text_content = content.to_s
+  def analyze_text_with_gpt(content)
+    plain_text_content = content.to_s
 
-  # 1. Analyse de la lisibilité, vulgarité, répétitions, etc.
-  readability_result = analyze_readability_with_gpt(plain_text_content)
+    # 1. Analyse de la lisibilité, vulgarité, répétitions, etc.
+    readability_result = analyze_readability_with_gpt(plain_text_content)
 
-  # 2. Évaluation de la qualité en tant que chapitre de livre
-  chapter_quality_result = evaluate_chapter_quality_with_gpt(plain_text_content)
+    # 2. Évaluation de la qualité en tant que chapitre de livre
+    chapter_quality_result = evaluate_chapter_quality_with_gpt(plain_text_content)
 
-  # 3. Feedback détaillé et concis de GPT
-  # detailed_feedback_result = call_gpt_for_detailed_feedback(plain_text_content, chapter_quality_result[:score])
+    # 3. Feedback détaillé et concis de GPT
+    # detailed_feedback_result = call_gpt_for_detailed_feedback(plain_text_content, chapter_quality_result[:score])
 
-  # 4. Calcul de la nouvelle moyenne avec le score de lisibilité, qualité, et feedback
-  final_score = (readability_result[:score] + chapter_quality_result[:score]) / 2.0
+    # 4. Calcul de la nouvelle moyenne avec le score de lisibilité, qualité, et feedback
+    final_score = (readability_result[:score] + chapter_quality_result[:score]) / 2.0
 
-  {
-    final_score: final_score.round(2),
-    readability_feedback: readability_result[:feedback],
-    chapter_quality_feedback: chapter_quality_result[:feedback],
-    # detailed_feedback: detailed_feedback_result[:feedback],
-    passed: final_score >= 70
-  }
-end
+    {
+      final_score: final_score.round(2),
+      readability_feedback: readability_result[:feedback],
+      chapter_quality_feedback: chapter_quality_result[:feedback],
+      # detailed_feedback: detailed_feedback_result[:feedback],
+      passed: final_score >= 70
+    }
+  end
 
 def analyze_readability_with_gpt(content)
   client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
