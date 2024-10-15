@@ -32,17 +32,10 @@ require 'odf'
     # Vérifier s'il y a des pièces jointes via ActionText (dans ActiveStorage)
     if @chapter.content.body.attachments.any?
       attachment = @chapter.content.body.attachments.first
-
       if valid_attachment?(attachment)
         extracted_text = extract_text_from_attachment(attachment)
-        Rails.logger.debug "Session size: #{request.session.to_hash.size}"
-
-
         if extracted_text
           @chapter.content = ActionText::Content.new(extracted_text)  # Remplacer le contenu par le texte extrait
-
-          # Supprimer la pièce jointe après l'extraction (en production uniquement)
-          attachment.purge if Rails.env.production?
         else
           flash.now[:alert] = "Impossible d'extraire le texte de la pièce jointe."
           return render :new
@@ -81,7 +74,6 @@ require 'odf'
       end
     end
   end
-
 
   def update
     @chapter = @story.chapters.build(chapter_params)
@@ -163,8 +155,6 @@ require 'odf'
     session[:analysis_score] = @chapter.analysis_score
   end
 
-private
-
   def valid_attachment?(attachment)
     attachment.content_type.in?(%w(application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.oasis.opendocument.text))
   end
@@ -178,6 +168,8 @@ private
     elsif attachment.content_type == 'application/vnd.oasis.opendocument.text'
       extract_text_from_odt(attachment)
     end
+
+    # File.delete(file_path) if file_path && File.exist?(file_path)
   end
 
   def extract_text_from_pdf(attachment)
