@@ -32,10 +32,17 @@ require 'odf'
     # Vérifier s'il y a des pièces jointes via ActionText (dans ActiveStorage)
     if @chapter.content.body.attachments.any?
       attachment = @chapter.content.body.attachments.first
+
       if valid_attachment?(attachment)
         extracted_text = extract_text_from_attachment(attachment)
+        Rails.logger.debug "Session size: #{request.session.to_hash.size}"
+
+
         if extracted_text
           @chapter.content = ActionText::Content.new(extracted_text)  # Remplacer le contenu par le texte extrait
+
+          # Supprimer la pièce jointe après l'extraction (en production uniquement)
+          attachment.purge if Rails.env.production?
         else
           flash.now[:alert] = "Impossible d'extraire le texte de la pièce jointe."
           return render :new
@@ -74,6 +81,7 @@ require 'odf'
       end
     end
   end
+
 
   def update
     @chapter = @story.chapters.build(chapter_params)
