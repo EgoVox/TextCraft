@@ -12,6 +12,7 @@ gem "activestorage"
 gem "pg_search"
 gem "actiontext"
 gem 'toastr-rails'
+gem 'aws-sdk-s3'
 
 gem 'docx'
 gem 'pdf-reader'
