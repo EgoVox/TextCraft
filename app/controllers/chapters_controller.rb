@@ -156,21 +156,36 @@ require 'odf'
   end
 
   def valid_attachment?(attachment)
-    attachment.content_type.in?(%w(application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.oasis.opendocument.text))
+    valid = attachment.content_type.in?(%w(application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.oasis.opendocument.text))
+
+    if valid
+      Rails.logger.info "Fichier valide : #{attachment.content_type}"
+    else
+      Rails.logger.error "Fichier non valide : #{attachment.content_type}"
+    end
+
+    valid
   end
 
 # Méthode pour extraire le texte de la pièce jointe
   def extract_text_from_attachment(attachment)
+    Rails.logger.info "Début de l'extraction de texte pour le fichier : #{attachment.filename} (#{attachment.content_type})"
+
     if attachment.content_type == 'application/pdf'
+      Rails.logger.info "Traitement d'un fichier PDF"
       extract_text_from_pdf(attachment)
     elsif attachment.content_type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      Rails.logger.info "Traitement d'un fichier DOCX"
       extract_text_from_docx(attachment)
     elsif attachment.content_type == 'application/vnd.oasis.opendocument.text'
+      Rails.logger.info "Traitement d'un fichier ODT"
       extract_text_from_odt(attachment)
+    else
+      Rails.logger.error "Type de fichier non supporté : #{attachment.content_type}"
+      nil
     end
-
-    # File.delete(file_path) if file_path && File.exist?(file_path)
   end
+
 
   def extract_text_from_pdf(attachment)
     begin
