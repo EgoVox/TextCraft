@@ -156,6 +156,9 @@ require 'odf'
   end
 
   def valid_attachment?(attachment)
+    Rails.logger.info "Attachment content_type: #{attachment.content_type}"
+    Rails.logger.info "Valid content types: #{%w(application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.oasis.opendocument.text)}"
+
     valid = attachment.content_type.in?(%w(application/pdf application/vnd.openxmlformats-officedocument.wordprocessingml.document application/vnd.oasis.opendocument.text))
 
     if valid
