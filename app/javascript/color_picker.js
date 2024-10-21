@@ -24,8 +24,6 @@ function injectStyles(primaryColor, oppositeColor, darkColor) {
     document.head.appendChild(style);
   }
 
-  console.log('Injection des styles avec la couleur:', primaryColor);
-
   style.innerHTML = `
     :root {
       --primary-color: ${primaryColor} !important;
@@ -43,13 +41,11 @@ function injectStyles(primaryColor, oppositeColor, darkColor) {
 
 // Fonction pour appliquer la couleur principale et la couleur opposée
 export function applyPrimaryColor(color) {
-  console.log("Couleur appliquée:", color);
   const darkColor = darkenColor(color, 20); // Assombrir la couleur
   const oppositeColor = getOppositeColor(color); // Calculer la couleur opposée
 
   // Injecter les styles immédiatement
   injectStyles(color, oppositeColor, darkColor);
-  console.log("Styles injectés avec couleur:", color, "couleur opposée:", oppositeColor, "couleur sombre:", darkColor);
 
   // Mettre à jour la base de données
   fetch('/users/update_color', {
@@ -61,7 +57,6 @@ export function applyPrimaryColor(color) {
     body: JSON.stringify({ user: { primary_color: color, opposite_color: oppositeColor } })
   }).then(response => {
     if (response.ok) {
-      console.log("Couleur mise à jour avec succès");
     } else {
       console.error("Erreur lors de la mise à jour de la couleur");
     }

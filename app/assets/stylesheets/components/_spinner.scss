@@ -1,0 +1,60 @@
+@import 'base/variables';
+/* Modal CSS */
+.spinner_modal {
+  position: fixed;
+  z-index: 999;
+  left: 50%;
+  top: 50%;
+  // width: 50%;
+  // height: 12%;
+  overflow: hidden;
+  background-color: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  transform: translate(-50%, -50%);
+}
+
+/* Spinner CSS */
+.spinner {
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid $primary-color;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  /* Supprimer les marges et laisser Flexbox centrer l'élément */
+  margin: 0;
+  /* Remplacer les marges par zéro pour laisser le parent le centrer */
+}
+
+.spinner_modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centre verticalement */
+  align-items: center;
+  /* Centre horizontalement */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.spinner_modal p {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

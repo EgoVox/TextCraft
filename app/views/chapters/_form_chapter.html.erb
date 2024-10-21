@@ -1,6 +1,6 @@
 <div class="chapter-edit-container">
   <div class="chapter-form card">
-    <%= form_with(model: [@story, @chapter], local: true) do |form| %>
+    <%= form_with(model: [@story, @chapter]) do |form| %>
       <div class="form-group">
         <%= form.label :title, "Titre du Chapitre", class: 'form-label' %>
         <%= form.text_field :title, class: 'form-control input-field' %>
@@ -15,7 +15,13 @@
         <%= form.submit "Enregistrer le Chapitre", class: 'btn btn-primary' %>
         <%= link_to 'Retour à l\'histoire', story_path(@story), class: 'btn btn-secondary' %>
       </div>
-
       <% end %>
+  </div>
+</div>
+
+<div id="loading-modal" class="spinner_modal" style="display: flex;">
+  <div class="modal-content">
+  <div class="spinner"></div>
+    <p>Analyse en cours, veuillez patienter...</p>
   </div>
 </div>
