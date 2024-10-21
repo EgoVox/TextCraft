@@ -19,6 +19,7 @@
 
 /* Spinner CSS */
 .spinner {
+  align-self: center;
   border: 6px solid #f3f3f3;
   border-radius: 50%;
   border-top: 6px solid $primary-color;
@@ -35,9 +36,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Centre verticalement */
   align-items: center;
-  /* Centre horizontalement */
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
