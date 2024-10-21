@@ -16,6 +16,7 @@ import "init_color";
 import "carousel";
 import "tag_limit";
 import "hidebuttontext";
+import "spinner";
 
 import "trix"
 import "@rails/actiontext"
