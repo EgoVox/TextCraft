@@ -4,6 +4,21 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @stories = @user.stories
+
+    if user_signed_in?
+
+            @read_stories = Story.joins(:reads)
+                           .where(reads: { user_id: current_user.id })
+                           .where.not(user_id: current_user.id)
+                           .group('stories.id')
+                           .order('MAX(reads.created_at) DESC')
+                           .limit(8)
+        @last_read_chapters = @read_stories.map do |story|
+        story.last_read_chapter_for_user(current_user)
+      end
+    else
+      @read_stories = []
+    end
   end
 
   def update_color

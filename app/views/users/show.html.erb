@@ -11,8 +11,27 @@
     <%= link_to 'Modifier mon profil', edit_user_registration_path, class: 'btn btn-primary' %>
   </div>
 
+  <!-- Dernières histoires lues -->
+  <div class="user-details card section">
+  <% if user_signed_in? && @read_stories.any? %>
+    <div class="last-read section">
+      <h1>Dernières histoires lues</h1>
+      <div class="stories-list">
+        <% @read_stories.each do |story| %>
+          <div class="card-index list-item">
+            <div>
+              <h3 class="card-index__title"><%= link_to story.title, story_path(story) %></h3>
+              <span class="card-index__tagline">par <%= story.user.username %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </div>
+
   <!-- Section des histoires de l'utilisateur -->
-  <div class="my-stories section">
+  <div class="my-stories card section">
     <h2>Les histoires au top par <%= @user.username %></h2>
 
     <% if @stories.any? %>

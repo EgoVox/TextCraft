@@ -7,7 +7,7 @@
   .dropdown-toggle {
     background-color: $primary-color;
     color: $white-color;
-    padding: 0.625rem 1.25rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
     font-family: $font-family-serif;
     font-weight: 700;
@@ -123,12 +123,12 @@
 /* Dropdown pour le menu utilisateur */
 .user-menu {
   position: relative;
-  margin-right: 1.25rem;
+  // margin-right: 1.25rem;
 
   .dropdown-toggle {
     background-color: $primary-color;
     color: $white-color;
-    padding: 0.625rem 1.25rem;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
     font-family: $font-family-serif;
     font-weight: 700;
