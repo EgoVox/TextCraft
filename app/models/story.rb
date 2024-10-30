@@ -27,7 +27,7 @@ class Story < ApplicationRecord
 
   # Recherche par titre, description et tags
   pg_search_scope :search_by_title_description_and_tags,
-                  against: [:title, :description],
+                  against: [:title, :description, :predifined_tags, :suggested_tags],
                   associated_against: {
                     tags: [:name]
                   },
