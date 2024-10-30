@@ -8,13 +8,14 @@
   /* Espace entre le label et le bouton */
   flex-wrap: nowrap;
   /* Empêche les éléments de se briser sur plusieurs lignes */
+    margin-right: 20px;
 }
 
 /* Ajuster le label */
 .color-picker-container label {
   white-space: nowrap;
   /* Empêche le label de se briser sur plusieurs lignes */
-  // margin-right: 10rem;
+  // margin-right: 1rem;
   /* Espace à droite du label */
 }
 
