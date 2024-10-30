@@ -129,3 +129,38 @@
   font-size: 0.875rem;
   /* Réduction de la taille de police du bouton */
 }
+
+/* Styles de base pour les liens de navigation (s'appliquera à Accueil, Catégories, Rechercher et User Menu) */
+.nav-link,
+#searchDropdown,
+#categoriesDropdown,
+#userDropdown {
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+  padding: 0.3rem 0.6rem;
+  /* Pour un léger effet de bouton */
+  border-radius: 5px;
+  /* Arrondi pour un style plus moderne */
+}
+
+/* Effet au survol pour indiquer que les éléments sont interactifs */
+.nav-link:hover,
+#searchDropdown:hover,
+#categoriesDropdown:hover,
+#userDropdown:hover {
+  transform: scale(1.05);
+  /* Légère augmentation de taille pour attirer l'attention */
+  color: $primary-color;
+  /* Change la couleur du texte */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Fond léger pour plus de visibilité */
+}
+
+/* Dark mode : couleur spécifique au survol */
+.dark-mode .nav-link:hover,
+.dark-mode #searchDropdown:hover,
+.dark-mode #categoriesDropdown:hover,
+.dark-mode #userDropdown:hover {
+  color: $dark-primary-color;
+  background-color: rgba(255, 255, 255, 0.1);
+}

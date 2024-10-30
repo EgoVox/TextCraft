@@ -19,5 +19,6 @@ pin "carousel", to: "carousel.js"
 pin "tag_limit", to: "tag_limit.js"
 pin "hidebuttontext", to: "hidebuttontext.js"
 pin "spinner", to: "spinner.js"
+pin "search", to: "search.js"
 
 pin_all_from "app/javascript", under: "javascript"

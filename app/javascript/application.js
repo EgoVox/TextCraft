@@ -17,6 +17,7 @@ import "carousel";
 import "tag_limit";
 import "hidebuttontext";
 import "spinner";
+import "search";
 
 import "trix"
 import "@rails/actiontext"
