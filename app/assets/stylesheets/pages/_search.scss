@@ -111,9 +111,31 @@
     border-radius: $border-radius;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   }
+}
 
-  &:hover .search-form-container {
-    display: block;
-    /* Affiche le formulaire au hover */
-  }
+#searchDropdown {
+  cursor: pointer;
+  /* Change le curseur pour indiquer un lien cliquable */
+  transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+#searchDropdown:hover {
+  transform: scale(1.05);
+  /* Légère augmentation de la taille */
+  color: var(--primary-color);
+  /* Changer la couleur du texte pour attirer l’attention */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Ajoute un fond léger pour renforcer l'effet */
+  border-radius: 5px;
+  /* Ajoute un léger arrondi pour un style plus agréable */
+}
+
+#searchForm {
+  display: none;
+  /* Masqué par défaut */
+}
+
+#searchForm.show {
+  display: block;
+  /* Affiche le menu avec la classe .show */
 }
