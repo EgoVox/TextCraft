@@ -3,10 +3,10 @@
   .custom-search {
     display: flex;
     align-items: center;
-    background-color: $background-color;
+    // background-color: $background-color;
     border-radius: $border-radius;
-    padding: 0.5rem 1rem;
-    box-shadow: $box-shadow-light;
+    // padding: 0.5rem 1rem;
+    // box-shadow: $box-shadow-light;
     margin-left: 4rem;
 
     /* Media queries pour les petits écrans */
@@ -36,7 +36,7 @@
       flex-grow: 1;
       padding: 0.5rem;
       border: 1px solid #ddd;
-      border-radius: $border-radius;
+      border-radius: 5px;
       font-size: 1rem;
       transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
@@ -66,7 +66,7 @@
       background-color: $primary-color;
       color: $white-color;
       border: none;
-      border-radius: $border-radius;
+      border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
 

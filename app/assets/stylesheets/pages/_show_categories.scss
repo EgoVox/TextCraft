@@ -215,38 +215,6 @@
     flex-direction: column;
   }
 
-  .create-story .btn-create {
-    background-color: $primary-color;
-    color: $white-color;
-    border: 2px solid $primary-color;
-    padding: 0.75rem 1.5rem;
-    /* Utilisation de rem pour le padding */
-    font-size: 1rem;
-    /* Taille ajustée pour petits écrans */
-    border-radius: $card-border-radius;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-
-    .dark-mode & {
-      background-color: $dark-primary-color;
-      border-color: $dark-primary-color;
-      color: $dark-white-color;
-    }
-
-    @media (min-width: 768px) {
-      font-size: 1.2rem;
-      /* Taille par défaut sur écrans moyens */
-    }
-  }
-
-  .create-story .btn-create:hover {
-    background-color: $primary-hover-color;
-
-    .dark-mode & {
-      background-color: $dark-primary-hover-color;
-    }
-  }
-
   @media (max-width: 1024px) {
     .layout-container {
       flex-direction: column;
@@ -279,12 +247,5 @@
   .card-category__description {
     font-size: 0.875rem;
     /* Réduction de la taille de la description */
-  }
-
-  .create-story .btn-create {
-    padding: 0.5rem 1rem;
-    /* Réduction du padding du bouton */
-    font-size: 0.875rem;
-    /* Réduction de la taille de police du bouton */
   }
 }

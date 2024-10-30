@@ -6,12 +6,15 @@
 /* Header principal */
 .main-header {
   background-color: $card-background-color;
-  padding: 1rem 1.25rem;
+  padding: 0.3rem 0.5rem;
   /* Utilisation de rem pour le padding */
   box-shadow: $box-shadow-light;
+  margin-left: 2rem;
+  margin-right: 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-radius: $card-border-radius;
 
   .dark-mode & {
     background-color: $dark-card-background-color;
@@ -19,8 +22,7 @@
   }
 
   @media (min-width: 768px) {
-    padding: 15px 20px;
-    /* Restaure le padding par défaut sur écrans moyens */
+    // padding: 15px 20px;
   }
 }
 
@@ -87,4 +89,43 @@
     margin-right: 0.5rem;
     /* Réduction de la marge droite */
   }
+}
+
+.create-story .btn-create {
+  background-color: $primary-color;
+  color: $white-color;
+  border: 2px solid $primary-color;
+  padding: 0.75rem 1.5rem;
+  /* Utilisation de rem pour le padding */
+  font-size: 1rem;
+  /* Taille ajustée pour petits écrans */
+  border-radius: $card-border-radius;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  .dark-mode & {
+    background-color: $dark-primary-color;
+    color: $dark-white-color;
+    border-color: $dark-primary-color;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+    /* Taille par défaut sur écrans moyens */
+  }
+}
+
+.create-story .btn-create:hover {
+  background-color: $primary-hover-color;
+
+  .dark-mode & {
+    background-color: $dark-primary-hover-color;
+  }
+}
+
+.create-story .btn-create {
+  padding: 0.5rem 1rem;
+  /* Réduction du padding du bouton */
+  font-size: 0.875rem;
+  /* Réduction de la taille de police du bouton */
 }

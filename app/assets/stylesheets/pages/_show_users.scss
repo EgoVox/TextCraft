@@ -116,6 +116,9 @@
 
 /* Mes histoires */
 .my-stories {
+  box-shadow: $box-shadow-light;
+  border-radius: $card-border-radius;
+
   .section-title {
     font-size: 1.5rem;
     /* Réduction de la taille pour les petits écrans */
@@ -263,8 +266,6 @@
 /* Bouton créer une nouvelle histoire */
 .btn-create {
   display: block;
-  margin-top: 1.5rem;
-  /* Utilisation de rem */
   padding: 0.75rem 1.5rem;
   /* Utilisation de rem */
   background-color: #007bff;
