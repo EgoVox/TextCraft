@@ -37,9 +37,9 @@
 
             <!-- Menu déroulant pour les catégories -->
             <div class="header-categories-dropdown">
-              <button class="nav-link dropdown-toggle" id="categoriesDropdown" type="button" aria-expanded="false">
+              <a class="nav-link logo-link" id="categoriesDropdown" aria-expanded="false">
                 Catégories
-              </button>
+              </a>
               <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
                 <% Category.all.each do |category| %>
                   <li><%= link_to category.name, category_path(category), class: 'dropdown-item' %></li>
@@ -53,7 +53,7 @@
 
 <!-- Ajoute un menu "Rechercher" qui montre le formulaire au hover -->
           <div class="header-search-dropdown">
-            <button class="nav-link dropdown-toggle" id="searchDropdown">Rechercher</button>
+            <a class="nav-link logo-link" id="searchDropdown">Rechercher</a>
             <div class="search-form-container" id="searchForm">
               <%= form_with url: search_stories_path, method: :get, local: true, class: "tag-search-form custom-search" do %>
                 <div class="form-group">
@@ -67,13 +67,12 @@
           </div>
 
 
-          </div>
 
           <!-- Section droite : Menu utilisateur -->
           <div class="dropdown user-menu">
-            <button class="nav-link dropdown-toggle" type="button" id="userDropdown" aria-expanded="false">
+            <a class="nav-link logo-link" id="userDropdown" aria-expanded="false">
               <i class="fas fa-user"></i> <%= current_user.username || current_user.email %>
-            </button>
+            </a>
             <ul class="dropdown-menu" aria-labelledby="userDropdown">
               <li><%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %></li>
               <li><%= link_to 'Paramètres', edit_user_registration_path, class: 'dropdown-item' %></li>
@@ -81,6 +80,8 @@
             </ul>
           </div>
           </nav>
+                    </div>
+
       <% else %>
         <nav class="nav-container">
           <div class="nav-left">
