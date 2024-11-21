@@ -264,7 +264,7 @@ def analyze_readability_with_gpt(content)
               - **Absence de vulgarité** (5 si aucune, 0 si trop présente),
               - **Fluidité** (note sur 5).
 
-            N'indique pas le calcul. Multipilie le total par 2 et ne donne que la note sur 100. Justifie ta note en deux phrases.
+            N'indique pas le calcul. Multipilie le total par 2 et ne donne (obligatoirement) que la note sur 100. Justifie ta note en deux phrases, en te gardant d'être trop gentil.
             Voici le texte : #{content}"
 
   begin
@@ -300,7 +300,8 @@ end
               1. **Cohérence** dans le contexte d'un récit plus vaste (transition fluide, continuité).
               2. **Engagement du lecteur** (impact émotionnel, suspense, intérêt maintenu).
               3. **Clarté de la narration** (compréhension générale, fluidité des descriptions et dialogues).
-              Ne donne qu'une analyse d'ensemble en 4 phrases.
+              4. **lisibilité** (lourdeurs, difficultés de compréhesion, qualité des dialogues s'il y en a, chose transmises au lecteurs).
+              Ne donne qu'une analyse d'ensemble en 5 phrases maximum, en te gardant d'être trop gentil.
               Voici le texte : #{content}"
 
     begin
@@ -324,38 +325,6 @@ end
       { score: 0, feedback: "Erreur lors de l'évaluation de la qualité de chapitre." }
     end
   end
-
-  # def call_gpt_for_detailed_feedback(content, score)
-  #   puts "Appel à GPT pour un feedback détaillé et concis"
-  #   client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
-
-  #   prompt = if score < 70
-  #               "Le texte suivant a obtenu un score de #{score}/100. Fournis 3 critiques courtes (1 phrase chacune) sur les principales faiblesses du texte. Utilise un langage direct et sans explications supplémentaires. Voici le texte : #{content}"
-  #             else
-  #               "Le texte suivant a obtenu un score de #{score}/100. Fournis 3 conseils précis (1 phrase chacun) pour améliorer le texte. Utilise un langage direct et sans explications supplémentaires. Voici le texte : #{content}"
-  #             end
-
-  #   begin
-  #     response = client.chat(
-  #       parameters: {
-  #         model: "gpt-3.5-turbo",
-  #         messages: [
-  #           { role: "system", content: "Tu es un critique littéraire spécialisé dans l'évaluation de chapitres de romans. Sois concis." },
-  #           { role: "user", content: prompt }
-  #         ],
-  #         max_tokens: 150  # Limiter le nombre de tokens pour un retour concis
-  #       }
-  #     )
-
-  #     feedback = response['choices'].first['message']['content']
-  #     score = extract_score_from_feedback(feedback)
-  #     puts "Feedback détaillé reçu de GPT : #{feedback}"
-  #     { feedback: feedback, score: score }
-  #   rescue StandardError => e
-  #     Rails.logger.error "Erreur OpenAI : #{e.message}"
-  #     { feedback: "Erreur lors de l'évaluation avec GPT.", score: 0 }
-  #   end
-  # end
 
   def extract_score_from_feedback(feedback)
     if feedback.match(/(\d{1,2})\/100/)
