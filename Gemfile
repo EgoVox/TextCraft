@@ -17,6 +17,7 @@ gem 'aws-sdk-s3'
 gem 'docx'
 gem 'pdf-reader'
 gem 'odf'
+gem 'activerecord-session_store'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4"
