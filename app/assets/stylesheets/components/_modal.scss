@@ -18,6 +18,13 @@
   border-radius: 8px;
   max-width: 500px;
   width: 90%;
+    /* Ajuste la largeur relative à la fenêtre */
+    max-width: 600px;
+    /* Limite la largeur maximale */
+    max-height: 80%;
+    /* Limite la hauteur maximale */
+    overflow-y: auto;
+    /* Ajoute le défilement vertical */
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
   position: relative;
 }
